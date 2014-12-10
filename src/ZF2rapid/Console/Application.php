@@ -1,0 +1,131 @@
+<?php
+/**
+ * ZF2rapid - Zend Framework 2 Rapid Development Tool
+ *
+ * @link      https://github.com/ZFrapid/zf2rapid
+ * @copyright Copyright (c) 2014 Ralf Eggert
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+namespace ZF2rapid\Console;
+
+use Zend\Console\Adapter\AdapterInterface;
+use Zend\Console\ColorInterface;
+use Zend\Console\Console;
+use ZF\Console\Application as ZFApplication;
+use ZF\Console\Dispatcher;
+use ZF\Console\RouteCollection;
+
+/**
+ * Class Application
+ *
+ * @package ZF2rapid\Console
+ */
+class Application extends ZFApplication
+{
+    /**
+     * Name of application
+     */
+    const NAME = 'ZF2rapid';
+
+    /**
+     * Slogan of application
+     */
+    const SLOGAN = 'Rapid Application Development Tool for the ZF2';
+
+    /**
+     * Version of application
+     */
+    const VERSION = '0.0.2';
+
+    /**
+     * Overwritten constructor to simplify application instantiation
+     *
+     * @param string     $routes
+     * @param Dispatcher $dispatcher
+     */
+    public function __construct(
+        $routes, Dispatcher $dispatcher = null
+    ) {
+        // call parent constructor
+        parent::__construct(
+            self::NAME . ' - ' . self::SLOGAN,
+            self::VERSION,
+            $routes,
+            Console::getInstance(),
+            $dispatcher
+        );
+
+        // initialize routes
+        $routes = array();
+
+        // get all routes except standard version route
+        foreach ($this->routeCollection->getRouteNames() as $routeName) {
+            if ($routeName == 'version') {
+                continue;
+            }
+
+            $routes[$routeName] = $this->routeCollection->getRoute($routeName);
+        }
+
+        // create new RouteCollection instance and add routes to it
+        $this->routeCollection = new RouteCollection();
+        $this->setRoutes($routes);
+
+        // change banner and footer
+        $this->setBanner(array($this, 'writeApplicationBanner'));
+        $this->setFooter(array($this, 'writeApplicationFooter'));
+    }
+
+    /**
+     * Write application banner
+     *
+     * @param AdapterInterface $console
+     */
+    public function writeApplicationBanner(AdapterInterface $console)
+    {
+        $console->writeLine();
+
+        $console->writeLine(
+            str_pad('', $console->getWidth() - 1, '=', STR_PAD_RIGHT),
+            ColorInterface::GREEN
+        );
+
+        $console->write('=', ColorInterface::GREEN);
+        $console->write(
+            str_pad(
+                '' . self::NAME . ' - ' . self::SLOGAN
+                . ' (Version ' . self::VERSION . ')',
+                $console->getWidth() - 3,
+                ' ',
+                STR_PAD_BOTH
+            )
+        );
+        $console->writeLine('=', ColorInterface::GREEN);
+
+        $console->writeLine(
+            str_pad('', $console->getWidth() - 1, '=', STR_PAD_RIGHT),
+            ColorInterface::GREEN
+        );
+
+        $console->writeLine();
+    }
+
+    /**
+     * Write application footer
+     *
+     * @param AdapterInterface $console
+     */
+    public function writeApplicationFooter(AdapterInterface $console)
+    {
+        $console->writeLine();
+
+        $console->writeLine(
+            str_pad('', $console->getWidth() - 1, '=', STR_PAD_RIGHT),
+            ColorInterface::GREEN
+        );
+
+        $console->writeLine();
+    }
+
+
+}

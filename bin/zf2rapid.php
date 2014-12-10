@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+/**
+ * ZF2rapid - Zend Framework 2 Rapid Development Tool
+ *
+ * @link      https://github.com/ZFrapid/zf2rapid
+ * @copyright Copyright (c) 2014 Ralf Eggert
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+
+// set working directory
+use ZF2rapid\Console\Application;
+
+// define application root
+define('APPLICATION_ROOT', realpath(__DIR__ . '/..'));
+
+// get vendor autoloading
+include APPLICATION_ROOT . '/vendor/autoload.php';
+
+// configure applications
+$application = new Application(
+    include APPLICATION_ROOT . '/config/routes.php'
+);
+
+// run application
+$exit = $application->run();
+exit($exit);
