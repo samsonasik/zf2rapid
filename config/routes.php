@@ -6,7 +6,6 @@
  * @copyright   Copyright (c) 2014 Ralf Eggert
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  *
- * @todo        Create a new module within a project
  * @todo        Create a new controller within a module
  * @todo        Create a new action within a controller
  * @todo        Create routing for a module
@@ -23,8 +22,25 @@ use ZF2rapid\Filter\NormalizeParam as NormalizeParamFilter;
 
 return array(
     array(
-        'name'                 => 'create-module',
-        'route'                => 'create-module <module> [<path>]',
+        'name'                 => 'module-activate',
+        'route'                => 'module-activate <module> [<path>]',
+        'description'          => 'Activate an existing ZF2 module within the specified path',
+        'short_description'    => 'Activate existing ZF2 module',
+        'options_descriptions' => array(
+            '<module>' => 'The name of the module to activate; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to activate an existing module in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path' => '.',
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Module\ModuleActivate',
+    ),
+    array(
+        'name'                 => 'module-create',
+        'route'                => 'module-create <module> [<path>]',
         'description'          => 'Create a new ZF2 module within the specified path',
         'short_description'    => 'Create new ZF2 module',
         'options_descriptions' => array(
@@ -37,20 +53,41 @@ return array(
         'filters'              => array(
             'module' => new NormalizeParamFilter(),
         ),
-        'handler'              => 'ZF2rapid\Command\Create\CreateModule',
+        'handler'              => 'ZF2rapid\Command\Module\ModuleCreate',
     ),
     array(
-        'name'                 => 'create-project',
-        'route'                => 'create-project [<path>] [--skeleton=]',
-        'description'          => 'Create a new ZF2 project within the specified path',
-        'short_description'    => 'Create new ZF2 project',
+        'name'                 => 'module-deactivate',
+        'route'                => 'module-deactivate <module> [<path>]',
+        'description'          => 'Deactivate an existing ZF2 module within the specified path',
+        'short_description'    => 'Deactivate existing ZF2 module',
         'options_descriptions' => array(
-            '<path>' => 'The directory to install the new ZF2 project in; mandatory',
+            '<module>' => 'The name of the module to deactivate; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to deactivate an existing module in; defaults to current working directory',
         ),
         'defaults'             => array(
-            'path' => false,
+            'path' => '.',
         ),
-        'handler'              => 'ZF2rapid\Command\Create\CreateProject',
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Module\ModuleDeactivate',
+    ),
+    array(
+        'name'                 => 'module-delete',
+        'route'                => 'module-delete <module> [<path>]',
+        'description'          => 'Delete an existing ZF2 module within the specified path',
+        'short_description'    => 'Delete existing ZF2 module',
+        'options_descriptions' => array(
+            '<module>' => 'The name of the module to delete; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to delete an existing module in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path' => '.',
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Module\ModuleDelete',
     ),
     array(
         'name'                 => 'project-actions',
@@ -90,6 +127,19 @@ return array(
             'modules' => new NormalizeListFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Project\ProjectControllers',
+    ),
+    array(
+        'name'                 => 'project-create',
+        'route'                => 'project-create [<path>] [--skeleton=]',
+        'description'          => 'Create a new ZF2 project within the specified path',
+        'short_description'    => 'Create new ZF2 project',
+        'options_descriptions' => array(
+            '<path>' => 'The directory to install the new ZF2 project in; mandatory',
+        ),
+        'defaults'             => array(
+            'path' => false,
+        ),
+        'handler'              => 'ZF2rapid\Command\Project\ProjectCreate',
     ),
     array(
         'name'                 => 'project-modules',

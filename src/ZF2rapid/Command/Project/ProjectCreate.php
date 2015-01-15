@@ -6,21 +6,22 @@
  * @copyright Copyright (c) 2014 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Command\Create;
+namespace ZF2rapid\Command\Project;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Zend\Console\ColorInterface as Color;
 use Zend\Console\Prompt\Line;
 use Zend\Console\Prompt\Select;
+use ZF2rapid\Command\AbstractCommand;
 use ZipArchive;
 
 /**
- * Class CreateProject
+ * Class ProjectCreate
  *
- * @package ZF2rapid\Command\Create
+ * @package ZF2rapid\Command\Project
  */
-class CreateProject extends AbstractCreateCommand
+class ProjectCreate extends AbstractProjectCommand
 {
     /**
      * URL to Zend Framework 2 Skeleton Application
@@ -104,6 +105,9 @@ class CreateProject extends AbstractCreateCommand
         // run composer
         $this->runComposer();
 
+        // prepare project
+        $this->prepareProject();
+
         // output success message
         $this->writeOkLine(
             'Congratulations! The new ZF2 project was successfully created.'
@@ -156,7 +160,7 @@ class CreateProject extends AbstractCreateCommand
 
             $this->writeDoneLine(
                 'Project path ' . $this->console->colorize(
-                    $this->projectPath, Color::GREEN
+                    realpath($this->projectPath), Color::GREEN
                 ) . ' was created.'
             );
         }
@@ -178,7 +182,7 @@ class CreateProject extends AbstractCreateCommand
         $this->console->write(' ');
 
         // set indention
-        $spaces = '     ';
+        $spaces = AbstractCommand::INDENTION_PROMPT_OPTIONS;
 
         // define options for select prompt
         $options = array(
@@ -231,7 +235,7 @@ class CreateProject extends AbstractCreateCommand
         $this->skeletonName = $options[$spaces . $skeletonAnswer];
 
         // write which skeleton application was chosen
-        $this->writeDoneLine($this->skeletonName . ' will be installed now.', false);
+        $this->writeDoneLine($this->skeletonName . ' will be installed now.');
 
     }
 
@@ -257,6 +261,10 @@ class CreateProject extends AbstractCreateCommand
             // get skeleton app
             return $this->getSkeletonApplication($tmpFile);
         }
+
+        $this->writeDoneLine(
+            'Getting ' . $this->skeletonName . ' from cache...', false
+        );
 
         return true;
 
@@ -402,8 +410,6 @@ class CreateProject extends AbstractCreateCommand
 
                 return false;
             }
-        } else {
-            var_dump($zipArchive);
         }
 
         return true;
@@ -468,6 +474,9 @@ class CreateProject extends AbstractCreateCommand
             // output message
             $this->writeDoneLine('Self-updating composer.phar...', false);
 
+            /**
+             * @todo check on Windows
+             */
             exec(
                 'php ' . $this->projectPath . '/composer.phar self-update',
                 $output, $return
@@ -489,6 +498,9 @@ class CreateProject extends AbstractCreateCommand
                 // output message
                 $this->writeDoneLine('Run composer installer...', false);
 
+                /**
+                 * @todo check on Windows
+                 */
                 // run composer installer
                 exec(
                     'php ' . $tmpDir . '/composer_installer.php --install-dir '
@@ -513,12 +525,64 @@ class CreateProject extends AbstractCreateCommand
     protected function runComposer()
     {
         // output message
-        $this->writeDoneLine('Installing dependencies...');
+        $this->writeDoneLine('Installing dependencies...', false);
 
+        /**
+         * @todo check on Windows
+         */
         // start installation of dependencies
         exec(
             'php ' . $this->projectPath . '/composer.phar --working-dir='
             . $this->projectPath . ' install', $output, $return
         );
+    }
+
+    /**
+     * Prepare project by changing file permissions and copying config files
+     */
+    protected function prepareProject()
+    {
+        // output message
+        $this->writeDoneLine('Preparing project...');
+
+        /**
+         * @todo check on Windows
+         */
+        // change data file rights
+        exec('chmod 777 -R ' . $this->projectPath . '/data');
+
+        // change public assets vendor file rights if exists
+        if (file_exists($this->projectPath . '/public/assets/vendor')) {
+            /**
+             * @todo check on Windows
+             */
+            exec(
+                'chmod 777 -R ' . $this->projectPath . '/public/assets/vendor'
+            );
+        }
+
+        // set ZendDeveloperTools path
+        $devToolsPath = $this->projectPath . '/vendor/zendframework/zend-developer-tools';
+
+        // copy ZendDeveloperTools configuration if exists
+        if (file_exists(
+            $devToolsPath . '/config/zenddevelopertools.local.php.dist'
+        )) {
+            copy(
+                $devToolsPath . '/config/zenddevelopertools.local.php.dist',
+                $this->projectPath
+                . '/config/autoload/zenddevelopertools.local.php'
+            );
+        }
+
+        // rename local.php.dist if exists
+        if (file_exists(
+            $this->projectPath . '/config/autoload/local.php.dist'
+        )) {
+            rename(
+                $this->projectPath . '/config/autoload/local.php.dist',
+                $this->projectPath . '/config/autoload/local.php'
+            );
+        }
     }
 }

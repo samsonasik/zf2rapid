@@ -182,7 +182,10 @@ class Configuration extends AbstractCommand
             // write config data to file
             file_put_contents(
                 $configFile,
-                serialize($this->configFileData)
+                json_encode(
+                    $this->configFileData,
+                    JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+                )
             );
 
             $this->writeDoneLine(

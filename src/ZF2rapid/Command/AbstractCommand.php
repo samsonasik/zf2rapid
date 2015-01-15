@@ -24,6 +24,8 @@ abstract class AbstractCommand
     const TEXT_DONE_NO_ZF2_PROJECT = 'There is no ZF2 project within ';
     const TEXT_OK_INFORMATION_SUCCESSFUL = 'The requested information was successfully displayed.';
 
+    const INDENTION_PROMPT_OPTIONS = '     ';
+
     /**
      * @var AdapterInterface
      */
@@ -52,7 +54,7 @@ abstract class AbstractCommand
             'configFileFormat'      => 'php',
             'flagAddDocBlocks'      => 'true',
             'fileDocBlockText'      => 'ZF2 Application built by ZF2rapid',
-            'fileDocBlockCopyright' => '(c) 2014 by John Doe',
+            'fileDocBlockCopyright' => '(c) 2014 by ZF2rapid',
             'fileDocBlockLicense'   => 'http://opensource.org/licenses/MIT The MIT License (MIT)',
         );
 
@@ -101,7 +103,7 @@ abstract class AbstractCommand
         if (file_exists(($configFile))) {
 
             // load config from file
-            $this->configFileData = json_decode(file_get_contents($configFile));
+            $this->configFileData = json_decode(file_get_contents($configFile), true);
 
             return;
         }
@@ -259,7 +261,7 @@ abstract class AbstractCommand
     public function writeFailLine($message, $flagNewLine = true)
     {
         $this->writeBadgeLine(
-            $message, ' ✓ ', Color::RED, $flagNewLine
+            $message, ' ! ', Color::RED, $flagNewLine
         );
     }
 
