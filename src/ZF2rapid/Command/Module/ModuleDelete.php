@@ -10,6 +10,7 @@ namespace ZF2rapid\Command\Module;
 
 use Zend\Code\Generator\ValueGenerator;
 use Zend\Console\ColorInterface as Color;
+use Zend\Console\Prompt\Confirm;
 
 /**
  * Class ModuleDelete
@@ -18,11 +19,6 @@ use Zend\Console\ColorInterface as Color;
  */
 class ModuleDelete extends AbstractModuleCommand
 {
-    /**
-     * @var string
-     */
-    protected $moduleDir;
-
     /**
      * @return int
      */
@@ -67,7 +63,7 @@ class ModuleDelete extends AbstractModuleCommand
         $this->deactivateModule();
 
         // delete module
-        $this->deleteModule();
+        $this->deleteModuleDirectory();
 
         // output success message
         $this->writeOkLine(
@@ -87,6 +83,57 @@ class ModuleDelete extends AbstractModuleCommand
      * Delete the module in current project
      */
     protected function deleteModule()
+    {
+        // output message
+        $this->writeDoneLine('Deleting module...');
+
+        // write prompt badge
+        $this->console->write(
+            ' ? ', Color::NORMAL, Color::RED
+        );
+        $this->console->write(' ');
+
+        // output confirm prompt
+        $deletePrompt       = new Confirm(
+            'Are you sure you want to delete the module? [y/n] ',
+            'y',
+            'n'
+        );
+        $deleteConfirmation = $deletePrompt->show();
+
+        $this->console->writeLine();
+
+        if (!$deleteConfirmation) {
+            return false;
+        }
+
+        // write prompt badge
+        $this->console->write(
+            ' ? ', Color::NORMAL, Color::RED
+        );
+        $this->console->write(' ');
+
+        // output confirm prompt
+        $deletePrompt       = new Confirm(
+            'Are you REALLY sure that you want to delete the module and all of its files? [y/n] ',
+            'y',
+            'n'
+        );
+        $deleteConfirmation = $deletePrompt->show();
+
+        $this->console->writeLine();
+
+        if (!$deleteConfirmation) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Delete the module directory in current project
+     */
+    protected function deleteModuleDirectory()
     {
         /**
          * @todo check on Windows

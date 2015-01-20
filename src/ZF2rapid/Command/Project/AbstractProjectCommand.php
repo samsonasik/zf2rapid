@@ -270,12 +270,7 @@ abstract class AbstractProjectCommand extends AbstractCommand
         foreach ($loadedControllers as $moduleKey => $controllerTypes) {
             $actionList[$moduleKey] = array();
 
-            $moduleViewPath = StaticFilter::execute(
-                $moduleKey, 'Word\CamelCaseToDash'
-            );
-            $moduleViewPath = StaticFilter::execute(
-                $moduleViewPath, 'StringToLower'
-            );
+            $moduleViewPath = $this->filterCamelCaseToDash($moduleKey);
 
             // loop through controllers by controller type
             foreach ($controllerTypes as $controllerList) {
@@ -292,11 +287,8 @@ abstract class AbstractProjectCommand extends AbstractCommand
                     $controllerName = substr(
                         $classReflection->getShortName(), 0, -10
                     );
-                    $controllerName = StaticFilter::execute(
-                        $controllerName, 'Word\CamelCaseToDash'
-                    );
-                    $controllerName = StaticFilter::execute(
-                        $controllerName, 'StringToLower'
+                    $controllerName = $this->filterCamelCaseToDash(
+                        $controllerName
                     );
 
                     // get public methods
@@ -322,11 +314,8 @@ abstract class AbstractProjectCommand extends AbstractCommand
 
                         // convert method name to get dashed action
                         $actionName = substr($methodName, 0, -6);
-                        $actionName = StaticFilter::execute(
-                            $actionName, 'Word\CamelCaseToDash'
-                        );
-                        $actionName = StaticFilter::execute(
-                            $actionName, 'StringToLower'
+                        $actionName = $this->filterCamelCaseToDash(
+                            $actionName
                         );
 
                         // build action file

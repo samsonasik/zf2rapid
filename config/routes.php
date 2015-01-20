@@ -6,7 +6,6 @@
  * @copyright   Copyright (c) 2014 - 2015 Ralf Eggert
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  *
- * @todo        Create a new controller within a module
  * @todo        Create a new action within a controller
  * @todo        Create routing for a module
  * @todo        Create a view helper within a module
@@ -21,6 +20,27 @@ use ZF2rapid\Filter\NormalizeList as NormalizeListFilter;
 use ZF2rapid\Filter\NormalizeParam as NormalizeParamFilter;
 
 return array(
+    array(
+        'name'                 => 'controller-create',
+        'route'                => 'controller-create <module> <controller> [<path>] [--factory|-f]:factory',
+        'description'          => 'Create a new ZF2 controller for module within the specified path',
+        'short_description'    => 'Create new ZF2 controller',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to create the controller in; mandatory',
+            '<controller>' => 'The name of the controller to create; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to create a new controller in; defaults to current working directory',
+            '--factory|-f' => 'Whether or not to create a factory for the new controller (disabled by default)',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => false,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'controller' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Controller\ControllerCreate',
+    ),
     array(
         'name'                 => 'module-activate',
         'route'                => 'module-activate <module> [<path>]',

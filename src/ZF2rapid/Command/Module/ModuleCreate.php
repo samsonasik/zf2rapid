@@ -23,11 +23,6 @@ use Zend\Console\ColorInterface as Color;
 class ModuleCreate extends AbstractModuleCommand
 {
     /**
-     * @var string
-     */
-    protected $moduleDir;
-
-    /**
      * @return int
      */
     public function processCommand()
@@ -51,12 +46,12 @@ class ModuleCreate extends AbstractModuleCommand
             return 1;
         }
 
-        // build module root
+        // build module class
         if (!$this->buildModuleClass()) {
             return 1;
         }
 
-        // build module root
+        // build module configuration
         if (!$this->buildModuleConfig()) {
             return 1;
         }

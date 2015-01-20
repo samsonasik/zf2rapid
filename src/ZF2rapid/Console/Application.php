@@ -35,7 +35,7 @@ class Application extends ZFApplication
     /**
      * Version of application
      */
-    const VERSION = '0.0.3';
+    const VERSION = '0.0.4';
 
     /**
      * Overwritten constructor to simplify application instantiation

@@ -8,8 +8,15 @@
  */
 namespace ZF2rapid\Command;
 
+use Zend\Code\Generator\DocBlock\Tag\GenericTag;
+use Zend\Code\Generator\DocBlock\Tag\LicenseTag;
+use Zend\Code\Generator\DocBlock\Tag\ParamTag;
+use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
+use Zend\Code\Generator\DocBlockGenerator;
+use Zend\Code\Generator\FileGenerator;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\Console\ColorInterface as Color;
+use Zend\Filter\StaticFilter;
 use ZF\Console\Route;
 
 /**
@@ -54,7 +61,7 @@ abstract class AbstractCommand
             'configFileFormat'      => 'php',
             'flagAddDocBlocks'      => 'true',
             'fileDocBlockText'      => 'ZF2 Application built by ZF2rapid',
-            'fileDocBlockCopyright' => '(c) 2014 by ZF2rapid',
+            'fileDocBlockCopyright' => '(c) 2014 - 2015 by ZF2rapid',
             'fileDocBlockLicense'   => 'http://opensource.org/licenses/MIT The MIT License (MIT)',
         );
 
@@ -62,6 +69,26 @@ abstract class AbstractCommand
      * @var array
      */
     protected $configFileData = array();
+
+    /**
+     * @var string
+     */
+    protected $moduleDir;
+
+    /**
+     * @var string
+     */
+    protected $modulePath;
+
+    /**
+     * @var string
+     */
+    protected $paramModule;
+
+    /**
+     * @var string
+     */
+    protected $paramFactory;
 
     /**
      * Start command processing
@@ -103,7 +130,9 @@ abstract class AbstractCommand
         if (file_exists(($configFile))) {
 
             // load config from file
-            $this->configFileData = json_decode(file_get_contents($configFile), true);
+            $this->configFileData = json_decode(
+                file_get_contents($configFile), true
+            );
 
             return;
         }
@@ -277,4 +306,176 @@ abstract class AbstractCommand
             $message, ' ✓ ', Color::RED, $flagNewLine
         );
     }
+
+    /**
+     * Filter camel case to dash
+     *
+     * @param string $text
+     *
+     * @return string
+     */
+    public function filterCamelCaseToDash($text)
+    {
+        $text = StaticFilter::execute($text, 'Word\CamelCaseToDash');
+        $text = StaticFilter::execute($text, 'StringToLower');
+
+        return $text;
+    }
+
+    /**
+     * Build module and check existence
+     *
+     * @return bool|string
+     */
+    protected function buildModulePath()
+    {
+        $modulePath = $this->projectPath . '/module';
+
+        if (is_dir($modulePath)) {
+
+            return $modulePath;
+        }
+
+        // output fail message
+        $message = AbstractCommand::TEXT_DONE_NO_ZF2_PROJECT;
+        $message .= $this->console->colorize($this->projectPath, Color::GREEN);
+
+        $this->writeDoneLine($message);
+
+        $this->writeFailLine(
+            AbstractCommand::TEXT_FAIL_INFORMATION_NOT_FOUND, false
+        );
+
+        return false;
+    }
+
+    /**
+     * Generate package tag
+     *
+     * @param string $description
+     *
+     * @return GenericTag
+     */
+    protected function generatePackageTag($description)
+    {
+        return new GenericTag('package', $description);
+    }
+
+    /**
+     * Generate copyright tag
+     *
+     * @param string $description
+     *
+     * @return GenericTag
+     */
+    protected function generateCopyrightTag($description)
+    {
+        return new GenericTag('copyright', $description);
+    }
+
+    /**
+     * Generate license tag
+     *
+     * @param string $description
+     *
+     * @return LicenseTag
+     */
+    protected function generateLicenseTag($description)
+    {
+        return new LicenseTag($description);
+    }
+
+    /**
+     * Generate param tag
+     *
+     * @param string $name
+     * @param array  $types
+     * @param string $description
+     *
+     * @return ReturnTag
+     */
+    protected function generateParamTag(
+        $name, array $types, $description = null
+    ) {
+        return new ParamTag($name, $types, $description);
+    }
+
+    /**
+     * Generate return tag
+     *
+     * @param array  $types
+     * @param string $description
+     *
+     * @return ReturnTag
+     */
+    protected function generateReturnTag(array $types, $description)
+    {
+        return new ReturnTag($types, $description);
+    }
+
+    /**
+     * Write body to a file
+     *
+     * @param $fileBody
+     * @param $fileName
+     */
+    protected function writeFile($fileName, $fileBody)
+    {
+        // create file
+        $file = new FileGenerator();
+        $file->setBody($fileBody);
+
+        // check for api docs
+        if ($this->configFileData['flagAddDocBlocks']) {
+            $file->setDocBlock(
+                new DocBlockGenerator(
+                    $this->configFileData['fileDocBlockText'],
+                    null,
+                    array(
+                        $this->generateCopyrightTag(
+                            $this->configFileData['fileDocBlockCopyright']
+                        ),
+                        $this->generateLicenseTag(
+                            $this->configFileData['fileDocBlockLicense']
+                        ),
+                    )
+                )
+            );
+        }
+
+        // write file
+        file_put_contents(
+            $fileName,
+            $file->generate()
+        );
+    }
+
+    /**
+     * Check if module exists
+     */
+    protected function checkModule()
+    {
+        // output message
+        $this->writeDoneLine(
+            'Checking module...', false
+        );
+
+        // check for module directory
+        if (!is_dir($this->moduleDir)) {
+            $this->console->writeLine();
+            $this->writeFailLine(
+                'The module ' . $this->console->colorize(
+                    $this->paramModule, Color::GREEN
+                ) . ' does not exist in ' . $this->console->colorize(
+                    $this->modulePath, Color::GREEN
+                ) . '.',
+                false
+            );
+
+            return false;
+        }
+
+        return true;
+    }
+
 }

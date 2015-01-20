@@ -18,11 +18,6 @@ use Zend\Console\ColorInterface as Color;
 class ModuleActivate extends AbstractModuleCommand
 {
     /**
-     * @var string
-     */
-    protected $moduleDir;
-
-    /**
      * @return int
      */
     public function processCommand()
