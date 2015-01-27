@@ -9,8 +9,7 @@
 namespace ZF2rapid\Console;
 
 use Zend\Console\Adapter\AdapterInterface;
-use Zend\Console\ColorInterface;
-use Zend\Console\Console;
+use Zend\Console\ColorInterface as Color;
 use ZF\Console\Application as ZFApplication;
 use ZF\Console\Dispatcher;
 use ZF\Console\RouteCollection;
@@ -40,18 +39,19 @@ class Application extends ZFApplication
     /**
      * Overwritten constructor to simplify application instantiation
      *
-     * @param string     $routes
-     * @param Dispatcher $dispatcher
+     * @param string           $routes
+     * @param ConsoleInterface $console
+     * @param Dispatcher       $dispatcher
      */
     public function __construct(
-        $routes, Dispatcher $dispatcher = null
+        $routes, ConsoleInterface $console, Dispatcher $dispatcher = null
     ) {
         // call parent constructor
         parent::__construct(
             self::NAME . ' - ' . self::SLOGAN,
             self::VERSION,
             $routes,
-            Console::getInstance(),
+            $console,
             $dispatcher
         );
 
@@ -87,10 +87,10 @@ class Application extends ZFApplication
 
         $console->writeLine(
             str_pad('', $console->getWidth() - 1, '=', STR_PAD_RIGHT),
-            ColorInterface::GREEN
+            Color::GREEN
         );
 
-        $console->write('=', ColorInterface::GREEN);
+        $console->write('=', Color::GREEN);
         $console->write(
             str_pad(
                 '' . self::NAME . ' - ' . self::SLOGAN
@@ -100,11 +100,11 @@ class Application extends ZFApplication
                 STR_PAD_BOTH
             )
         );
-        $console->writeLine('=', ColorInterface::GREEN);
+        $console->writeLine('=', Color::GREEN);
 
         $console->writeLine(
             str_pad('', $console->getWidth() - 1, '=', STR_PAD_RIGHT),
-            ColorInterface::GREEN
+            Color::GREEN
         );
 
         $console->writeLine();
@@ -121,7 +121,7 @@ class Application extends ZFApplication
 
         $console->writeLine(
             str_pad('', $console->getWidth() - 1, '=', STR_PAD_RIGHT),
-            ColorInterface::GREEN
+            Color::GREEN
         );
 
         $console->writeLine();

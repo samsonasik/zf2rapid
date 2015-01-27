@@ -11,6 +11,7 @@
         "zendframework/zend-loader": "2.*",
         "zendframework/zend-modulemanager": "2.*",
         "zendframework/zend-mvc": "2.*",
+        "zendframework/zend-servicemanager": "2.*",
         "zendframework/zend-version": "2.*"
     },
     "autoload": {

@@ -1,0 +1,41 @@
+<?php
+/**
+ * ZF2rapid - Zend Framework 2 Rapid Development Tool
+ *
+ * @link      https://github.com/ZFrapid/zf2rapid
+ * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
+ * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
+ */
+namespace ZF2rapid\Generator;
+
+/**
+ * Class ClassFileGenerator
+ *
+ * @package ZF2rapid\Generator
+ */
+class ClassFileGenerator extends AbstractFileGenerator
+{
+    /**
+     * @var array
+     */
+    protected $config = array();
+
+    /**
+     * @param string $fileBody
+     * @param array  $config
+     */
+    public function __construct($fileBody, array $config = array())
+    {
+        // set config data
+        $this->config = $config;
+
+        // call parent constructor
+        parent::__construct();
+
+        // set file body
+        $this->setBody($fileBody);
+
+        // add file doc block
+        $this->addFileDocBlock();
+    }
+}

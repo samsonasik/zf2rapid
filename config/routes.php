@@ -6,6 +6,10 @@
  * @copyright   Copyright (c) 2014 - 2015 Ralf Eggert
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  *
+ * @todo        COMMANDS
+ * @todo        Create controller factory
+ * @todo        Delete controller factory
+ * @todo        Delete controller
  * @todo        Create a new action within a controller
  * @todo        Create routing for a module
  * @todo        Create a view helper within a module
@@ -21,8 +25,25 @@ use ZF2rapid\Filter\NormalizeParam as NormalizeParamFilter;
 
 return array(
     array(
-        'name'                 => 'controller-create',
-        'route'                => 'controller-create <module> <controller> [<path>] [--factory|-f]:factory',
+        'name'                 => 'activate-module',
+        'route'                => 'activate-module <module> [<path>]',
+        'description'          => 'Activate an existing ZF2 module within the specified path',
+        'short_description'    => 'Activate existing ZF2 module',
+        'options_descriptions' => array(
+            '<module>' => 'The name of the module to activate; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to activate an existing module in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path' => '.',
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Activate\ActivateModule',
+    ),
+    array(
+        'name'                 => 'create-controller',
+        'route'                => 'create-controller <module> <controller> [<path>] [--factory|-f]:factory',
         'description'          => 'Create a new ZF2 controller for module within the specified path',
         'short_description'    => 'Create new ZF2 controller',
         'options_descriptions' => array(
@@ -39,28 +60,11 @@ return array(
             'module'     => new NormalizeParamFilter(),
             'controller' => new NormalizeParamFilter(),
         ),
-        'handler'              => 'ZF2rapid\Command\Controller\ControllerCreate',
+        'handler'              => 'ZF2rapid\Command\Create\CreateController',
     ),
     array(
-        'name'                 => 'module-activate',
-        'route'                => 'module-activate <module> [<path>]',
-        'description'          => 'Activate an existing ZF2 module within the specified path',
-        'short_description'    => 'Activate existing ZF2 module',
-        'options_descriptions' => array(
-            '<module>' => 'The name of the module to activate; mandatory',
-            '<path>'   => 'The directory of the ZF2 project to activate an existing module in; defaults to current working directory',
-        ),
-        'defaults'             => array(
-            'path' => '.',
-        ),
-        'filters'              => array(
-            'module' => new NormalizeParamFilter(),
-        ),
-        'handler'              => 'ZF2rapid\Command\Module\ModuleActivate',
-    ),
-    array(
-        'name'                 => 'module-create',
-        'route'                => 'module-create <module> [<path>]',
+        'name'                 => 'create-module',
+        'route'                => 'create-module <module> [<path>]',
         'description'          => 'Create a new ZF2 module within the specified path',
         'short_description'    => 'Create new ZF2 module',
         'options_descriptions' => array(
@@ -73,11 +77,24 @@ return array(
         'filters'              => array(
             'module' => new NormalizeParamFilter(),
         ),
-        'handler'              => 'ZF2rapid\Command\Module\ModuleCreate',
+        'handler'              => 'ZF2rapid\Command\Create\CreateModule',
     ),
     array(
-        'name'                 => 'module-deactivate',
-        'route'                => 'module-deactivate <module> [<path>]',
+        'name'                 => 'create-project',
+        'route'                => 'create-project <path>',
+        'description'          => 'Create a new ZF2 project within the specified path',
+        'short_description'    => 'Create new ZF2 project',
+        'options_descriptions' => array(
+            '<path>' => 'The directory to install the new ZF2 project in; mandatory',
+        ),
+        'defaults'             => array(
+            'path' => false,
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateProject',
+    ),
+    array(
+        'name'                 => 'deactivate-module',
+        'route'                => 'deactivate-module <module> [<path>]',
         'description'          => 'Deactivate an existing ZF2 module within the specified path',
         'short_description'    => 'Deactivate existing ZF2 module',
         'options_descriptions' => array(
@@ -90,11 +107,11 @@ return array(
         'filters'              => array(
             'module' => new NormalizeParamFilter(),
         ),
-        'handler'              => 'ZF2rapid\Command\Module\ModuleDeactivate',
+        'handler'              => 'ZF2rapid\Command\Deactivate\DeactivateModule',
     ),
     array(
-        'name'                 => 'module-delete',
-        'route'                => 'module-delete <module> [<path>]',
+        'name'                 => 'delete-module',
+        'route'                => 'delete-module <module> [<path>]',
         'description'          => 'Delete an existing ZF2 module within the specified path',
         'short_description'    => 'Delete existing ZF2 module',
         'options_descriptions' => array(
@@ -107,11 +124,11 @@ return array(
         'filters'              => array(
             'module' => new NormalizeParamFilter(),
         ),
-        'handler'              => 'ZF2rapid\Command\Module\ModuleDelete',
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteModule',
     ),
     array(
-        'name'                 => 'project-actions',
-        'route'                => 'project-actions [<path>] [--modules=] [--controllers=]',
+        'name'                 => 'show-actions',
+        'route'                => 'show-actions [<path>] [--modules=] [--controllers=]',
         'description'          => 'Show all controllers for the controllers of the current ZF2 project specified within the path',
         'short_description'    => 'Show all actions for the ZF2 project',
         'options_descriptions' => array(
@@ -128,11 +145,11 @@ return array(
             'modules'     => new NormalizeListFilter(),
             'controllers' => new ExplodeFilter(),
         ),
-        'handler'              => 'ZF2rapid\Command\Project\ProjectActions',
+        'handler'              => 'ZF2rapid\Command\Show\ShowActions',
     ),
     array(
-        'name'                 => 'project-controllers',
-        'route'                => 'project-controllers [<path>] [--modules=]',
+        'name'                 => 'show-controllers',
+        'route'                => 'show-controllers [<path>] [--modules=]',
         'description'          => 'Show all controllers for the modules of the current ZF2 project specified within the path',
         'short_description'    => 'Show all controllers for the ZF2 modules',
         'options_descriptions' => array(
@@ -146,24 +163,11 @@ return array(
         'filters'              => array(
             'modules' => new NormalizeListFilter(),
         ),
-        'handler'              => 'ZF2rapid\Command\Project\ProjectControllers',
+        'handler'              => 'ZF2rapid\Command\Show\ShowControllers',
     ),
     array(
-        'name'                 => 'project-create',
-        'route'                => 'project-create [<path>] [--skeleton=]',
-        'description'          => 'Create a new ZF2 project within the specified path',
-        'short_description'    => 'Create new ZF2 project',
-        'options_descriptions' => array(
-            '<path>' => 'The directory to install the new ZF2 project in; mandatory',
-        ),
-        'defaults'             => array(
-            'path' => false,
-        ),
-        'handler'              => 'ZF2rapid\Command\Project\ProjectCreate',
-    ),
-    array(
-        'name'                 => 'project-modules',
-        'route'                => 'project-modules [<path>]',
+        'name'                 => 'show-modules',
+        'route'                => 'show-modules [<path>]',
         'description'          => 'Show all modules of the current ZF2 project specified within the path',
         'short_description'    => 'Show all modules for the ZF2 project',
         'options_descriptions' => array(
@@ -172,11 +176,11 @@ return array(
         'defaults'             => array(
             'path' => '.',
         ),
-        'handler'              => 'ZF2rapid\Command\Project\ProjectModules',
+        'handler'              => 'ZF2rapid\Command\Show\ShowModules',
     ),
     array(
-        'name'                 => 'project-version',
-        'route'                => 'project-version [<path>]',
+        'name'                 => 'show-version',
+        'route'                => 'show-version [<path>]',
         'description'          => 'Show the ZF2 version of the current project specified within the path',
         'short_description'    => 'Show ZF2 version of the project',
         'options_descriptions' => array(
@@ -185,7 +189,7 @@ return array(
         'defaults'             => array(
             'path' => '.',
         ),
-        'handler'              => 'ZF2rapid\Command\Project\ProjectVersion',
+        'handler'              => 'ZF2rapid\Command\Show\ShowVersion',
     ),
     array(
         'name'                 => 'tool-config',
@@ -202,13 +206,13 @@ return array(
             'configKey'   => false,
             'configValue' => false,
         ),
-        'handler'              => 'ZF2rapid\Command\Tool\Configuration',
+        'handler'              => 'ZF2rapid\Command\Tool\ToolConfiguration',
     ),
     array(
         'name'              => 'tool-version',
         'route'             => 'tool-version',
         'description'       => 'Display the version of the ZF2rapid tool.',
         'short_description' => 'Display ZF2rapid version',
-        'handler'           => 'ZF2rapid\Command\Tool\Version',
+        'handler'           => 'ZF2rapid\Command\Tool\ToolVersion',
     ),
 );

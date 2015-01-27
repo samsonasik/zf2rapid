@@ -10,6 +10,7 @@
 
 // set working directory
 use ZF2rapid\Console\Application;
+use ZF2rapid\Console\Console;
 
 // define application root
 define('APPLICATION_ROOT', realpath(__DIR__ . '/..'));
@@ -19,7 +20,8 @@ include APPLICATION_ROOT . '/vendor/autoload.php';
 
 // configure applications
 $application = new Application(
-    include APPLICATION_ROOT . '/config/routes.php'
+    include APPLICATION_ROOT . '/config/routes.php',
+    new Console()
 );
 
 // run application

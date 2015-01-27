@@ -8,33 +8,20 @@
  */
 namespace ZF2rapid\Command;
 
-use Zend\Code\Generator\DocBlock\Tag\GenericTag;
-use Zend\Code\Generator\DocBlock\Tag\LicenseTag;
-use Zend\Code\Generator\DocBlock\Tag\ParamTag;
-use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
-use Zend\Code\Generator\DocBlockGenerator;
-use Zend\Code\Generator\FileGenerator;
-use Zend\Console\Adapter\AdapterInterface;
-use Zend\Console\ColorInterface as Color;
-use Zend\Filter\StaticFilter;
+use Zend\Stdlib\Parameters;
 use ZF\Console\Route;
+use ZF2rapid\Task\TaskInterface;
+use ZF2rapid\Console\ConsoleInterface;
 
 /**
  * Class AbstractCommand
  *
  * @package ZF2rapid\Command
  */
-abstract class AbstractCommand
+abstract class AbstractCommand implements CommandInterface
 {
-    const TEXT_GO_FETCHING_INFORMATION = 'Fetching requested information...';
-    const TEXT_FAIL_INFORMATION_NOT_FOUND = 'The requested information was not found.';
-    const TEXT_DONE_NO_ZF2_PROJECT = 'There is no ZF2 project within ';
-    const TEXT_OK_INFORMATION_SUCCESSFUL = 'The requested information was successfully displayed.';
-
-    const INDENTION_PROMPT_OPTIONS = '     ';
-
     /**
-     * @var AdapterInterface
+     * @var ConsoleInterface
      */
     protected $console;
 
@@ -44,438 +31,58 @@ abstract class AbstractCommand
     protected $route;
 
     /**
-     * @var string
+     * @var Parameters
      */
-    protected $projectPath;
-
-    /**
-     * @var string
-     */
-    protected $configFileName = 'zfrapid2.json';
+    protected $params;
 
     /**
      * @var array
      */
-    protected $configFileDefaults
-        = array(
-            'configFileFormat'      => 'php',
-            'flagAddDocBlocks'      => 'true',
-            'fileDocBlockText'      => 'ZF2 Application built by ZF2rapid',
-            'fileDocBlockCopyright' => '(c) 2014 - 2015 by ZF2rapid',
-            'fileDocBlockLicense'   => 'http://opensource.org/licenses/MIT The MIT License (MIT)',
-        );
-
-    /**
-     * @var array
-     */
-    protected $configFileData = array();
-
-    /**
-     * @var string
-     */
-    protected $moduleDir;
-
-    /**
-     * @var string
-     */
-    protected $modulePath;
-
-    /**
-     * @var string
-     */
-    protected $paramModule;
-
-    /**
-     * @var string
-     */
-    protected $paramFactory;
+    protected $tasks = array();
 
     /**
      * Start command processing
      *
      * @param Route            $route
-     * @param AdapterInterface $console
-     *
-     * @return mixed
-     */
-    public function __invoke(Route $route, AdapterInterface $console)
-    {
-        $this->route   = $route;
-        $this->console = $console;
-
-        $this->checkConfigFile();
-
-        return $this->processCommand();
-    }
-
-    /**
-     * Process the command
+     * @param ConsoleInterface $console
      *
      * @return integer
      */
-    abstract public function processCommand();
+    public function __invoke(Route $route, ConsoleInterface $console)
+    {
+        $this->route   = $route;
+        $this->console = $console;
+        $this->params  = new Parameters();
+
+        $this->startCommand();
+
+        if (!$this->processTasks()) {
+            return 1;
+        }
+
+        $this->stopCommand();
+
+        return 0;
+    }
 
     /**
-     * @return int
+     * Process command tasks
      */
-    public function checkConfigFile()
+    public function processTasks()
     {
-        // set path
-        $this->projectPath = realpath($this->route->getMatchedParam('path'));
+        /** @var TaskInterface $task */
+        foreach ($this->tasks as $task) {
+            $callable = new $task();
 
-        // set config file name
-        $configFile = $this->projectPath . '/' . $this->configFileName;
-
-        // check config file existence
-        if (file_exists(($configFile))) {
-
-            // load config from file
-            $this->configFileData = json_decode(
-                file_get_contents($configFile), true
+            $result = call_user_func(
+                $callable, $this->route, $this->console, $this->params
             );
 
-            return;
-        }
-
-        // get config defaults
-        $this->configFileData = $this->configFileDefaults;
-
-        // check if file is writable
-        if (!is_writable($this->projectPath)) {
-            return;
-        }
-
-        // write config data to file
-        file_put_contents(
-            $configFile,
-            json_encode(
-                $this->configFileData,
-                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
-            )
-        );
-    }
-
-    /**
-     * Write a line with customizable badge
-     *
-     * @param string $message
-     * @param string $badgeText
-     * @param string $badgeColor
-     * @param bool   $flagNewLine
-     */
-    public function writeBadgeLine(
-        $message, $badgeText, $badgeColor, $flagNewLine = true
-    ) {
-        $this->console->write(
-            $badgeText, Color::NORMAL, $badgeColor
-        );
-        $this->console->write(' ');
-        $this->console->writeLine($message);
-
-        if ($flagNewLine) {
-            $this->console->writeLine();
-        }
-
-    }
-
-    /**
-     * Write an indented line
-     *
-     * @param string $message
-     * @param bool   $flagNewLine
-     */
-    public function writeIndentedLine($message, $flagNewLine = true)
-    {
-        $this->console->write('    ');
-        $this->console->writeLine($message);
-
-        if ($flagNewLine) {
-            $this->console->writeLine();
-        }
-    }
-
-    /**
-     * Write a list item line
-     *
-     * @param string $message
-     * @param bool   $flagNewLine
-     */
-    public function writeListItemLine($message, $flagNewLine = true)
-    {
-        $this->console->write('    * ');
-        $this->console->writeLine($message);
-
-        if ($flagNewLine) {
-            $this->console->writeLine();
-        }
-    }
-
-    /**
-     * Write a list item line for second level
-     *
-     * @param string $message
-     * @param bool   $flagNewLine
-     */
-    public function writeListItemLineLevel2($message, $flagNewLine = true)
-    {
-        $this->console->write('      * ');
-        $this->console->writeLine($message);
-
-        if ($flagNewLine) {
-            $this->console->writeLine();
-        }
-    }
-
-    /**
-     * Write a list item line for third level
-     *
-     * @param string $message
-     * @param bool   $flagNewLine
-     */
-    public function writeListItemLineLevel3($message, $flagNewLine = true)
-    {
-        $this->console->write('        * ');
-        $this->console->writeLine($message);
-
-        if ($flagNewLine) {
-            $this->console->writeLine();
-        }
-    }
-
-    /**
-     * Write a line with a yellow GO badge
-     *
-     * @param      $message
-     * @param bool $flagNewLine
-     */
-    public function writeGoLine($message, $flagNewLine = true)
-    {
-        $this->writeBadgeLine(
-            $message, ' ✓ ', Color::YELLOW, $flagNewLine
-        );
-    }
-
-    /**
-     * Write a line with a Blue Done badge
-     *
-     * @param      $message
-     * @param bool $flagNewLine
-     */
-    public function writeDoneLine($message, $flagNewLine = true)
-    {
-        $this->writeBadgeLine(
-            $message, ' ✓ ', Color::BLUE, $flagNewLine
-        );
-    }
-
-    /**
-     * Write a line with a green OK badge
-     *
-     * @param      $message
-     * @param bool $flagNewLine
-     */
-    public function writeOkLine($message, $flagNewLine = true)
-    {
-        $this->writeBadgeLine(
-            $message, ' ✓ ', Color::GREEN, $flagNewLine
-        );
-    }
-
-    /**
-     * Write a line with a red Fail badge
-     *
-     * @param      $message
-     * @param bool $flagNewLine
-     */
-    public function writeFailLine($message, $flagNewLine = true)
-    {
-        $this->writeBadgeLine(
-            $message, ' ! ', Color::RED, $flagNewLine
-        );
-    }
-
-    /**
-     * Write a line with a red Warn badge
-     *
-     * @param      $message
-     * @param bool $flagNewLine
-     */
-    public function writeWarnLine($message, $flagNewLine = true)
-    {
-        $this->writeBadgeLine(
-            $message, ' ✓ ', Color::RED, $flagNewLine
-        );
-    }
-
-    /**
-     * Filter camel case to dash
-     *
-     * @param string $text
-     *
-     * @return string
-     */
-    public function filterCamelCaseToDash($text)
-    {
-        $text = StaticFilter::execute($text, 'Word\CamelCaseToDash');
-        $text = StaticFilter::execute($text, 'StringToLower');
-
-        return $text;
-    }
-
-    /**
-     * Build module and check existence
-     *
-     * @return bool|string
-     */
-    protected function buildModulePath()
-    {
-        $modulePath = $this->projectPath . '/module';
-
-        if (is_dir($modulePath)) {
-
-            return $modulePath;
-        }
-
-        // output fail message
-        $message = AbstractCommand::TEXT_DONE_NO_ZF2_PROJECT;
-        $message .= $this->console->colorize($this->projectPath, Color::GREEN);
-
-        $this->writeDoneLine($message);
-
-        $this->writeFailLine(
-            AbstractCommand::TEXT_FAIL_INFORMATION_NOT_FOUND, false
-        );
-
-        return false;
-    }
-
-    /**
-     * Generate package tag
-     *
-     * @param string $description
-     *
-     * @return GenericTag
-     */
-    protected function generatePackageTag($description)
-    {
-        return new GenericTag('package', $description);
-    }
-
-    /**
-     * Generate copyright tag
-     *
-     * @param string $description
-     *
-     * @return GenericTag
-     */
-    protected function generateCopyrightTag($description)
-    {
-        return new GenericTag('copyright', $description);
-    }
-
-    /**
-     * Generate license tag
-     *
-     * @param string $description
-     *
-     * @return LicenseTag
-     */
-    protected function generateLicenseTag($description)
-    {
-        return new LicenseTag($description);
-    }
-
-    /**
-     * Generate param tag
-     *
-     * @param string $name
-     * @param array  $types
-     * @param string $description
-     *
-     * @return ReturnTag
-     */
-    protected function generateParamTag(
-        $name, array $types, $description = null
-    ) {
-        return new ParamTag($name, $types, $description);
-    }
-
-    /**
-     * Generate return tag
-     *
-     * @param array  $types
-     * @param string $description
-     *
-     * @return ReturnTag
-     */
-    protected function generateReturnTag(array $types, $description)
-    {
-        return new ReturnTag($types, $description);
-    }
-
-    /**
-     * Write body to a file
-     *
-     * @param $fileBody
-     * @param $fileName
-     */
-    protected function writeFile($fileName, $fileBody)
-    {
-        // create file
-        $file = new FileGenerator();
-        $file->setBody($fileBody);
-
-        // check for api docs
-        if ($this->configFileData['flagAddDocBlocks']) {
-            $file->setDocBlock(
-                new DocBlockGenerator(
-                    $this->configFileData['fileDocBlockText'],
-                    null,
-                    array(
-                        $this->generateCopyrightTag(
-                            $this->configFileData['fileDocBlockCopyright']
-                        ),
-                        $this->generateLicenseTag(
-                            $this->configFileData['fileDocBlockLicense']
-                        ),
-                    )
-                )
-            );
-        }
-
-        // write file
-        file_put_contents(
-            $fileName,
-            $file->generate()
-        );
-    }
-
-    /**
-     * Check if module exists
-     */
-    protected function checkModule()
-    {
-        // output message
-        $this->writeDoneLine(
-            'Checking module...', false
-        );
-
-        // check for module directory
-        if (!is_dir($this->moduleDir)) {
-            $this->console->writeLine();
-            $this->writeFailLine(
-                'The module ' . $this->console->colorize(
-                    $this->paramModule, Color::GREEN
-                ) . ' does not exist in ' . $this->console->colorize(
-                    $this->modulePath, Color::GREEN
-                ) . '.',
-                false
-            );
-
-            return false;
+            if (1 === $result) {
+                return false;
+            }
         }
 
         return true;
     }
-
 }
