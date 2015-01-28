@@ -103,6 +103,12 @@ class Params extends AbstractTask
             );
         }
 
+        if ($this->route->getMatchedParam('removeFactory')) {
+            $this->params->paramRemoveFactory = $this->route->getMatchedParam(
+                'removeFactory'
+            );
+        }
+
         return 0;
     }
 

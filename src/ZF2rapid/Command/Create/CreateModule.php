@@ -28,7 +28,7 @@ class CreateModule extends AbstractCommand
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Module\CreateModuleStructure',
             'ZF2rapid\Task\Module\GenerateModuleClass',
-            'ZF2rapid\Task\Module\GenerateModuleConfiguration',
+            'ZF2rapid\Task\Module\GenerateModuleConfig',
             'ZF2rapid\Task\Module\ChooseApplicationConfigFile',
             'ZF2rapid\Task\Module\ActivateModule',
         );

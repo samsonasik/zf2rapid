@@ -9,10 +9,9 @@
 namespace ZF2rapid\Task\Controller;
 
 use Zend\Console\ColorInterface as Color;
-use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Generator\ClassFileGenerator;
-use ZF2rapid\Generator\ControllerClassGenerator;
 use ZF2rapid\Generator\ControllerFactoryGenerator;
+use ZF2rapid\Task\AbstractTask;
 
 /**
  * Class GenerateControllerFactory

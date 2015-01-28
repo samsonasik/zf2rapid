@@ -6,13 +6,15 @@
  * @copyright   Copyright (c) 2014 - 2015 Ralf Eggert
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  *
+ * @todo        REFACTORING
+ * @todo        Write badge lines commands new lines tidy up
+ *
  * @todo        COMMANDS
- * @todo        Create controller factory
- * @todo        Delete controller factory
- * @todo        Delete controller
  * @todo        Create a new action within a controller
+ * @todo        Delete an action within a controller
  * @todo        Create routing for a module
  * @todo        Create a view helper within a module
+ * @todo        Create a controller plugin within a module
  * @todo        Generate class map for a module
  * @todo        Generate a template map for a module
  * @todo        List configuration from autoloading path
@@ -63,6 +65,26 @@ return array(
         'handler'              => 'ZF2rapid\Command\Create\CreateController',
     ),
     array(
+        'name'                 => 'create-controller-factory',
+        'route'                => 'create-controller-factory <module> <controller> [<path>]',
+        'description'          => 'Create a factory for an existing ZF2 controller for module within the specified path',
+        'short_description'    => 'Create factory for ZF2 controller',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to create the controller factory in; mandatory',
+            '<controller>' => 'The name of the controller to create the factory for; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to create the controller factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => true,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'controller' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateControllerFactory',
+    ),
+    array(
         'name'                 => 'create-module',
         'route'                => 'create-module <module> [<path>]',
         'description'          => 'Create a new ZF2 module within the specified path',
@@ -108,6 +130,46 @@ return array(
             'module' => new NormalizeParamFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Deactivate\DeactivateModule',
+    ),
+    array(
+        'name'                 => 'delete-controller',
+        'route'                => 'delete-controller <module> <controller> [<path>]',
+        'description'          => 'Delete an existing ZF2 controller for module within the specified path',
+        'short_description'    => 'Delete ZF2 controller',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to delete the controller in; mandatory',
+            '<controller>' => 'The name of the controller to delete; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to delete the controller in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'controller' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteController',
+    ),
+    array(
+        'name'                 => 'delete-controller-factory',
+        'route'                => 'delete-controller-factory <module> <controller> [<path>]',
+        'description'          => 'Delete the factory for an existing ZF2 controller for module within the specified path',
+        'short_description'    => 'Delete factory for ZF2 controller',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to delete the controller factory in; mandatory',
+            '<controller>' => 'The name of the controller to delete the factory for; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to delete the controller factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'controller' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteControllerFactory',
     ),
     array(
         'name'                 => 'delete-module',

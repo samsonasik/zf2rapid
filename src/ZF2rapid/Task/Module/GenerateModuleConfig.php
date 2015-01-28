@@ -13,11 +13,11 @@ use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Generator\ConfigFileGenerator;
 
 /**
- * Class GenerateModuleConfiguration
+ * Class GenerateModuleConfig
  *
  * @package ZF2rapid\Task\Module
  */
-class GenerateModuleConfiguration extends AbstractTask
+class GenerateModuleConfig extends AbstractTask
 {
     /**
      * Process the command

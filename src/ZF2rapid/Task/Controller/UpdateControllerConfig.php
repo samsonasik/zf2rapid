@@ -10,15 +10,15 @@ namespace ZF2rapid\Task\Controller;
 
 use Zend\Code\Generator\ValueGenerator;
 use Zend\Console\ColorInterface as Color;
-use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Generator\ConfigFileGenerator;
+use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class GenerateControllerConfig
+ * Class UpdateControllerConfig
  *
  * @package ZF2rapid\Task\Controller
  */
-class GenerateControllerConfig extends AbstractTask
+class UpdateControllerConfig extends AbstractTask
 {
     /**
      * Process the command
@@ -58,6 +58,16 @@ class GenerateControllerConfig extends AbstractTask
         $ctrlKey = $this->params->paramModule . '\\'
             . $this->params->paramController;
 
+        // remove factory if requested
+        if ($this->params->paramRemoveFactory) {
+            // delete factories key if set
+            if (isset($configData['controllers']['factories'])
+                && isset($configData['controllers']['factories'][$ctrlKey])
+            ) {
+                unset($configData['controllers']['factories'][$ctrlKey]);
+            }
+        }
+
         // check for factory
         if ($this->params->paramFactory) {
             // check for factories config key
@@ -71,6 +81,13 @@ class GenerateControllerConfig extends AbstractTask
 
             // add controller
             $configData['controllers']['factories'][$ctrlKey] = $ctrlClass;
+
+            // delete invokables key if set
+            if (isset($configData['controllers']['invokables'])
+                && isset($configData['controllers']['invokables'][$ctrlKey])
+            ) {
+                unset($configData['controllers']['invokables'][$ctrlKey]);
+            }
         } else {
             // check for invokables config key
             if (!isset($configData['controllers']['invokables'])) {
