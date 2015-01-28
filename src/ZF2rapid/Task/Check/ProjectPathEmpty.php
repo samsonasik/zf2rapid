@@ -42,8 +42,7 @@ class ProjectPathEmpty extends AbstractTask
                 $this->console->writeFailLine(
                     'The specified project path ' . $this->console->colorize(
                         $this->params->projectPath, Color::GREEN
-                    ) . ' is not empty. ZF2 project can not be installed here.',
-                    false
+                    ) . ' is not empty. ZF2 project can not be installed here.'
                 );
 
                 return 1;
@@ -52,7 +51,7 @@ class ProjectPathEmpty extends AbstractTask
             // create new project path if it does not exists
             mkdir($this->params->projectPath, 0777, true);
 
-            $this->console->writeDoneLine(
+            $this->console->writeTaskLine(
                 'Project path ' . $this->console->colorize(
                     realpath($this->params->projectPath), Color::GREEN
                 ) . ' was created.'

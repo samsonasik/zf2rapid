@@ -27,7 +27,7 @@ class GenerateModuleClass extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Writing module class file...', false
         );
 

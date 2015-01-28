@@ -41,7 +41,7 @@ class ToolVersion extends AbstractCommand
     {
         // output success message
         $this->console->writeOkLine(
-            'The ZF2rapid tool version was successfully displayed.', false
+            'The ZF2rapid tool version was successfully displayed.'
         );
     }
 }

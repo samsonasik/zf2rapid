@@ -186,7 +186,7 @@ class Configuration extends AbstractTask
             )
         );
 
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'The value for configuration key ' . $this->console->colorize(
                 $paramKey, Color::GREEN
             ) . ' was changed to ' . $this->console->colorize(
@@ -203,7 +203,7 @@ class Configuration extends AbstractTask
     protected function displayConfiguration($paramKey = null)
     {
         // output found configuration
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'The following configuration was found in '
             . $this->console->colorize(
                 $this->params->projectPath . '/' . ConfigFile::CONFIG_FILE_NAME,
@@ -237,8 +237,7 @@ class Configuration extends AbstractTask
                 ) . str_pad('', $maxLength - strlen($configKey)) . ' : '
                 . $this->console->colorize(
                     $configValue, Color::BLUE
-                ),
-                false
+                )
             );
         }
 

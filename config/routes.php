@@ -6,9 +6,6 @@
  * @copyright   Copyright (c) 2014 - 2015 Ralf Eggert
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  *
- * @todo        REFACTORING
- * @todo        Write badge lines commands new lines tidy up
- *
  * @todo        COMMANDS
  * @todo        Create a new action within a controller
  * @todo        Delete an action within a controller

@@ -389,18 +389,23 @@ class Console implements AdapterInterface, ConsoleInterface
      * @param string $message
      * @param string $badgeText
      * @param string $badgeColor
-     * @param bool   $flagNewLine
+     * @param bool   $preNewLine
+     * @param bool   $postNewLine
      */
     public function writeBadgeLine(
-        $message, $badgeText, $badgeColor, $flagNewLine = true
+        $message, $badgeText, $badgeColor, $preNewLine = false, $postNewLine = false
     ) {
+        if ($preNewLine) {
+            $this->adapter->writeLine();
+        }
+
         $this->adapter->write(
             $badgeText, Color::NORMAL, $badgeColor
         );
         $this->adapter->write(' ');
         $this->adapter->writeLine($message);
 
-        if ($flagNewLine) {
+        if ($postNewLine) {
             $this->adapter->writeLine();
         }
     }
@@ -409,76 +414,57 @@ class Console implements AdapterInterface, ConsoleInterface
      * Write an indented line
      *
      * @param string $message
-     * @param bool   $flagNewLine
      */
-    public function writeIndentedLine($message, $flagNewLine = true)
+    public function writeIndentedLine($message)
     {
-        $this->adapter->write('    ');
+        $this->adapter->writeLine();
+        $this->adapter->write('       ');
         $this->adapter->writeLine($message);
-
-        if ($flagNewLine) {
-            $this->adapter->writeLine();
-        }
     }
 
     /**
      * Write a list item line
      *
      * @param string $message
-     * @param bool   $flagNewLine
      */
-    public function writeListItemLine($message, $flagNewLine = true)
+    public function writeListItemLine($message)
     {
-        $this->adapter->write('    * ');
+        $this->adapter->writeLine();
+        $this->adapter->write('       * ');
         $this->adapter->writeLine($message);
-
-        if ($flagNewLine) {
-            $this->adapter->writeLine();
-        }
     }
 
     /**
      * Write a list item line for second level
      *
      * @param string $message
-     * @param bool   $flagNewLine
      */
-    public function writeListItemLineLevel2($message, $flagNewLine = true)
+    public function writeListItemLineLevel2($message)
     {
-        $this->adapter->write('      * ');
+        $this->adapter->write('         * ');
         $this->adapter->writeLine($message);
-
-        if ($flagNewLine) {
-            $this->adapter->writeLine();
-        }
     }
 
     /**
      * Write a list item line for third level
      *
      * @param string $message
-     * @param bool   $flagNewLine
      */
-    public function writeListItemLineLevel3($message, $flagNewLine = true)
+    public function writeListItemLineLevel3($message)
     {
-        $this->adapter->write('        * ');
+        $this->adapter->write('           * ');
         $this->adapter->writeLine($message);
-
-        if ($flagNewLine) {
-            $this->adapter->writeLine();
-        }
     }
 
     /**
      * Write a line with a yellow GO badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeGoLine($message, $flagNewLine = true)
+    public function writeGoLine($message)
     {
         $this->writeBadgeLine(
-            $message, ' ✓ ', Color::YELLOW, $flagNewLine
+            $message, '  GO  ', Color::YELLOW, false, true
         );
     }
 
@@ -486,12 +472,11 @@ class Console implements AdapterInterface, ConsoleInterface
      * Write a line with a Blue Done badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeDoneLine($message, $flagNewLine = true)
+    public function writeTaskLine($message)
     {
         $this->writeBadgeLine(
-            $message, ' ✓ ', Color::BLUE, $flagNewLine
+            $message, ' task ', Color::BLUE, false, false
         );
     }
 
@@ -499,12 +484,11 @@ class Console implements AdapterInterface, ConsoleInterface
      * Write a line with a green OK badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeOkLine($message, $flagNewLine = true)
+    public function writeOkLine($message)
     {
         $this->writeBadgeLine(
-            $message, ' ✓ ', Color::GREEN, $flagNewLine
+            $message, '  OK  ', Color::GREEN, true, true
         );
     }
 
@@ -512,12 +496,11 @@ class Console implements AdapterInterface, ConsoleInterface
      * Write a line with a red Fail badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeFailLine($message, $flagNewLine = true)
+    public function writeFailLine($message)
     {
         $this->writeBadgeLine(
-            $message, ' ! ', Color::RED, $flagNewLine
+            $message, ' FAIL ', Color::RED, true, true
         );
     }
 
@@ -525,12 +508,23 @@ class Console implements AdapterInterface, ConsoleInterface
      * Write a line with a red Warn badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeWarnLine($message, $flagNewLine = true)
+    public function writeWarnLine($message)
     {
         $this->writeBadgeLine(
-            $message, ' ✓ ', Color::RED, $flagNewLine
+            $message, ' WARN ', Color::RED, true, true
+        );
+    }
+
+    /**
+     * Write a line with a yellow to-do badge
+     *
+     * @param      $message
+     */
+    public function writeTodoLine($message)
+    {
+        $this->writeBadgeLine(
+            $message, ' todo ', Color::GREEN, false, true
         );
     }
 

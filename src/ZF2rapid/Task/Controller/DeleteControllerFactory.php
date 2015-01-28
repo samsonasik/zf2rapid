@@ -34,7 +34,7 @@ class DeleteControllerFactory extends AbstractTask
         }
 
         // output message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Deleting controller factory file...'
         );
 

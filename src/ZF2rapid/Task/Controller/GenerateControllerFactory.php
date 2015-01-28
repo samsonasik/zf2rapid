@@ -32,7 +32,7 @@ class GenerateControllerFactory extends AbstractTask
         }
 
         // output message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Writing controller factory file...'
         );
 

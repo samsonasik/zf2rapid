@@ -49,7 +49,6 @@ class CreateModuleStructure extends AbstractTask
 
         // create config module
         if (!mkdir($this->params->moduleConfigDir, 0777, true)) {
-            $this->console->writeLine();
             $this->console->writeFailLine(
                 'The module config directory ' . $this->console->colorize(
                     $this->params->moduleConfigDir, Color::GREEN
@@ -73,19 +72,17 @@ class CreateModuleStructure extends AbstractTask
 
         // create view module
         if (!mkdir($this->params->moduleViewDir, 0777, true)) {
-            $this->console->writeLine();
             $this->console->writeFailLine(
                 'The module view directory ' . $this->console->colorize(
                     $this->params->moduleViewDir, Color::GREEN
-                ) . ' could not be created.',
-                false
+                ) . ' could not be created.'
             );
 
             return 1;
         }
 
         // output message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Module root ' . $this->console->colorize(
                 $this->params->moduleDir, Color::GREEN
             ) . ' was created.'

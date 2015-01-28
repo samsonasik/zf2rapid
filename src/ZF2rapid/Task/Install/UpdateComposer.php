@@ -27,8 +27,8 @@ class UpdateComposer extends AbstractTask
         // start self-update if composer is available
         if (file_exists($this->params->projectPath . '/composer.phar')) {
             // output message
-            $this->console->writeDoneLine(
-                'Self-updating composer.phar...', false
+            $this->console->writeTaskLine(
+                'Self-updating composer.phar...'
             );
 
             /**
@@ -58,8 +58,8 @@ class UpdateComposer extends AbstractTask
                 }
 
                 // output message
-                $this->console->writeDoneLine(
-                    'Run composer installer...', false
+                $this->console->writeTaskLine(
+                    'Run composer installer...'
                 );
 
                 /**

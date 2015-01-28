@@ -45,7 +45,7 @@ class LoadControllers extends AbstractTask
             return 0;
         }
 
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'No controllers were found in ' . $this->console->colorize(
                 $this->params->projectPath, Color::GREEN
             )

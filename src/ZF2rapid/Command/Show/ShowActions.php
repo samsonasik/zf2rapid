@@ -47,7 +47,7 @@ class ShowActions extends AbstractCommand
     {
         // output success message
         $this->console->writeOkLine(
-            'The ZF2 controller actions were successfully displayed.', false
+            'The ZF2 controller actions were successfully displayed.'
         );
     }
 }

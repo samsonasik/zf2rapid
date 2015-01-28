@@ -26,7 +26,7 @@ class ControllerExists extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Checking controller...'
         );
 
@@ -41,8 +41,7 @@ class ControllerExists extends AbstractTask
                     $this->params->paramController, Color::GREEN
                 ) . ' does not exist in module ' . $this->console->colorize(
                     $this->params->paramModule, Color::GREEN
-                ) . '.',
-                false
+                ) . '.'
             );
 
             return 1;

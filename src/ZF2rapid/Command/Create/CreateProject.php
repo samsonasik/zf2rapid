@@ -52,11 +52,10 @@ class CreateProject extends AbstractCommand
             'Congratulations! The new ZF2 project was successfully created.'
         );
 
-        $this->console->writeIndentedLine(
+        $this->console->writeTodoLine(
             'Please change to working dir ' . $this->console->colorize(
                 realpath($this->params->projectPath), Color::GREEN
-            ) . ' to continue.',
-            false
+            ) . ' to continue.'
         );
     }
 }

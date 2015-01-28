@@ -28,7 +28,7 @@ class DeactivateModule extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Deactivating module in config file ' . $this->console->colorize(
                 $this->params->configFile, Color::GREEN
             ) . ' ...'

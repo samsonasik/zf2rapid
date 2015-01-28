@@ -31,81 +31,81 @@ interface ConsoleInterface extends AdapterInterface
      * @param string $message
      * @param string $badgeText
      * @param string $badgeColor
-     * @param bool   $flagNewLine
+     * @param bool   $preNewLine
+     * @param bool   $postNewLine
      */
     public function writeBadgeLine(
-        $message, $badgeText, $badgeColor, $flagNewLine = true
+        $message, $badgeText, $badgeColor, $preNewLine = false,
+        $postNewLine = false
     );
 
     /**
      * Write an indented line
      *
      * @param string $message
-     * @param bool   $flagNewLine
      */
-    public function writeIndentedLine($message, $flagNewLine = true);
+    public function writeIndentedLine($message);
 
     /**
      * Write a list item line
      *
      * @param string $message
-     * @param bool   $flagNewLine
      */
-    public function writeListItemLine($message, $flagNewLine = true);
+    public function writeListItemLine($message);
 
     /**
      * Write a list item line for second level
      *
      * @param string $message
-     * @param bool   $flagNewLine
      */
-    public function writeListItemLineLevel2($message, $flagNewLine = true);
+    public function writeListItemLineLevel2($message);
 
     /**
      * Write a list item line for third level
      *
      * @param string $message
-     * @param bool   $flagNewLine
      */
-    public function writeListItemLineLevel3($message, $flagNewLine = true);
+    public function writeListItemLineLevel3($message);
 
     /**
      * Write a line with a yellow GO badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeGoLine($message, $flagNewLine = true);
+    public function writeGoLine($message);
 
     /**
      * Write a line with a Blue Done badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeDoneLine($message, $flagNewLine = true);
+    public function writeTaskLine($message);
 
     /**
      * Write a line with a green OK badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeOkLine($message, $flagNewLine = true);
+    public function writeOkLine($message);
 
     /**
      * Write a line with a red Fail badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeFailLine($message, $flagNewLine = true);
+    public function writeFailLine($message);
 
     /**
      * Write a line with a red Warn badge
      *
      * @param      $message
-     * @param bool $flagNewLine
      */
-    public function writeWarnLine($message, $flagNewLine = true);
+    public function writeWarnLine($message);
+
+    /**
+     * Write a line with a yellow to-do badge
+     *
+     * @param      $message
+     */
+    public function writeTodoLine($message);
 }

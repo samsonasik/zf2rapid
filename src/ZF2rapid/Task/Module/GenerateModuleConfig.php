@@ -27,8 +27,8 @@ class GenerateModuleConfig extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine(
-            'Writing module configuration file...', false
+        $this->console->writeTaskLine(
+            'Writing module configuration file...'
         );
 
         // create config

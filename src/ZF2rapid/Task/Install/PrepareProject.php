@@ -25,7 +25,7 @@ class PrepareProject extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine('Preparing project...');
+        $this->console->writeTaskLine('Preparing project...');
 
         /**
          * @todo check on Windows

@@ -28,8 +28,9 @@ class ChooseApplicationConfigFile extends AbstractTask
     public function processCommandTask()
     {
         // write prompt badge
+        $this->console->writeLine();
         $this->console->write(
-            ' ? ', Color::NORMAL, Color::RED
+            ' pick ', Color::NORMAL, Color::RED
         );
         $this->console->write(' ');
 

@@ -29,8 +29,8 @@ class UnzipSkeletonApplication extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine(
-            'Unzipping ' . $this->params->skeletonName . '...', false
+        $this->console->writeTaskLine(
+            'Unzipping ' . $this->params->skeletonName . '...'
         );
 
         // initialize archive
@@ -46,8 +46,7 @@ class UnzipSkeletonApplication extends AbstractTask
                 $this->console->writeFailLine(
                     'Zip file from url ' . $this->console->colorize(
                         $this->params->skeletonUrl, Color::GREEN
-                    ) . ' does not contain any files.',
-                    false
+                    ) . ' does not contain any files.'
                 );
 
                 return false;
@@ -67,8 +66,7 @@ class UnzipSkeletonApplication extends AbstractTask
                 $this->console->writeFailLine(
                     'Unzipping of file ' . $this->console->colorize(
                         $this->params->tmpFile, Color::GREEN
-                    ) . ' failed.',
-                    false
+                    ) . ' failed.'
                 );
 
                 return false;
@@ -89,8 +87,7 @@ class UnzipSkeletonApplication extends AbstractTask
                 $this->console->writeFailLine(
                     'Copying of files from file ' . $this->console->colorize(
                         $this->params->tmpFile, Color::GREEN
-                    ) . ' failed.',
-                    false
+                    ) . ' failed.'
                 );
 
                 return false;

@@ -44,7 +44,7 @@ class ShowModules extends AbstractCommand
     {
         // output success message
         $this->console->writeOkLine(
-            'The ZF2 modules were successfully displayed.', false
+            'The ZF2 modules were successfully displayed.'
         );
     }
 }

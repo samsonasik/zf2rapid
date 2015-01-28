@@ -40,20 +40,20 @@ class DownloadSkeletonApplication extends AbstractTask
         // check if file was downloaded already today
         if (!file_exists($this->params->tmpFile)) {
             // output message
-            $this->console->writeDoneLine(
+            $this->console->writeTaskLine(
                 'Downloading ' . $this->console->colorize(
                     $this->params->skeletonName, Color::GREEN
-                ) . '...', false
+                ) . '...'
             );
 
             // get skeleton app
             return $this->getSkeletonApplication();
         }
 
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Getting ' . $this->console->colorize(
                 $this->params->skeletonName, Color::GREEN
-            ) . ' from cache...', false
+            ) . ' from cache...'
         );
 
         // @todo implement garbage collection
@@ -81,8 +81,7 @@ class DownloadSkeletonApplication extends AbstractTask
             $this->console->writeFailLine(
                 'Downloading of file from url ' . $this->console->colorize(
                     $this->params->skeletonUrl, Color::GREEN
-                ) . ' failed.',
-                false
+                ) . ' failed.'
             );
 
             return false;

@@ -28,7 +28,7 @@ class LoadedActions extends AbstractTask
     public function processCommandTask()
     {
         // output done message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'The following controller-actions were found in '
             . $this->console->colorize($this->params->projectPath, Color::GREEN)
         );
@@ -40,8 +40,7 @@ class LoadedActions extends AbstractTask
                     $moduleName, Color::GREEN
                 ) . ' (Class ' . $this->console->colorize(
                     get_class($moduleObject), Color::BLUE
-                ) . ')',
-                false
+                ) . ')'
             );
 
             // check for empty controller list

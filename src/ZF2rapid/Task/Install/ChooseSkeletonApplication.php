@@ -39,8 +39,9 @@ class ChooseSkeletonApplication extends AbstractTask
     public function processCommandTask()
     {
         // write prompt badge
+        $this->console->writeLine();
         $this->console->write(
-            $this->console->colorize(' ? ', Color::NORMAL, Color::RED) . ' '
+            $this->console->colorize(' pick ', Color::NORMAL, Color::RED) . ' '
         );
 
         // set indention
@@ -73,7 +74,7 @@ class ChooseSkeletonApplication extends AbstractTask
             case 'c':
                 // write prompt badge
                 $this->console->write(
-                    ' ? ', Color::NORMAL, Color::RED
+                    ' pick ', Color::NORMAL, Color::RED
                 );
                 $this->console->write(' ');
 
@@ -97,7 +98,7 @@ class ChooseSkeletonApplication extends AbstractTask
         $this->params->skeletonName = $options[$spaces . $skeletonAnswer];
 
         // write which skeleton application was chosen
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             $this->console->colorize($this->params->skeletonName, Color::GREEN)
             . ' will be installed now.');
 

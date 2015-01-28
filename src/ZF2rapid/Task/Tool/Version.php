@@ -25,7 +25,7 @@ class Version extends AbstractTask
     public function processCommandTask()
     {
         // output done message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'The current version of '
             . $this->console->colorize(Application::NAME, Color::GREEN)
             . ' is '

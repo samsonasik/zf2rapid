@@ -28,7 +28,7 @@ class LoadedModules extends AbstractTask
     public function processCommandTask()
     {
         // output found modules
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'The following modules were found in ' . $this->console->colorize(
                 $this->params->projectPath, Color::GREEN
             )
@@ -41,8 +41,7 @@ class LoadedModules extends AbstractTask
                     $moduleName, Color::GREEN
                 ) . ' (Class ' . $this->console->colorize(
                     get_class($moduleObject), Color::BLUE
-                ) . ')',
-                false
+                ) . ')'
             );
         }
 

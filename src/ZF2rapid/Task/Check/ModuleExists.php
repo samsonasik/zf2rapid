@@ -26,7 +26,7 @@ class ModuleExists extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Checking module...'
         );
 
@@ -37,8 +37,7 @@ class ModuleExists extends AbstractTask
                     $this->params->paramModule, Color::GREEN
                 ) . ' does not exist in ' . $this->console->colorize(
                     $this->params->projectModuleDir, Color::GREEN
-                ) . '.',
-                false
+                ) . '.'
             );
 
             return 1;

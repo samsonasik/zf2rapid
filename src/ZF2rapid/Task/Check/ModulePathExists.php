@@ -31,7 +31,8 @@ class ModulePathExists extends AbstractTask
             $this->console->writeFailLine(
                 'There is no ZF2 project within ' . $this->console->colorize(
                     $this->params->projectModuleDir, Color::GREEN
-                ));
+                )
+            );
 
             return 1;
         }

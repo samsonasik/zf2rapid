@@ -28,7 +28,7 @@ class LoadedControllers extends AbstractTask
     public function processCommandTask()
     {
         // output done message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'The following controllers were found in '
             . $this->console->colorize($this->params->projectPath, Color::GREEN)
         );
@@ -40,8 +40,7 @@ class LoadedControllers extends AbstractTask
                     $moduleName, Color::GREEN
                 ) . ' (Class ' . $this->console->colorize(
                     get_class($moduleObject), Color::BLUE
-                ) . ')',
-                false
+                ) . ')'
             );
 
             // check for empty controller list
@@ -76,8 +75,6 @@ class LoadedControllers extends AbstractTask
                         false
                     );
                 }
-
-                $this->console->writeLine();
             }
         }
 

@@ -50,7 +50,7 @@ class ZFVersion extends AbstractTask
         require_once $versionFile;
 
         // output success message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'A ZF2 library was found in ' . $this->console->colorize(
                 $projectPath . $library, Color::GREEN
             )

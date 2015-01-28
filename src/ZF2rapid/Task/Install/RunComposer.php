@@ -25,7 +25,7 @@ class RunComposer extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine('Installing dependencies...', false);
+        $this->console->writeTaskLine('Installing dependencies...');
 
         /**
          * @todo check on Windows

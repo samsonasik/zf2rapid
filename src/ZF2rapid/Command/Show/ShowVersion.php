@@ -43,7 +43,7 @@ class ShowVersion extends AbstractCommand
     {
         // output success message
         $this->console->writeOkLine(
-            'The ZF2 version was successfully displayed.', false
+            'The ZF2 version was successfully displayed.'
         );
     }
 }

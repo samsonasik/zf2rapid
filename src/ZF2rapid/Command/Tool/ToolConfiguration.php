@@ -44,7 +44,7 @@ class ToolConfiguration extends AbstractCommand
     {
         // output success message
         $this->console->writeOkLine(
-            'The ZF2rapid tool configuration was successfully managed.', false
+            'The ZF2rapid tool configuration was successfully managed.'
         );
     }
 }

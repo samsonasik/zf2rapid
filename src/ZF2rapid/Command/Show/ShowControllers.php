@@ -46,7 +46,7 @@ class ShowControllers extends AbstractCommand
     {
         // output success message
         $this->console->writeOkLine(
-            'The ZF2 controllers were successfully displayed.', false
+            'The ZF2 controllers were successfully displayed.'
         );
     }
 }

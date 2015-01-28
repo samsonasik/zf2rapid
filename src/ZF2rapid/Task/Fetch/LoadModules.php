@@ -81,7 +81,7 @@ class LoadModules extends AbstractTask
         }
 
         // output fail message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'No modules were found in ' . $this->console->colorize(
                 $this->params->projectPath, Color::GREEN
             )

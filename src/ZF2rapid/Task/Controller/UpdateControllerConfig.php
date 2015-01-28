@@ -28,7 +28,7 @@ class UpdateControllerConfig extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Writing configuration file...'
         );
 

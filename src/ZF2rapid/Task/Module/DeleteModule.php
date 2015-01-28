@@ -27,15 +27,16 @@ class DeleteModule extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeDoneLine(
+        $this->console->writeTaskLine(
             'Deleting module ' . $this->console->colorize(
                 $this->params->paramModule, Color::GREEN
             ) . ' ...'
         );
 
         // write prompt badge
+        $this->console->writeLine();
         $this->console->write(
-            ' ? ', Color::NORMAL, Color::RED
+            ' WARN ', Color::NORMAL, Color::RED
         );
         $this->console->write(' ');
 
@@ -47,8 +48,6 @@ class DeleteModule extends AbstractTask
         );
         $deleteConfirmation = $deletePrompt->show();
 
-        $this->console->writeLine();
-
         if (!$deleteConfirmation) {
             // output success message
             $this->console->writeOkLine(
@@ -65,8 +64,9 @@ class DeleteModule extends AbstractTask
         }
 
         // write prompt badge
+        $this->console->writeLine();
         $this->console->write(
-            ' ? ', Color::NORMAL, Color::RED
+            ' WARN ', Color::NORMAL, Color::RED
         );
         $this->console->write(' ');
 
@@ -77,8 +77,6 @@ class DeleteModule extends AbstractTask
             'n'
         );
         $deleteConfirmation = $deletePrompt->show();
-
-        $this->console->writeLine();
 
         if (!$deleteConfirmation) {
             // output success message
@@ -94,6 +92,8 @@ class DeleteModule extends AbstractTask
 
             return 1;
         }
+
+        $this->console->writeLine();
 
         /**
          * @todo check on Windows

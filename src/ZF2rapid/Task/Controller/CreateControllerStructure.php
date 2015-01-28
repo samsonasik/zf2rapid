@@ -39,7 +39,7 @@ class CreateControllerStructure extends AbstractTask
             }
 
             // output message
-            $this->console->writeDoneLine(
+            $this->console->writeTaskLine(
                 'Controller directory ' . $this->console->colorize(
                     $this->params->controllerDir, Color::GREEN
                 ) . ' was created.'
@@ -60,7 +60,7 @@ class CreateControllerStructure extends AbstractTask
             }
 
             // output message
-            $this->console->writeDoneLine(
+            $this->console->writeTaskLine(
                 'Controller view directory ' . $this->console->colorize(
                     $this->params->controllerViewDir, Color::GREEN
                 ) . ' was created.'

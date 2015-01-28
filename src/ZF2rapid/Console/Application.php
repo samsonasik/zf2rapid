@@ -117,8 +117,6 @@ class Application extends ZFApplication
      */
     public function writeApplicationFooter(AdapterInterface $console)
     {
-        $console->writeLine();
-
         $console->writeLine(
             str_pad('', $console->getWidth() - 1, '=', STR_PAD_RIGHT),
             Color::GREEN

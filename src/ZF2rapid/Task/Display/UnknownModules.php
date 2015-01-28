@@ -53,8 +53,7 @@ class UnknownModules extends AbstractTask
                 $this->console->writeListItemLine(
                     'Module ' . $this->console->colorize(
                         $moduleName, Color::GREEN
-                    ),
-                    false
+                    )
                 );
             }
 
