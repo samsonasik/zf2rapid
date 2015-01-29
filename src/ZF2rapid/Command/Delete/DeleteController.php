@@ -15,8 +15,6 @@ use ZF2rapid\Command\AbstractCommand;
  * Class DeleteController
  *
  * @package ZF2rapid\Command\Delete
- *
- * @todo    view scripts for controller must be deleted
  */
 class DeleteController extends AbstractCommand
 {
@@ -32,6 +30,7 @@ class DeleteController extends AbstractCommand
             'ZF2rapid\Task\Controller\DeleteController',
             'ZF2rapid\Task\Controller\DeleteControllerFactory',
             'ZF2rapid\Task\Controller\RemoveControllerConfig',
+            'ZF2rapid\Task\Controller\RemoveControllerViews',
         );
 
     /**
