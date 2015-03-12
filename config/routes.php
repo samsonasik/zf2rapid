@@ -7,8 +7,6 @@
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  *
  * @todo        COMMANDS
- * @todo        Create a new action within a controller
- * @todo        Delete an action within a controller
  * @todo        Create routing for a module
  * @todo        Create a view helper within a module
  * @todo        Create a controller plugin within a module
@@ -149,6 +147,28 @@ return array(
             'module' => new NormalizeParamFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Deactivate\DeactivateModule',
+    ),
+    array(
+        'name'                 => 'delete-action',
+        'route'                => 'delete-action <module> <controller> <action> [<path>]',
+        'description'          => 'Delete an existing ZF2 controller action for module within the specified path',
+        'short_description'    => 'Delete ZF2 controller action',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to delete the action in; mandatory',
+            '<controller>' => 'The name of the controller to delete the action in; mandatory',
+            '<action>'     => 'The name of the new action to delete; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to delete the controller action in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'controller' => new NormalizeParamFilter(),
+            'action'     => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteAction',
     ),
     array(
         'name'                 => 'delete-controller',

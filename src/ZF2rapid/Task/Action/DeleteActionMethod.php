@@ -6,22 +6,20 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Controller;
+namespace ZF2rapid\Task\Action;
 
 use Zend\Code\Generator\ClassGenerator;
-use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Reflection\FileReflection;
 use Zend\Console\ColorInterface as Color;
-use ZF2rapid\Generator\ActionMethodGenerator;
 use ZF2rapid\Generator\ClassFileGenerator;
 use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class GenerateActionMethod
+ * Class DeleteActionMethod
  *
- * @package ZF2rapid\Task\Controller
+ * @package ZF2rapid\Task\Action
  */
-class GenerateActionMethod extends AbstractTask
+class DeleteActionMethod extends AbstractTask
 {
     /**
      * Process the command
@@ -32,7 +30,7 @@ class GenerateActionMethod extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Writing action method for controller...'
+            'Deleting action method from controller...'
         );
 
         // set controller file and action method
@@ -54,14 +52,14 @@ class GenerateActionMethod extends AbstractTask
         $class = ClassGenerator::fromReflection($classReflection);
 
         // set method to check
-        $checkMethod = strtolower($this->params->paramAction) . 'action';
+        $actionMethod = strtolower($this->params->paramAction) . 'action';
 
         // check for action method
-        if ($class->hasMethod($checkMethod)) {
+        if (!$class->hasMethod($actionMethod)) {
             $this->console->writeFailLine(
                 'The action ' . $this->console->colorize(
                     $this->params->paramAction, Color::GREEN
-                ) . ' already exists in controller ' . $this->console->colorize(
+                ) . ' does not exist in controller ' . $this->console->colorize(
                     $this->params->paramController, Color::GREEN
                 ) . ' of module ' . $this->console->colorize(
                     $this->params->paramModule, Color::GREEN
@@ -70,17 +68,11 @@ class GenerateActionMethod extends AbstractTask
 
             return 1;
         }
-
         // fix namespace usage
         $class->addUse('Zend\Mvc\Controller\AbstractActionController');
         $class->addUse('Zend\View\Model\ViewModel');
         $class->setExtendedClass('AbstractActionController');
-        $class->addMethodFromGenerator(
-            new ActionMethodGenerator(
-                $this->params->paramAction, $this->params->paramController,
-                $this->params->config
-            )
-        );
+        $class->removeMethod($actionMethod);
 
         // create file
         $file = new ClassFileGenerator(

@@ -48,7 +48,7 @@ class DeleteController extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 controller ' . $this->console->colorize(
+            'Congratulations! The controller ' . $this->console->colorize(
                 $this->params->paramController, Color::GREEN
             ) . ' for module ' . $this->console->colorize(
                 $this->params->paramModule, Color::GREEN

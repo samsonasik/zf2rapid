@@ -6,17 +6,17 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Command\Create;
+namespace ZF2rapid\Command\Delete;
 
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Command\AbstractCommand;
 
 /**
- * Class CreateAction
+ * Class DeleteAction
  *
- * @package ZF2rapid\Command\Create
+ * @package ZF2rapid\Command\Delete
  */
-class CreateAction extends AbstractCommand
+class DeleteAction extends AbstractCommand
 {
     /**
      * @var array
@@ -27,8 +27,8 @@ class CreateAction extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Check\ControllerExists',
-            'ZF2rapid\Task\Action\GenerateActionMethod',
-            'ZF2rapid\Task\Action\GenerateActionView',
+            'ZF2rapid\Task\Action\DeleteActionMethod',
+            'ZF2rapid\Task\Action\DeleteActionView',
         );
 
     /**
@@ -37,7 +37,7 @@ class CreateAction extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new controller action...');
+        $this->console->writeGoLine('Deleting controller action...');
     }
 
     /**
@@ -46,13 +46,13 @@ class CreateAction extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 controller action ' . $this->console->colorize(
+            'Congratulations! The controller action ' . $this->console->colorize(
                 $this->params->paramAction, Color::GREEN
             ) . ' for controller ' . $this->console->colorize(
                 $this->params->paramController, Color::GREEN
-            ) . ' and module ' . $this->console->colorize(
+            ) . ' for module ' . $this->console->colorize(
                 $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            ) . ' was successfully deleted.'
         );
     }
 }
