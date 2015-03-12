@@ -97,6 +97,12 @@ class Params extends AbstractTask
             );
         }
 
+        if ($this->route->getMatchedParam('action')) {
+            $this->params->paramAction = $this->route->getMatchedParam(
+                'action'
+            );
+        }
+
         if ($this->route->getMatchedParam('factory')) {
             $this->params->paramFactory = $this->route->getMatchedParam(
                 'factory'

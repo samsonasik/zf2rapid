@@ -34,7 +34,7 @@ class GenerateActionView extends AbstractTask
 
         // set action
         if ($this->params->paramAction) {
-            $action = $this->params->paramAction;
+            $action = $this->filterCamelCaseToDash($this->params->paramAction);
         } else {
             $action = 'index';
         }

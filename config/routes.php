@@ -41,6 +41,28 @@ return array(
         'handler'              => 'ZF2rapid\Command\Activate\ActivateModule',
     ),
     array(
+        'name'                 => 'create-action',
+        'route'                => 'create-action <module> <controller> <action> [<path>]',
+        'description'          => 'Create a new ZF2 controller action for module within the specified path',
+        'short_description'    => 'Create new ZF2 controller action',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to create the controller action in; mandatory',
+            '<controller>' => 'The name of the controller to create an action for; mandatory',
+            '<action>'     => 'The name of the new action to create; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to create a new controller action in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => false,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'controller' => new NormalizeParamFilter(),
+            'action'     => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateAction',
+    ),
+    array(
         'name'                 => 'create-controller',
         'route'                => 'create-controller <module> <controller> [<path>] [--factory|-f]:factory',
         'description'          => 'Create a new ZF2 controller for module within the specified path',
