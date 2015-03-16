@@ -35,7 +35,7 @@ class CreateControllerStructure extends AbstractTask
                     ) . ' could not be created.'
                 );
 
-                return false;
+                return 1;
             }
 
             // output message
@@ -56,7 +56,7 @@ class CreateControllerStructure extends AbstractTask
                     ) . ' could not be created.'
                 );
 
-                return false;
+                return 1;
             }
 
             // output message

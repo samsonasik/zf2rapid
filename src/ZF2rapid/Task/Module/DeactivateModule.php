@@ -10,6 +10,7 @@ namespace ZF2rapid\Task\Module;
 
 use Zend\Code\Generator\ValueGenerator;
 use Zend\Console\ColorInterface as Color;
+use ZF2rapid\Generator\ConfigArrayGenerator;
 use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Generator\ConfigFileGenerator;
 
@@ -98,10 +99,8 @@ class DeactivateModule extends AbstractTask
                 unset($configData['modules'][$moduleKey]);
             }
 
-            // create config
-            $config = new ValueGenerator(
-                $configData, ValueGenerator::TYPE_ARRAY
-            );
+            // create config array
+            $config = new ConfigArrayGenerator($configData, $this->params);
 
             // create file
             $file = new ConfigFileGenerator(

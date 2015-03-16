@@ -49,7 +49,7 @@ class UnzipSkeletonApplication extends AbstractTask
                     ) . ' does not contain any files.'
                 );
 
-                return false;
+                return 1;
             }
 
             // get top dir
@@ -69,7 +69,7 @@ class UnzipSkeletonApplication extends AbstractTask
                     ) . ' failed.'
                 );
 
-                return false;
+                return 1;
             }
 
             // copy files from tmp to project path
@@ -90,7 +90,7 @@ class UnzipSkeletonApplication extends AbstractTask
                     ) . ' failed.'
                 );
 
-                return false;
+                return 1;
             }
         }
 

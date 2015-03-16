@@ -9,11 +9,14 @@
 namespace ZF2rapid\Generator;
 
 use Zend\Code\Generator\AbstractGenerator;
+use Zend\Code\Generator\BodyGenerator;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag\GenericTag;
+use Zend\Code\Generator\DocBlock\Tag\ParamTag;
 use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
+use Zend\Code\Generator\ParameterGenerator;
 use Zend\Code\Generator\ValueGenerator;
 
 /**
@@ -29,18 +32,27 @@ class ModuleClassGenerator extends ClassGenerator
     protected $config = array();
 
     /**
+     * @var string
+     */
+    protected $moduleRootConstant;
+
+    /**
      * @param null|string $moduleName
+     * @param null|string $moduleRootConstant
      * @param array       $config
      */
-    public function __construct($moduleName, array $config = array())
-    {
+    public function __construct(
+        $moduleName, $moduleRootConstant, array $config = array()
+    ) {
         // set config data
-        $this->config = $config;
+        $this->config             = $config;
+        $this->moduleRootConstant = $moduleRootConstant;
 
         // call parent constructor
         parent::__construct('Module', $moduleName);
 
         // add methods
+        $this->addInitMethod();
         $this->addGetConfigMethod();
         $this->addGetAutoloaderConfigMethod();
         $this->addClassDocBlock($moduleName);
@@ -68,6 +80,58 @@ class ModuleClassGenerator extends ClassGenerator
     }
 
     /**
+     * Generate the init() method
+     */
+    protected function addInitMethod()
+    {
+        // set action body
+        $bodyContent = array(
+            'if (!defined(\'' . $this->moduleRootConstant . '\')) {',
+            '    define(\'' . $this->moduleRootConstant . '\', realpath(__DIR__));',
+            '}',
+        );
+        $bodyContent = implode(AbstractGenerator::LINE_FEED, $bodyContent);
+
+        // create method body
+        $body = new BodyGenerator();
+        $body->setContent($bodyContent);
+
+        // create method
+        $method = new MethodGenerator();
+        $method->setName('init');
+        $method->setBody($body->generate());
+        $method->setParameter(
+            new ParameterGenerator('manager', 'ModuleManagerInterface')
+        );
+
+        // check for api docs
+        if ($this->config['flagAddDocBlocks']) {
+            $method->setDocBlock(
+                new DocBlockGenerator(
+                    'Init module',
+                    'Initialize module on loading',
+                    array(
+                        new ParamTag(
+                            'manager', array('ModuleManagerInterface')
+                        ),
+                    )
+                )
+            );
+        }
+
+        // add method
+        $this->addMethodFromGenerator($method);
+        $this->addUse('Zend\ModuleManager\Feature\InitProviderInterface');
+        $this->addUse('Zend\ModuleManager\ModuleManagerInterface');
+        $this->setImplementedInterfaces(
+            array_merge(
+                $this->getImplementedInterfaces(),
+                array('InitProviderInterface')
+            )
+        );
+    }
+
+    /**
      * Generate the getConfig() method
      *
      * @return void
@@ -75,9 +139,8 @@ class ModuleClassGenerator extends ClassGenerator
     protected function addGetConfigMethod()
     {
         // create method body
-        $body = new ValueGenerator();
-        $body->initEnvironmentConstants();
-        $body->setValue(
+        $body = new BodyGenerator();
+        $body->setContent(
             'include __DIR__ . \'/config/module.config.php\''
         );
 

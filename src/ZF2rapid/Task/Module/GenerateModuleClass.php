@@ -34,6 +34,7 @@ class GenerateModuleClass extends AbstractTask
         // create class
         $class = new ModuleClassGenerator(
             $this->params->paramModule,
+            $this->params->moduleRootConstant,
             $this->params->config
         );
 

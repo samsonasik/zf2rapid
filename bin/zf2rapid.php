@@ -13,14 +13,14 @@ use ZF2rapid\Console\Application;
 use ZF2rapid\Console\Console;
 
 // define application root
-define('APPLICATION_ROOT', realpath(__DIR__ . '/..'));
+define('ZF2RAPID_ROOT', realpath(__DIR__ . '/..'));
 
 // get vendor autoloading
-include APPLICATION_ROOT . '/vendor/autoload.php';
+include ZF2RAPID_ROOT . '/vendor/autoload.php';
 
 // configure applications
 $application = new Application(
-    include APPLICATION_ROOT . '/config/routes.php',
+    include ZF2RAPID_ROOT . '/config/routes.php',
     new Console()
 );
 

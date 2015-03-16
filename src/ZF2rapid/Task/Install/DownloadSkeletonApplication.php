@@ -56,8 +56,6 @@ class DownloadSkeletonApplication extends AbstractTask
             ) . ' from cache...'
         );
 
-        // @todo implement garbage collection
-
         return 0;
     }
 

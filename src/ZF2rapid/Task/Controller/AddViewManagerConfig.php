@@ -15,11 +15,11 @@ use ZF2rapid\Generator\ConfigFileGenerator;
 use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class RemoveControllerConfig
+ * Class AddViewManagerConfig
  *
  * @package ZF2rapid\Task\Controller
  */
-class RemoveControllerConfig extends AbstractTask
+class AddViewManagerConfig extends AbstractTask
 {
     /**
      * Process the command
@@ -30,7 +30,7 @@ class RemoveControllerConfig extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Writing configuration file...'
+            'Writing view manager configuration...'
         );
 
         // set config dir
@@ -50,22 +50,23 @@ class RemoveControllerConfig extends AbstractTask
         // get config data from file
         $configData = include $configFile;
 
-        // set controller key
-        $ctrlKey = $this->params->paramModule . '\\'
-            . $this->params->paramController;
-
-        // delete factories key if set
-        if (isset($configData['controllers']['factories'])
-            && isset($configData['controllers']['factories'][$ctrlKey])
-        ) {
-            unset($configData['controllers']['factories'][$ctrlKey]);
+        // check for view_manager config key
+        if (!isset($configData['view_manager'])) {
+            $configData['view_manager'] = array();
         }
 
-        // delete invokables key if set
-        if (isset($configData['controllers']['invokables'])
-            && isset($configData['controllers']['invokables'][$ctrlKey])
-        ) {
-            unset($configData['controllers']['invokables'][$ctrlKey]);
+        // check for view_manager config key
+        if (!isset($configData['view_manager']['template_path_stack'])) {
+            $configData['view_manager']['template_path_stack'] = array();
+        }
+
+        // check for template path stack
+        if (!in_array($this->params->moduleDir . '/view', $configData['view_manager']['template_path_stack'])) {
+            // set template path
+            $templatePath = $this->params->moduleRootConstant . ' . \'/view\'';
+
+            // add template path to stack
+            $configData['view_manager']['template_path_stack'][] = $templatePath;
         }
 
         // create config array

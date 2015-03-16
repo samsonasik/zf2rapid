@@ -7,7 +7,6 @@
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
  *
  * @todo        COMMANDS
- * @todo        Create routing for a module
  * @todo        Create a view helper within a module
  * @todo        Create a controller plugin within a module
  * @todo        Generate class map for a module
@@ -117,6 +116,25 @@ return array(
             'module' => new NormalizeParamFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Create\CreateModule',
+    ),
+    array(
+        'name'                 => 'create-routing',
+        'route'                => 'create-routing <module> [<path>] [--strict|-s]:strict',
+        'description'          => 'Create the routing for an existing module within the specified path',
+        'short_description'    => 'Create routing for module',
+        'options_descriptions' => array(
+            '<module>'    => 'The name of the module to create the routing for; mandatory',
+            '<path>'      => 'The directory of the ZF2 project to create the module routing in; defaults to current working directory',
+            '--strict|-s' => 'In strict mode routing only allows existing controllers and actions for the routing (disabled by default)',
+        ),
+        'defaults'             => array(
+            'path'   => '.',
+            'strict' => false,
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateRouting',
     ),
     array(
         'name'                 => 'create-project',

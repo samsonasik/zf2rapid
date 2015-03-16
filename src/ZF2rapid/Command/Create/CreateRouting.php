@@ -12,11 +12,11 @@ use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Command\AbstractCommand;
 
 /**
- * Class CreateController
+ * Class CreateRouting
  *
  * @package ZF2rapid\Command\Create
  */
-class CreateController extends AbstractCommand
+class CreateRouting extends AbstractCommand
 {
     /**
      * @var array
@@ -26,12 +26,10 @@ class CreateController extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Check\ModulePathExists',
-            'ZF2rapid\Task\Controller\CreateControllerStructure',
-            'ZF2rapid\Task\Controller\GenerateControllerClass',
-            'ZF2rapid\Task\Controller\GenerateControllerFactory',
-            'ZF2rapid\Task\Controller\UpdateControllerConfig',
-            'ZF2rapid\Task\Controller\AddViewManagerConfig',
-            'ZF2rapid\Task\Action\GenerateActionView',
+            'ZF2rapid\Task\Fetch\LoadModules',
+            'ZF2rapid\Task\Fetch\LoadControllers',
+            'ZF2rapid\Task\Fetch\LoadActions',
+            'ZF2rapid\Task\Module\CreateModuleRouting',
         );
 
     /**
@@ -49,9 +47,7 @@ class CreateController extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 controller ' . $this->console->colorize(
-                $this->params->paramController, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
+            'Congratulations! The routing for module ' . $this->console->colorize(
                 $this->params->paramModule, Color::GREEN
             ) . ' was successfully created.'
         );

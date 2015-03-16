@@ -10,6 +10,7 @@ namespace ZF2rapid\Task\Controller;
 
 use Zend\Code\Generator\ValueGenerator;
 use Zend\Console\ColorInterface as Color;
+use ZF2rapid\Generator\ConfigArrayGenerator;
 use ZF2rapid\Generator\ConfigFileGenerator;
 use ZF2rapid\Task\AbstractTask;
 
@@ -29,7 +30,7 @@ class UpdateControllerConfig extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Writing configuration file...'
+            'Writing controller configuration...'
         );
 
         // set config dir
@@ -43,7 +44,7 @@ class UpdateControllerConfig extends AbstractTask
                 ) . ' does not exist.'
             );
 
-            return false;
+            return 1;
         }
 
         // get config data from file
@@ -102,8 +103,8 @@ class UpdateControllerConfig extends AbstractTask
             $configData['controllers']['invokables'][$ctrlKey] = $ctrlClass;
         }
 
-        // create config
-        $config = new ValueGenerator($configData, ValueGenerator::TYPE_ARRAY);
+        // create config array
+        $config = new ConfigArrayGenerator($configData, $this->params);
 
         // create file
         $file = new ConfigFileGenerator(

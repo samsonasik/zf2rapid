@@ -77,6 +77,21 @@ abstract class AbstractTask implements TaskInterface
     }
 
     /**
+     * Filter camel case to dash
+     *
+     * @param string $text
+     *
+     * @return string
+     */
+    public function filterCamelCaseToUpper($text)
+    {
+        $text = StaticFilter::execute($text, 'Word\CamelCaseToUnderScore');
+        $text = StaticFilter::execute($text, 'StringToUpper');
+
+        return $text;
+    }
+
+    /**
      * Filter dash to camel case
      *
      * @param string $text

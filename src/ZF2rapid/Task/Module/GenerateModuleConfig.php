@@ -9,6 +9,7 @@
 namespace ZF2rapid\Task\Module;
 
 use Zend\Code\Generator\ValueGenerator;
+use ZF2rapid\Generator\ConfigArrayGenerator;
 use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Generator\ConfigFileGenerator;
 
@@ -31,8 +32,8 @@ class GenerateModuleConfig extends AbstractTask
             'Writing module configuration file...'
         );
 
-        // create config
-        $config = new ValueGenerator(array(), ValueGenerator::TYPE_ARRAY);
+        // create config array
+        $config = new ConfigArrayGenerator(array(), $this->params);
 
         // create file
         $file = new ConfigFileGenerator(

@@ -36,6 +36,16 @@ class Params extends AbstractTask
                 );
             }
 
+            $this->params->applicationRootConstant = 'APPLICATION_ROOT';
+
+            // define constant temporarily
+            if (!defined($this->params->applicationRootConstant)) {
+                define(
+                    $this->params->applicationRootConstant,
+                    $this->params->projectPath
+                );
+            }
+
             if ($projectPath) {
                 $this->params->projectModuleDir = $projectPath
                     . DIRECTORY_SEPARATOR . 'module';
@@ -50,9 +60,22 @@ class Params extends AbstractTask
                 'module'
             );
 
+            $this->params->moduleRootConstant = $this->filterCamelCaseToUpper(
+                    $this->params->paramModule
+                ) . '_MODULE_ROOT';
+
             if ($this->params->projectModuleDir) {
                 $this->params->moduleDir = $this->params->projectModuleDir
                     . DIRECTORY_SEPARATOR . $this->params->paramModule;
+
+                // define constant temporarily
+                if (!defined($this->params->moduleRootConstant)) {
+                    define(
+                        $this->params->moduleRootConstant,
+                        $this->params->moduleDir
+                    );
+                }
+
             }
 
             if ($this->params->moduleDir) {
@@ -106,6 +129,12 @@ class Params extends AbstractTask
         if ($this->route->getMatchedParam('factory')) {
             $this->params->paramFactory = $this->route->getMatchedParam(
                 'factory'
+            );
+        }
+
+        if ($this->route->getMatchedParam('strict')) {
+            $this->params->paramStrict = $this->route->getMatchedParam(
+                'strict'
             );
         }
 
