@@ -182,13 +182,14 @@ class ModuleClassGenerator extends ClassGenerator
      * Generate the getAutoloaderConfig() method
      *
      * @return void
-     *
-     * @todo Needs to add classmap autoloading
      */
     protected function addGetAutoloaderConfigMethod()
     {
         // set array data
         $array = array(
+            'Zend\Loader\ClassMapAutoloader' => array(
+                '__NAMESPACE__ => __DIR__ . \'/autoload_classmap.php\'',
+            ),
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     '__NAMESPACE__ => __DIR__ . \'/src/\' . __NAMESPACE__',

@@ -31,6 +31,7 @@ class CreateProject extends AbstractCommand
             'ZF2rapid\Task\Install\UnzipSkeletonApplication',
             'ZF2rapid\Task\Install\UpdateComposer',
             'ZF2rapid\Task\Install\RunComposer',
+            'ZF2rapid\Task\Install\DownloadGenerators',
             'ZF2rapid\Task\Install\PrepareProject',
         );
 

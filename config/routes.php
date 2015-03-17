@@ -9,8 +9,6 @@
  * @todo        COMMANDS
  * @todo        Create a view helper within a module
  * @todo        Create a controller plugin within a module
- * @todo        Generate class map for a module
- * @todo        Generate a template map for a module
  * @todo        List configuration from autoloading path
  * @todo        Get configuration from autoloading path
  * @todo        Set configuration from autoloading path
@@ -244,6 +242,40 @@ return array(
             'module' => new NormalizeParamFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Delete\DeleteModule',
+    ),
+    array(
+        'name'                 => 'generate-classmap',
+        'route'                => 'generate-classmap <module> [<path>]',
+        'description'          => 'Create the classmap for an existing module within the specified path',
+        'short_description'    => 'Create classmap for module',
+        'options_descriptions' => array(
+            '<module>'    => 'The name of the module to create the classmap for; mandatory',
+            '<path>'      => 'The directory of the ZF2 project to create the module classmap in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'   => '.',
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Generate\GenerateClassmap',
+    ),
+    array(
+        'name'                 => 'generate-templatemap',
+        'route'                => 'generate-templatemap <module> [<path>]',
+        'description'          => 'Create the templatemap for an existing module within the specified path',
+        'short_description'    => 'Create templatemap for module',
+        'options_descriptions' => array(
+            '<module>'    => 'The name of the module to create the templatemap for; mandatory',
+            '<path>'      => 'The directory of the ZF2 project to create the module templatemap in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'   => '.',
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Generate\GenerateTemplatemap',
     ),
     array(
         'name'                 => 'show-actions',

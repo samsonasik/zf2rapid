@@ -36,7 +36,7 @@ class UpdateComposer extends AbstractTask
              */
             exec(
                 'php ' . $this->params->projectPath
-                . '/composer.phar self-update',
+                . '/composer.phar self-update -q',
                 $output,
                 $return
             );

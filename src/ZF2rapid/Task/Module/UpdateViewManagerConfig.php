@@ -6,20 +6,19 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Controller;
+namespace ZF2rapid\Task\Module;
 
-use Zend\Code\Generator\ValueGenerator;
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Generator\ConfigArrayGenerator;
 use ZF2rapid\Generator\ConfigFileGenerator;
 use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class AddViewManagerConfig
+ * Class UpdateViewManagerConfig
  *
- * @package ZF2rapid\Task\Controller
+ * @package ZF2rapid\Task\Module
  */
-class AddViewManagerConfig extends AbstractTask
+class UpdateViewManagerConfig extends AbstractTask
 {
     /**
      * Process the command
@@ -61,12 +60,17 @@ class AddViewManagerConfig extends AbstractTask
         }
 
         // check for template path stack
-        if (!in_array($this->params->moduleDir . '/view', $configData['view_manager']['template_path_stack'])) {
+        if (!in_array(
+            $this->params->moduleDir . '/view',
+            $configData['view_manager']['template_path_stack']
+        )
+        ) {
             // set template path
             $templatePath = $this->params->moduleRootConstant . ' . \'/view\'';
 
             // add template path to stack
-            $configData['view_manager']['template_path_stack'][] = $templatePath;
+            $configData['view_manager']['template_path_stack'][]
+                = $templatePath;
         }
 
         // create config array

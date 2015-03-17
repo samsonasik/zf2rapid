@@ -6,17 +6,17 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Command\Create;
+namespace ZF2rapid\Command\Generate;
 
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Command\AbstractCommand;
 
 /**
- * Class CreateModule
+ * Class GenerateTemplatemap
  *
- * @package ZF2rapid\Command\Create
+ * @package ZF2rapid\Command\Generate
  */
-class CreateModule extends AbstractCommand
+class GenerateTemplatemap extends AbstractCommand
 {
     /**
      * @var array
@@ -26,13 +26,7 @@ class CreateModule extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Check\ModulePathExists',
-            'ZF2rapid\Task\Module\CreateModuleStructure',
-            'ZF2rapid\Task\Module\GenerateModuleClass',
-            'ZF2rapid\Task\Module\GenerateClassmap',
             'ZF2rapid\Task\Module\GenerateTemplatemap',
-            'ZF2rapid\Task\Module\GenerateModuleConfig',
-            'ZF2rapid\Task\Module\ChooseApplicationConfigFile',
-            'ZF2rapid\Task\Module\ActivateModule',
         );
 
     /**
@@ -41,7 +35,7 @@ class CreateModule extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new module...');
+        $this->console->writeGoLine('Generating templatemap...');
     }
 
     /**
@@ -50,9 +44,9 @@ class CreateModule extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'Congratulations! The templatemap for module '
+            . $this->console->colorize($this->params->paramModule, Color::GREEN)
+            . ' was successfully generated.'
         );
     }
 }

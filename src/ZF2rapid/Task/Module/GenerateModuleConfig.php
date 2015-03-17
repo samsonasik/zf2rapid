@@ -8,10 +8,9 @@
  */
 namespace ZF2rapid\Task\Module;
 
-use Zend\Code\Generator\ValueGenerator;
 use ZF2rapid\Generator\ConfigArrayGenerator;
-use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Generator\ConfigFileGenerator;
+use ZF2rapid\Task\AbstractTask;
 
 /**
  * Class GenerateModuleConfig
@@ -32,8 +31,19 @@ class GenerateModuleConfig extends AbstractTask
             'Writing module configuration file...'
         );
 
+        // setup config data for view manager
+        $configData = array(
+            'view_manager' => array(
+                'template_map'        => 'include '
+                    . $this->params->moduleRootConstant
+                    . ' . \'/template_map.php\',',
+                'template_path_stack' => 'array('
+                    . $this->params->moduleRootConstant . ' . \'/view\')',
+            ),
+        );
+
         // create config array
-        $config = new ConfigArrayGenerator(array(), $this->params);
+        $config = new ConfigArrayGenerator($configData, $this->params);
 
         // create file
         $file = new ConfigFileGenerator(
