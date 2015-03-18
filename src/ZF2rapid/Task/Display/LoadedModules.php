@@ -22,8 +22,6 @@ class LoadedModules extends AbstractTask
      * Process the command
      *
      * @return integer
-     *
-     * @todo    Use Zend\Text\Table for output
      */
     public function processCommandTask()
     {

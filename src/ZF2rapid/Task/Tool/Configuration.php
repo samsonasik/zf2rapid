@@ -9,6 +9,7 @@
 namespace ZF2rapid\Task\Tool;
 
 use Zend\Console\ColorInterface as Color;
+use Zend\Validator\StaticValidator;
 use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Task\Setup\ConfigFile;
 
@@ -66,6 +67,11 @@ class Configuration extends AbstractTask
         if ($mode == self::MODE_CHANGE) {
             // check value for flag config key
             if (!$this->checkValueForFlagKey($paramKey, $paramValue)) {
+                return 1;
+            }
+
+            // check value for namespace config key
+            if (!$this->checkValueForNamespaceKey($paramKey, $paramValue)) {
                 return 1;
             }
         }
@@ -133,7 +139,7 @@ class Configuration extends AbstractTask
     }
 
     /**
-     * Check if the value for a configuration key is true or false
+     * Check if the value for a flag configuration key is true or false
      *
      * @param $paramKey
      * @param $paramValue
@@ -159,6 +165,42 @@ class Configuration extends AbstractTask
             ) . ' or ' . $this->console->colorize(
                 'false', Color::BLUE
             ) . '.'
+        );
+
+        return false;
+    }
+
+    /**
+     * Check if the value for a namespace configuration key is true or false
+     *
+     * @param $paramKey
+     * @param $paramValue
+     *
+     * @return bool
+     *
+     * @todo Regex needs to be refactored to match namespaces better
+     */
+    protected function checkValueForNamespaceKey($paramKey, $paramValue)
+    {
+        if (substr($paramKey, 0, 9) != 'namespace') {
+            return true;
+        }
+
+        $isValid = StaticValidator::execute(
+            $paramValue,
+            'Regex',
+            array('pattern' => '=^[A-Z]{1}[a-zA-Z0-9\\\\]*$=')
+        );
+
+        if ($isValid) {
+            return true;
+        }
+
+        $this->console->writeFailLine(
+            'The value for configuration key '
+            . $this->console->colorize(
+                $paramKey, Color::GREEN
+            ) . ' must be a valid namespace.'
         );
 
         return false;

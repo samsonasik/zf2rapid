@@ -23,8 +23,9 @@ class CreateRouting extends AbstractCommand
      */
     protected $tasks
         = array(
-            'ZF2rapid\Task\Setup\Params',
+            'ZF2rapid\Task\Setup\ProjectPath',
             'ZF2rapid\Task\Setup\ConfigFile',
+            'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Fetch\LoadModules',
             'ZF2rapid\Task\Fetch\LoadControllers',

@@ -24,37 +24,6 @@ class Params extends AbstractTask
      */
     public function processCommandTask()
     {
-        // set project path if set
-        if ($this->route->getMatchedParam('path')) {
-            $projectPath = realpath($this->route->getMatchedParam('path'));
-
-            if ($projectPath) {
-                $this->params->projectPath = $projectPath;
-            } else {
-                $this->params->projectPath = $this->route->getMatchedParam(
-                    'path'
-                );
-            }
-
-            $this->params->applicationRootConstant = 'APPLICATION_ROOT';
-
-            // define constant temporarily
-            if (!defined($this->params->applicationRootConstant)) {
-                define(
-                    $this->params->applicationRootConstant,
-                    $this->params->projectPath
-                );
-            }
-
-            if ($projectPath) {
-                $this->params->projectModuleDir = $projectPath
-                    . DIRECTORY_SEPARATOR . 'module';
-
-                $this->params->projectConfigDir = $projectPath
-                    . DIRECTORY_SEPARATOR . 'config';
-            }
-        }
-
         if ($this->route->getMatchedParam('module')) {
             $this->params->paramModule = $this->route->getMatchedParam(
                 'module'
@@ -105,7 +74,12 @@ class Params extends AbstractTask
 
             if ($this->params->moduleSrcDir) {
                 $this->params->controllerDir = $this->params->moduleSrcDir
-                    . DIRECTORY_SEPARATOR . 'Controller';
+                    . DIRECTORY_SEPARATOR
+                    . str_replace(
+                        '\\',
+                        DIRECTORY_SEPARATOR,
+                        $this->params->config['namespaceController']
+                    );
 
                 $this->params->controllerViewDir = $this->params->moduleViewDir
                     . DIRECTORY_SEPARATOR . $this->filterCamelCaseToDash(

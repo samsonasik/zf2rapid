@@ -8,7 +8,6 @@
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
-// set working directory
 use ZF2rapid\Console\Application;
 use ZF2rapid\Console\Console;
 

@@ -9,9 +9,6 @@
  * @todo        COMMANDS
  * @todo        Create a view helper within a module
  * @todo        Create a controller plugin within a module
- * @todo        List configuration from autoloading path
- * @todo        Get configuration from autoloading path
- * @todo        Set configuration from autoloading path
  */
 use ZF\Console\Filter\Explode as ExplodeFilter;
 use ZF2rapid\Filter\NormalizeList as NormalizeListFilter;

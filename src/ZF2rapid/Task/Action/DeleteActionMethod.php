@@ -44,7 +44,8 @@ class DeleteActionMethod extends AbstractTask
         );
 
         $classReflection = $fileReflection->getClass(
-            $this->params->paramModule . '\Controller\\'
+            $this->params->paramModule . '\\'
+            . $this->params->config['namespaceController'] . '\\'
             . $this->params->paramController . 'Controller'
         );
 

@@ -41,7 +41,7 @@ class ControllerClassGenerator extends ClassGenerator
         // call parent constructor
         parent::__construct(
             $controllerName . 'Controller',
-            $moduleName . '\Controller'
+            $moduleName . '\\' . $this->config['namespaceController']
         );
 
         // add used namespaces and extended classes

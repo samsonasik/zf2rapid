@@ -77,8 +77,9 @@ class UpdateControllerConfig extends AbstractTask
             }
 
             // set controller class and namespace
-            $ctrlClass = $this->params->paramModule . '\\Controller\\' .
-                $this->params->paramController . 'ControllerFactory';
+            $ctrlClass = $this->params->paramModule . '\\'
+                . $this->params->config['namespaceController'] . '\\'
+                . $this->params->paramController . 'ControllerFactory';
 
             // add controller
             $configData['controllers']['factories'][$ctrlKey] = $ctrlClass;
@@ -96,8 +97,9 @@ class UpdateControllerConfig extends AbstractTask
             }
 
             // set controller class and namespace
-            $ctrlClass = $this->params->paramModule . '\\Controller\\' .
-                $this->params->paramController . 'Controller';
+            $ctrlClass = $this->params->paramModule . '\\'
+                . $this->params->config['namespaceController'] . '\\'
+                . $this->params->paramController . 'Controller';
 
             // add controller
             $configData['controllers']['invokables'][$ctrlKey] = $ctrlClass;
