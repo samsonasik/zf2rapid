@@ -5,10 +5,6 @@
  * @link        https://github.com/ZFrapid/zf2rapid
  * @copyright   Copyright (c) 2014 - 2015 Ralf Eggert
  * @license     http://opensource.org/licenses/MIT The MIT License (MIT)
- *
- * @todo        COMMANDS
- * @todo        Create a view helper within a module
- * @todo        Create a controller plugin within a module
  */
 use ZF\Console\Filter\Explode as ExplodeFilter;
 use ZF2rapid\Filter\NormalizeList as NormalizeListFilter;
@@ -393,6 +389,24 @@ return array(
             'modules' => new NormalizeListFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Show\ShowControllers',
+    ),
+    array(
+        'name'                 => 'show-controller-plugins',
+        'route'                => 'show-controller-plugins [<path>] [--modules=]',
+        'description'          => 'Show all controller plugins for the modules of the current ZF2 project specified within the path',
+        'short_description'    => 'Show all controller plugins for the ZF2 modules',
+        'options_descriptions' => array(
+            '<path>'    => 'The directory of the project to fetch controller plugins for; defaults to current working directory',
+            '--modules' => 'Comma-separated list of modules to show controller plugins for; optional',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'modules' => array(),
+        ),
+        'filters'              => array(
+            'modules' => new NormalizeListFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Show\ShowControllerPlugins',
     ),
     array(
         'name'                 => 'show-modules',

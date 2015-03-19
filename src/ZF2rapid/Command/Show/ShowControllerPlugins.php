@@ -11,11 +11,11 @@ namespace ZF2rapid\Command\Show;
 use ZF2rapid\Command\AbstractCommand;
 
 /**
- * Class ShowVersion
+ * Class ShowControllerPlugins
  *
  * @package ZF2rapid\Command\Show
  */
-class ShowVersion extends AbstractCommand
+class ShowControllerPlugins extends AbstractCommand
 {
     /**
      * @var array
@@ -26,7 +26,10 @@ class ShowVersion extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
-            'ZF2rapid\Task\Display\ZFVersion',
+            'ZF2rapid\Task\Fetch\LoadModules',
+            'ZF2rapid\Task\Fetch\LoadControllerPlugins',
+            'ZF2rapid\Task\Display\UnknownModules',
+            'ZF2rapid\Task\Display\LoadedControllerPlugins',
         );
 
     /**
@@ -35,7 +38,7 @@ class ShowVersion extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 version...');
+        $this->console->writeGoLine('Fetching ZF2 controller plugins...');
     }
 
     /**
@@ -45,7 +48,7 @@ class ShowVersion extends AbstractCommand
     {
         // output success message
         $this->console->writeOkLine(
-            'The ZF2 version was successfully displayed.'
+            'The ZF2 controller plugins were successfully displayed.'
         );
     }
 }
