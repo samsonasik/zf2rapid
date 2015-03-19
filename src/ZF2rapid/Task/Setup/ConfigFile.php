@@ -34,6 +34,7 @@ class ConfigFile extends AbstractTask
             'fileDocBlockLicense'       => 'http://opensource.org/licenses/MIT The MIT License (MIT)',
             'namespaceController'       => 'Controller',
             'namespaceControllerPlugin' => 'Controller\\Plugin',
+            'namespaceViewHelper'       => 'View\\Helper',
         );
 
     /**

@@ -182,6 +182,47 @@ return array(
         'handler'              => 'ZF2rapid\Command\Create\CreateProject',
     ),
     array(
+        'name'                 => 'create-view-helper',
+        'route'                => 'create-view-helper <module> <viewHelper> [<path>] [--factory|-f]:factory',
+        'description'          => 'Create a new ZF2 view helper for module within the specified path',
+        'short_description'    => 'Create new ZF2 view helper',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to create the view helper in; mandatory',
+            '<viewHelper>' => 'The name of the view helper to create; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to create a new view helper in; defaults to current working directory',
+            '--factory|-f' => 'Whether or not to create a factory for the new view helper (disabled by default)',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => false,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'viewHelper' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateViewHelper',
+    ),
+    array(
+        'name'                 => 'create-view-helper-factory',
+        'route'                => 'create-view-helper-factory <module> <viewHelper> [<path>]',
+        'description'          => 'Create a factory for an existing ZF2 view helper for module within the specified path',
+        'short_description'    => 'Create factory for ZF2 view helper',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to create the view helper factory in; mandatory',
+            '<viewHelper>' => 'The name of the view helper to create the factory for; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to create the view helper factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => true,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'viewHelper' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateViewHelperFactory',
+    ),
+    array(
         'name'                 => 'deactivate-module',
         'route'                => 'deactivate-module <module> [<path>]',
         'description'          => 'Deactivate an existing ZF2 module within the specified path',
@@ -318,6 +359,46 @@ return array(
         'handler'              => 'ZF2rapid\Command\Delete\DeleteModule',
     ),
     array(
+        'name'                 => 'delete-view-helper',
+        'route'                => 'delete-view-helper <module> <viewHelper> [<path>]',
+        'description'          => 'Delete an existing ZF2 view helper for module within the specified path',
+        'short_description'    => 'Delete ZF2 view helper',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to delete the view helper in; mandatory',
+            '<viewHelper>' => 'The name of the view helper to delete; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to delete the view helper in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'viewHelper' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteViewHelper',
+    ),
+    array(
+        'name'                 => 'delete-view-helper-factory',
+        'route'                => 'delete-view-helper-factory <module> <viewHelper> [<path>]',
+        'description'          => 'Delete the factory for an existing ZF2 view helper for module within the specified path',
+        'short_description'    => 'Delete factory for ZF2 view helper',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to delete the view helper factory in; mandatory',
+            '<viewHelper>' => 'The name of the view helper to delete the factory for; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to delete the view helper factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'     => new NormalizeParamFilter(),
+            'viewHelper' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteViewHelperFactory',
+    ),
+    array(
         'name'                 => 'generate-classmap',
         'route'                => 'generate-classmap <module> [<path>]',
         'description'          => 'Create the classmap for an existing module within the specified path',
@@ -433,6 +514,24 @@ return array(
             'path' => '.',
         ),
         'handler'              => 'ZF2rapid\Command\Show\ShowVersion',
+    ),
+    array(
+        'name'                 => 'show-view-helpers',
+        'route'                => 'show-view-helpers [<path>] [--modules=]',
+        'description'          => 'Show all view helpers for the modules of the current ZF2 project specified within the path',
+        'short_description'    => 'Show all view helpers for the ZF2 modules',
+        'options_descriptions' => array(
+            '<path>'    => 'The directory of the project to fetch view helpers for; defaults to current working directory',
+            '--modules' => 'Comma-separated list of modules to show view helpers for; optional',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'modules' => array(),
+        ),
+        'filters'              => array(
+            'modules' => new NormalizeListFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Show\ShowViewHelpers',
     ),
     array(
         'name'                 => 'tool-config',

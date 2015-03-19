@@ -94,6 +94,12 @@ class Params extends AbstractTask
             );
         }
 
+        if ($this->route->getMatchedParam('action')) {
+            $this->params->paramAction = $this->route->getMatchedParam(
+                'action'
+            );
+        }
+
         if ($this->route->getMatchedParam('controllerPlugin')) {
             $this->params->paramControllerPlugin
                 = $this->route->getMatchedParam('controllerPlugin');
@@ -110,10 +116,20 @@ class Params extends AbstractTask
             }
         }
 
-        if ($this->route->getMatchedParam('action')) {
-            $this->params->paramAction = $this->route->getMatchedParam(
-                'action'
-            );
+        if ($this->route->getMatchedParam('viewHelper')) {
+            $this->params->paramViewHelper
+                = $this->route->getMatchedParam('viewHelper');
+
+            if ($this->params->moduleSrcDir) {
+                $this->params->viewHelperDir = $this->params->moduleSrcDir
+                    . DIRECTORY_SEPARATOR
+                    . str_replace(
+                        '\\',
+                        DIRECTORY_SEPARATOR,
+                        $this->params->config['namespaceViewHelper']
+                    );
+
+            }
         }
 
         if ($this->route->getMatchedParam('factory')) {
