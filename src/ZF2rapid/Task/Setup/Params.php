@@ -94,6 +94,22 @@ class Params extends AbstractTask
             );
         }
 
+        if ($this->route->getMatchedParam('controllerPlugin')) {
+            $this->params->paramControllerPlugin
+                = $this->route->getMatchedParam('controllerPlugin');
+
+            if ($this->params->moduleSrcDir) {
+                $this->params->controllerPluginDir = $this->params->moduleSrcDir
+                    . DIRECTORY_SEPARATOR
+                    . str_replace(
+                        '\\',
+                        DIRECTORY_SEPARATOR,
+                        $this->params->config['namespaceControllerPlugin']
+                    );
+
+            }
+        }
+
         if ($this->route->getMatchedParam('action')) {
             $this->params->paramAction = $this->route->getMatchedParam(
                 'action'

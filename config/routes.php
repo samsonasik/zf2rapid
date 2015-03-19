@@ -96,6 +96,47 @@ return array(
         'handler'              => 'ZF2rapid\Command\Create\CreateControllerFactory',
     ),
     array(
+        'name'                 => 'create-controller-plugin',
+        'route'                => 'create-controller-plugin <module> <controllerPlugin> [<path>] [--factory|-f]:factory',
+        'description'          => 'Create a new ZF2 controller plugin for module within the specified path',
+        'short_description'    => 'Create new ZF2 controller plugin',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to create the controller plugin in; mandatory',
+            '<controllerPlugin>' => 'The name of the controller plugin to create; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to create a new controller plugin in; defaults to current working directory',
+            '--factory|-f'       => 'Whether or not to create a factory for the new controller plugin (disabled by default)',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => false,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'controllerPlugin' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateControllerPlugin',
+    ),
+    array(
+        'name'                 => 'create-controller-plugin-factory',
+        'route'                => 'create-controller-plugin-factory <module> <controllerPlugin> [<path>]',
+        'description'          => 'Create a factory for an existing ZF2 controller plugin for module within the specified path',
+        'short_description'    => 'Create factory for ZF2 controller plugin',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to create the controller plugin factory in; mandatory',
+            '<controllerPlugin>' => 'The name of the controller plugin to create the factory for; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to create the controller plugin factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => true,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'controllerPlugin' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateControllerPluginFactory',
+    ),
+    array(
         'name'                 => 'create-module',
         'route'                => 'create-module <module> [<path>]',
         'description'          => 'Create a new ZF2 module within the specified path',
@@ -224,6 +265,46 @@ return array(
         'handler'              => 'ZF2rapid\Command\Delete\DeleteControllerFactory',
     ),
     array(
+        'name'                 => 'delete-controller-plugin',
+        'route'                => 'delete-controller-plugin <module> <controllerPlugin> [<path>]',
+        'description'          => 'Delete an existing ZF2 controller plugin for module within the specified path',
+        'short_description'    => 'Delete ZF2 controller plugin',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to delete the controller plugin in; mandatory',
+            '<controllerPlugin>' => 'The name of the controller plugin to delete; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to delete the controller plugin in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'controllerPlugin' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteControllerPlugin',
+    ),
+    array(
+        'name'                 => 'delete-controller-plugin-factory',
+        'route'                => 'delete-controller-plugin-factory <module> <controllerPlugin> [<path>]',
+        'description'          => 'Delete the factory for an existing ZF2 controller plugin for module within the specified path',
+        'short_description'    => 'Delete factory for ZF2 controller plugin',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to delete the controller plugin factory in; mandatory',
+            '<controllerPlugin>' => 'The name of the controller plugin to delete the factory for; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to delete the controller plugin factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'controllerPlugin' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteControllerPluginFactory',
+    ),
+    array(
         'name'                 => 'delete-module',
         'route'                => 'delete-module <module> [<path>]',
         'description'          => 'Delete an existing ZF2 module within the specified path',
@@ -246,11 +327,11 @@ return array(
         'description'          => 'Create the classmap for an existing module within the specified path',
         'short_description'    => 'Create classmap for module',
         'options_descriptions' => array(
-            '<module>'    => 'The name of the module to create the classmap for; mandatory',
-            '<path>'      => 'The directory of the ZF2 project to create the module classmap in; defaults to current working directory',
+            '<module>' => 'The name of the module to create the classmap for; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to create the module classmap in; defaults to current working directory',
         ),
         'defaults'             => array(
-            'path'   => '.',
+            'path' => '.',
         ),
         'filters'              => array(
             'module' => new NormalizeParamFilter(),
@@ -263,11 +344,11 @@ return array(
         'description'          => 'Create the templatemap for an existing module within the specified path',
         'short_description'    => 'Create templatemap for module',
         'options_descriptions' => array(
-            '<module>'    => 'The name of the module to create the templatemap for; mandatory',
-            '<path>'      => 'The directory of the ZF2 project to create the module templatemap in; defaults to current working directory',
+            '<module>' => 'The name of the module to create the templatemap for; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to create the module templatemap in; defaults to current working directory',
         ),
         'defaults'             => array(
-            'path'   => '.',
+            'path' => '.',
         ),
         'filters'              => array(
             'module' => new NormalizeParamFilter(),

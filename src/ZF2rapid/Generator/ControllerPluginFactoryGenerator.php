@@ -18,11 +18,11 @@ use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
 
 /**
- * Class ControllerFactoryGenerator
+ * Class ControllerPluginFactoryGenerator
  *
  * @package ZF2rapid\Generator
  */
-class ControllerFactoryGenerator extends ClassGenerator
+class ControllerPluginFactoryGenerator extends ClassGenerator
 {
     /**
      * @var array
@@ -30,20 +30,20 @@ class ControllerFactoryGenerator extends ClassGenerator
     protected $config = array();
 
     /**
-     * @param null|string $controllerName
+     * @param null|string $controllerPluginName
      * @param null|string $moduleName
      * @param array       $config
      */
     public function __construct(
-        $controllerName, $moduleName, array $config = array()
+        $controllerPluginName, $moduleName, array $config = array()
     ) {
         // set config data
         $this->config = $config;
 
         // call parent constructor
         parent::__construct(
-            $controllerName . 'ControllerFactory',
-            $moduleName . '\\' . $this->config['namespaceController']
+            $controllerPluginName . 'Factory',
+            $moduleName . '\\' . $this->config['namespaceControllerPlugin']
         );
 
         // add used namespaces and extended classes
@@ -53,8 +53,8 @@ class ControllerFactoryGenerator extends ClassGenerator
         $this->setImplementedInterfaces(array('FactoryInterface'));
 
         // add methods
-        $this->addCreateServiceMethod($controllerName . 'Controller');
-        $this->addClassDocBlock($controllerName . 'Controller');
+        $this->addCreateServiceMethod($controllerPluginName);
+        $this->addClassDocBlock($controllerPluginName);
     }
 
     /**
@@ -81,18 +81,18 @@ class ControllerFactoryGenerator extends ClassGenerator
     /**
      * Generate the create service method
      *
-     * @param string $controllerName
+     * @param string $controllerPluginName
      */
-    protected function addCreateServiceMethod($controllerName)
+    protected function addCreateServiceMethod($controllerPluginName)
     {
         // set action body
         $body = array(
-            '/** @var ServiceLocatorAwareInterface $controllerManager */',
-            '$serviceLocator = $controllerManager->getServiceLocator();',
+            '/** @var ServiceLocatorAwareInterface $controllerPluginManager */',
+            '$serviceLocator = $controllerPluginManager->getServiceLocator();',
             '',
-            '$controller = new ' . $controllerName . '();',
+            '$plugin = new ' . $controllerPluginName . '();',
             '',
-            'return $controller;',
+            'return $plugin;',
         );
         $body = implode(AbstractGenerator::LINE_FEED, $body);
 
@@ -103,7 +103,7 @@ class ControllerFactoryGenerator extends ClassGenerator
         $method->setParameters(
             array(
                 new ParameterGenerator(
-                    'controllerManager', 'ServiceLocatorInterface'
+                    'controllerPluginManager', 'ServiceLocatorInterface'
                 ),
             )
         );
@@ -116,12 +116,12 @@ class ControllerFactoryGenerator extends ClassGenerator
                     null,
                     array(
                         new ParamTag(
-                            'controllerManager',
+                            'controllerPluginManager',
                             array(
                                 'ServiceLocatorInterface',
                             )
                         ),
-                        new ReturnTag(array($controllerName)),
+                        new ReturnTag(array($controllerPluginName)),
                     )
                 )
             );

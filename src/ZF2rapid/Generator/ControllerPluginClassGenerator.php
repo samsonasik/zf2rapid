@@ -11,18 +11,16 @@ namespace ZF2rapid\Generator;
 use Zend\Code\Generator\AbstractGenerator;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag\GenericTag;
-use Zend\Code\Generator\DocBlock\Tag\ParamTag;
 use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
 use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
-use Zend\Code\Generator\ParameterGenerator;
 
 /**
- * Class ControllerFactoryGenerator
+ * Class ControllerPluginClassGenerator
  *
  * @package ZF2rapid\Generator
  */
-class ControllerFactoryGenerator extends ClassGenerator
+class ControllerPluginClassGenerator extends ClassGenerator
 {
     /**
      * @var array
@@ -30,46 +28,46 @@ class ControllerFactoryGenerator extends ClassGenerator
     protected $config = array();
 
     /**
-     * @param null|string $controllerName
+     * @param null|string $controllerPluginName
      * @param null|string $moduleName
      * @param array       $config
      */
     public function __construct(
-        $controllerName, $moduleName, array $config = array()
+        $controllerPluginName, $moduleName, array $config = array()
     ) {
         // set config data
         $this->config = $config;
 
         // call parent constructor
         parent::__construct(
-            $controllerName . 'ControllerFactory',
-            $moduleName . '\\' . $this->config['namespaceController']
+            $controllerPluginName,
+            $moduleName . '\\' . $this->config['namespaceControllerPlugin']
         );
 
         // add used namespaces and extended classes
-        $this->addUse('Zend\ServiceManager\FactoryInterface');
-        $this->addUse('Zend\ServiceManager\ServiceLocatorAwareInterface');
-        $this->addUse('Zend\ServiceManager\ServiceLocatorInterface');
-        $this->setImplementedInterfaces(array('FactoryInterface'));
+        $this->addUse('Zend\Mvc\Controller\Plugin\AbstractPlugin');
+        $this->setExtendedClass('AbstractPlugin');
 
         // add methods
-        $this->addCreateServiceMethod($controllerName . 'Controller');
-        $this->addClassDocBlock($controllerName . 'Controller');
+        $this->addInvokeMethod();
+        $this->addClassDocBlock($controllerPluginName, $moduleName);
     }
 
     /**
      * Add a class doc block
      *
-     * @param string $controllerClass
+     * @param string $controllerPluginName
+     * @param string $moduleName
      */
-    protected function addClassDocBlock($controllerClass)
+    protected function addClassDocBlock($controllerPluginName, $moduleName)
     {
         // check for api docs
         if ($this->config['flagAddDocBlocks']) {
             $this->setDocBlock(
                 new DocBlockGenerator(
                     $this->getName(),
-                    'Creates an instance of ' . $controllerClass,
+                    'Provides the ' . $controllerPluginName . ' plugin for the '
+                    . $moduleName . ' Module',
                     array(
                         new GenericTag('package', $this->getNamespaceName()),
                     )
@@ -79,49 +77,29 @@ class ControllerFactoryGenerator extends ClassGenerator
     }
 
     /**
-     * Generate the create service method
-     *
-     * @param string $controllerName
+     * Generate an __invoke method
      */
-    protected function addCreateServiceMethod($controllerName)
+    protected function addInvokeMethod()
     {
         // set action body
         $body = array(
-            '/** @var ServiceLocatorAwareInterface $controllerManager */',
-            '$serviceLocator = $controllerManager->getServiceLocator();',
-            '',
-            '$controller = new ' . $controllerName . '();',
-            '',
-            'return $controller;',
+            '// add plugin code here',
         );
         $body = implode(AbstractGenerator::LINE_FEED, $body);
 
         // create method
         $method = new MethodGenerator();
-        $method->setName('createService');
+        $method->setName('__invoke');
         $method->setBody($body);
-        $method->setParameters(
-            array(
-                new ParameterGenerator(
-                    'controllerManager', 'ServiceLocatorInterface'
-                ),
-            )
-        );
 
         // check for api docs
         if ($this->config['flagAddDocBlocks']) {
             $method->setDocBlock(
                 new DocBlockGenerator(
-                    'Create service',
+                    'Called when plugin is executed',
                     null,
                     array(
-                        new ParamTag(
-                            'controllerManager',
-                            array(
-                                'ServiceLocatorInterface',
-                            )
-                        ),
-                        new ReturnTag(array($controllerName)),
+                        new ReturnTag(array('mixed')),
                     )
                 )
             );

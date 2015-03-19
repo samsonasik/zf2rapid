@@ -27,12 +27,13 @@ class ConfigFile extends AbstractTask
      */
     protected $configFileDefaults
         = array(
-            'configFileFormat'      => 'php',
-            'flagAddDocBlocks'      => 'true',
-            'fileDocBlockText'      => 'ZF2 Application built by ZF2rapid',
-            'fileDocBlockCopyright' => '(c) 2014 - 2015 by ZF2rapid',
-            'fileDocBlockLicense'   => 'http://opensource.org/licenses/MIT The MIT License (MIT)',
-            'namespaceController'   => 'Controller',
+            'configFileFormat'          => 'php',
+            'flagAddDocBlocks'          => 'true',
+            'fileDocBlockText'          => 'ZF2 Application built by ZF2rapid',
+            'fileDocBlockCopyright'     => '(c) 2014 - 2015 by ZF2rapid',
+            'fileDocBlockLicense'       => 'http://opensource.org/licenses/MIT The MIT License (MIT)',
+            'namespaceController'       => 'Controller',
+            'namespaceControllerPlugin' => 'Controller\\Plugin',
         );
 
     /**
