@@ -6,17 +6,14 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Check;
-
-use Zend\Console\ColorInterface as Color;
-use ZF2rapid\Task\AbstractTask;
+namespace ZF2rapid\Task\CreateStructure;
 
 /**
- * Class ControllerExists
+ * Class CreateControllerPluginStructure
  *
- * @package ZF2rapid\Task\Check
+ * @package ZF2rapid\Task\ControllerPlugin
  */
-class ControllerExists extends AbstractFileExists
+class CreateControllerPluginStructure extends AbstractCreateStructureTask
 {
     /**
      * Process the command
@@ -25,10 +22,8 @@ class ControllerExists extends AbstractFileExists
      */
     public function processCommandTask()
     {
-        $result = $this->checkFileExists(
-            $this->params->controllerDir,
-            $this->params->paramController . 'Controller',
-            'controller'
+        $result = $this->createDirectory(
+            $this->params->controllerPluginDir, 'Controller plugin'
         );
 
         return $result == true ? 0 : 1;

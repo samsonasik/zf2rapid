@@ -14,8 +14,8 @@ return array(
     array(
         'name'                 => 'activate-module',
         'route'                => 'activate-module <module> [<path>]',
-        'description'          => 'Activate an existing ZF2 module within the specified path',
-        'short_description'    => 'Activate existing ZF2 module',
+        'description'          => 'Activate an existing module within the specified path',
+        'short_description'    => 'Activate existing module',
         'options_descriptions' => array(
             '<module>' => 'The name of the module to activate; mandatory',
             '<path>'   => 'The directory of the ZF2 project to activate an existing module in; defaults to current working directory',
@@ -31,8 +31,8 @@ return array(
     array(
         'name'                 => 'create-action',
         'route'                => 'create-action <module> <controller> <action> [<path>]',
-        'description'          => 'Create a new ZF2 controller action for module within the specified path',
-        'short_description'    => 'Create new ZF2 controller action',
+        'description'          => 'Create a new controller action for module within the specified path',
+        'short_description'    => 'Create new controller action',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to create the controller action in; mandatory',
             '<controller>' => 'The name of the controller to create an action for; mandatory',
@@ -53,8 +53,8 @@ return array(
     array(
         'name'                 => 'create-controller',
         'route'                => 'create-controller <module> <controller> [<path>] [--factory|-f]:factory',
-        'description'          => 'Create a new ZF2 controller for module within the specified path',
-        'short_description'    => 'Create new ZF2 controller',
+        'description'          => 'Create a new controller for module within the specified path',
+        'short_description'    => 'Create new controller',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to create the controller in; mandatory',
             '<controller>' => 'The name of the controller to create; mandatory',
@@ -74,8 +74,8 @@ return array(
     array(
         'name'                 => 'create-controller-factory',
         'route'                => 'create-controller-factory <module> <controller> [<path>]',
-        'description'          => 'Create a factory for an existing ZF2 controller for module within the specified path',
-        'short_description'    => 'Create factory for ZF2 controller',
+        'description'          => 'Create a factory for an existing controller for module within the specified path',
+        'short_description'    => 'Create factory for controller',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to create the controller factory in; mandatory',
             '<controller>' => 'The name of the controller to create the factory for; mandatory',
@@ -94,8 +94,8 @@ return array(
     array(
         'name'                 => 'create-controller-plugin',
         'route'                => 'create-controller-plugin <module> <controllerPlugin> [<path>] [--factory|-f]:factory',
-        'description'          => 'Create a new ZF2 controller plugin for module within the specified path',
-        'short_description'    => 'Create new ZF2 controller plugin',
+        'description'          => 'Create a new controller plugin for module within the specified path',
+        'short_description'    => 'Create new controller plugin',
         'options_descriptions' => array(
             '<module>'           => 'The name of the module to create the controller plugin in; mandatory',
             '<controllerPlugin>' => 'The name of the controller plugin to create; mandatory',
@@ -115,8 +115,8 @@ return array(
     array(
         'name'                 => 'create-controller-plugin-factory',
         'route'                => 'create-controller-plugin-factory <module> <controllerPlugin> [<path>]',
-        'description'          => 'Create a factory for an existing ZF2 controller plugin for module within the specified path',
-        'short_description'    => 'Create factory for ZF2 controller plugin',
+        'description'          => 'Create a factory for an existing controller plugin for module within the specified path',
+        'short_description'    => 'Create factory for controller plugin',
         'options_descriptions' => array(
             '<module>'           => 'The name of the module to create the controller plugin factory in; mandatory',
             '<controllerPlugin>' => 'The name of the controller plugin to create the factory for; mandatory',
@@ -135,8 +135,8 @@ return array(
     array(
         'name'                 => 'create-module',
         'route'                => 'create-module <module> [<path>]',
-        'description'          => 'Create a new ZF2 module within the specified path',
-        'short_description'    => 'Create new ZF2 module',
+        'description'          => 'Create a new module within the specified path',
+        'short_description'    => 'Create new module',
         'options_descriptions' => array(
             '<module>' => 'The name of the module to create; mandatory',
             '<path>'   => 'The directory of the ZF2 project to create a new module in; defaults to current working directory',
@@ -184,8 +184,8 @@ return array(
     array(
         'name'                 => 'create-view-helper',
         'route'                => 'create-view-helper <module> <viewHelper> [<path>] [--factory|-f]:factory',
-        'description'          => 'Create a new ZF2 view helper for module within the specified path',
-        'short_description'    => 'Create new ZF2 view helper',
+        'description'          => 'Create a new view helper for module within the specified path',
+        'short_description'    => 'Create new view helper',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to create the view helper in; mandatory',
             '<viewHelper>' => 'The name of the view helper to create; mandatory',
@@ -205,8 +205,8 @@ return array(
     array(
         'name'                 => 'create-view-helper-factory',
         'route'                => 'create-view-helper-factory <module> <viewHelper> [<path>]',
-        'description'          => 'Create a factory for an existing ZF2 view helper for module within the specified path',
-        'short_description'    => 'Create factory for ZF2 view helper',
+        'description'          => 'Create a factory for an existing view helper for module within the specified path',
+        'short_description'    => 'Create factory for view helper',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to create the view helper factory in; mandatory',
             '<viewHelper>' => 'The name of the view helper to create the factory for; mandatory',
@@ -225,8 +225,8 @@ return array(
     array(
         'name'                 => 'deactivate-module',
         'route'                => 'deactivate-module <module> [<path>]',
-        'description'          => 'Deactivate an existing ZF2 module within the specified path',
-        'short_description'    => 'Deactivate existing ZF2 module',
+        'description'          => 'Deactivate an existing module within the specified path',
+        'short_description'    => 'Deactivate existing module',
         'options_descriptions' => array(
             '<module>' => 'The name of the module to deactivate; mandatory',
             '<path>'   => 'The directory of the ZF2 project to deactivate an existing module in; defaults to current working directory',
@@ -242,8 +242,8 @@ return array(
     array(
         'name'                 => 'delete-action',
         'route'                => 'delete-action <module> <controller> <action> [<path>]',
-        'description'          => 'Delete an existing ZF2 controller action for module within the specified path',
-        'short_description'    => 'Delete ZF2 controller action',
+        'description'          => 'Delete an existing controller action for module within the specified path',
+        'short_description'    => 'Delete controller action',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to delete the action in; mandatory',
             '<controller>' => 'The name of the controller to delete the action in; mandatory',
@@ -264,8 +264,8 @@ return array(
     array(
         'name'                 => 'delete-controller',
         'route'                => 'delete-controller <module> <controller> [<path>]',
-        'description'          => 'Delete an existing ZF2 controller for module within the specified path',
-        'short_description'    => 'Delete ZF2 controller',
+        'description'          => 'Delete an existing controller for module within the specified path',
+        'short_description'    => 'Delete controller',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to delete the controller in; mandatory',
             '<controller>' => 'The name of the controller to delete; mandatory',
@@ -284,8 +284,8 @@ return array(
     array(
         'name'                 => 'delete-controller-factory',
         'route'                => 'delete-controller-factory <module> <controller> [<path>]',
-        'description'          => 'Delete the factory for an existing ZF2 controller for module within the specified path',
-        'short_description'    => 'Delete factory for ZF2 controller',
+        'description'          => 'Delete the factory for an existing controller for module within the specified path',
+        'short_description'    => 'Delete factory for controller',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to delete the controller factory in; mandatory',
             '<controller>' => 'The name of the controller to delete the factory for; mandatory',
@@ -304,8 +304,8 @@ return array(
     array(
         'name'                 => 'delete-controller-plugin',
         'route'                => 'delete-controller-plugin <module> <controllerPlugin> [<path>]',
-        'description'          => 'Delete an existing ZF2 controller plugin for module within the specified path',
-        'short_description'    => 'Delete ZF2 controller plugin',
+        'description'          => 'Delete an existing controller plugin for module within the specified path',
+        'short_description'    => 'Delete controller plugin',
         'options_descriptions' => array(
             '<module>'           => 'The name of the module to delete the controller plugin in; mandatory',
             '<controllerPlugin>' => 'The name of the controller plugin to delete; mandatory',
@@ -324,8 +324,8 @@ return array(
     array(
         'name'                 => 'delete-controller-plugin-factory',
         'route'                => 'delete-controller-plugin-factory <module> <controllerPlugin> [<path>]',
-        'description'          => 'Delete the factory for an existing ZF2 controller plugin for module within the specified path',
-        'short_description'    => 'Delete factory for ZF2 controller plugin',
+        'description'          => 'Delete the factory for an existing controller plugin for module within the specified path',
+        'short_description'    => 'Delete factory for controller plugin',
         'options_descriptions' => array(
             '<module>'           => 'The name of the module to delete the controller plugin factory in; mandatory',
             '<controllerPlugin>' => 'The name of the controller plugin to delete the factory for; mandatory',
@@ -344,8 +344,8 @@ return array(
     array(
         'name'                 => 'delete-module',
         'route'                => 'delete-module <module> [<path>]',
-        'description'          => 'Delete an existing ZF2 module within the specified path',
-        'short_description'    => 'Delete existing ZF2 module',
+        'description'          => 'Delete an existing module within the specified path',
+        'short_description'    => 'Delete existing module',
         'options_descriptions' => array(
             '<module>' => 'The name of the module to delete; mandatory',
             '<path>'   => 'The directory of the ZF2 project to delete an existing module in; defaults to current working directory',
@@ -361,8 +361,8 @@ return array(
     array(
         'name'                 => 'delete-view-helper',
         'route'                => 'delete-view-helper <module> <viewHelper> [<path>]',
-        'description'          => 'Delete an existing ZF2 view helper for module within the specified path',
-        'short_description'    => 'Delete ZF2 view helper',
+        'description'          => 'Delete an existing view helper for module within the specified path',
+        'short_description'    => 'Delete view helper',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to delete the view helper in; mandatory',
             '<viewHelper>' => 'The name of the view helper to delete; mandatory',
@@ -381,8 +381,8 @@ return array(
     array(
         'name'                 => 'delete-view-helper-factory',
         'route'                => 'delete-view-helper-factory <module> <viewHelper> [<path>]',
-        'description'          => 'Delete the factory for an existing ZF2 view helper for module within the specified path',
-        'short_description'    => 'Delete factory for ZF2 view helper',
+        'description'          => 'Delete the factory for an existing view helper for module within the specified path',
+        'short_description'    => 'Delete factory for view helper',
         'options_descriptions' => array(
             '<module>'     => 'The name of the module to delete the view helper factory in; mandatory',
             '<viewHelper>' => 'The name of the view helper to delete the factory for; mandatory',
@@ -438,7 +438,7 @@ return array(
         'description'          => 'Show all controllers for the controllers of the current ZF2 project specified within the path',
         'short_description'    => 'Show all actions for the ZF2 project',
         'options_descriptions' => array(
-            '<path>'        => 'The directory of the project to fetch controller-actions for; defaults to current working directory',
+            '<path>'        => 'The directory of the ZF2 project to fetch controller-actions for; defaults to current working directory',
             '--modules'     => 'Comma-separated list of modules to show controllers for; optional',
             '--controllers' => 'Comma-separated list of controllers to show controller-actions for; optional',
         ),
@@ -457,9 +457,9 @@ return array(
         'name'                 => 'show-controllers',
         'route'                => 'show-controllers [<path>] [--modules=]',
         'description'          => 'Show all controllers for the modules of the current ZF2 project specified within the path',
-        'short_description'    => 'Show all controllers for the ZF2 modules',
+        'short_description'    => 'Show all controllers for the modules',
         'options_descriptions' => array(
-            '<path>'    => 'The directory of the project to fetch controllers for; defaults to current working directory',
+            '<path>'    => 'The directory of the ZF2 project to fetch controllers for; defaults to current working directory',
             '--modules' => 'Comma-separated list of modules to show controllers for; optional',
         ),
         'defaults'             => array(
@@ -475,9 +475,9 @@ return array(
         'name'                 => 'show-controller-plugins',
         'route'                => 'show-controller-plugins [<path>] [--modules=]',
         'description'          => 'Show all controller plugins for the modules of the current ZF2 project specified within the path',
-        'short_description'    => 'Show all controller plugins for the ZF2 modules',
+        'short_description'    => 'Show all controller plugins for the modules',
         'options_descriptions' => array(
-            '<path>'    => 'The directory of the project to fetch controller plugins for; defaults to current working directory',
+            '<path>'    => 'The directory of the ZF2 project to fetch controller plugins for; defaults to current working directory',
             '--modules' => 'Comma-separated list of modules to show controller plugins for; optional',
         ),
         'defaults'             => array(
@@ -495,7 +495,7 @@ return array(
         'description'          => 'Show all modules of the current ZF2 project specified within the path',
         'short_description'    => 'Show all modules for the ZF2 project',
         'options_descriptions' => array(
-            '<path>' => 'The directory of the project to fetch modules for; defaults to current working directory',
+            '<path>' => 'The directory of the ZF2 project to fetch modules for; defaults to current working directory',
         ),
         'defaults'             => array(
             'path' => '.',
@@ -505,10 +505,10 @@ return array(
     array(
         'name'                 => 'show-version',
         'route'                => 'show-version [<path>]',
-        'description'          => 'Show the ZF2 version of the current project specified within the path',
-        'short_description'    => 'Show ZF2 version of the project',
+        'description'          => 'Show the ZF2 version of the current ZF2 project specified within the path',
+        'short_description'    => 'Show ZF2 version of the ZF2 project',
         'options_descriptions' => array(
-            '<path>' => 'The directory of the project to identify the version for; defaults to current working directory',
+            '<path>' => 'The directory of the ZF2 project to identify the version for; defaults to current working directory',
         ),
         'defaults'             => array(
             'path' => '.',
@@ -519,9 +519,9 @@ return array(
         'name'                 => 'show-view-helpers',
         'route'                => 'show-view-helpers [<path>] [--modules=]',
         'description'          => 'Show all view helpers for the modules of the current ZF2 project specified within the path',
-        'short_description'    => 'Show all view helpers for the ZF2 modules',
+        'short_description'    => 'Show all view helpers for the modules',
         'options_descriptions' => array(
-            '<path>'    => 'The directory of the project to fetch view helpers for; defaults to current working directory',
+            '<path>'    => 'The directory of the ZF2 project to fetch view helpers for; defaults to current working directory',
             '--modules' => 'Comma-separated list of modules to show view helpers for; optional',
         ),
         'defaults'             => array(
@@ -536,10 +536,10 @@ return array(
     array(
         'name'                 => 'tool-config',
         'route'                => 'tool-config [<path>] [--configKey=] [--configValue=]',
-        'description'          => 'Display and change the ZF2rapid configuration of the current project specified within the path.',
+        'description'          => 'Display and change the ZF2rapid configuration of the current ZF2 project specified within the path.',
         'short_description'    => 'Display and change ZF2rapid configuration',
         'options_descriptions' => array(
-            '<path>'           => 'The directory of the project to display the ZF2rapid configuration for; defaults to current working directory',
+            '<path>'           => 'The directory of the ZF2 project to display the ZF2rapid configuration for; defaults to current working directory',
             '[--configKey=]'   => 'Configuration key to display if no configuration value is specified',
             '[--configValue=]' => 'Configuration value to change for the specified configuration key; use double-quotes when adding texts with spaces',
         ),

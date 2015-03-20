@@ -28,8 +28,8 @@ class CreateAction extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Check\ControllerExists',
-            'ZF2rapid\Task\Action\GenerateActionMethod',
-            'ZF2rapid\Task\Action\GenerateActionView',
+            'ZF2rapid\Task\GenerateAction\GenerateActionMethod',
+            'ZF2rapid\Task\GenerateAction\GenerateActionView',
         );
 
     /**

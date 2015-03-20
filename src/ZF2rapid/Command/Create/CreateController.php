@@ -27,11 +27,12 @@ class CreateController extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
-            'ZF2rapid\Task\Controller\CreateControllerStructure',
-            'ZF2rapid\Task\Controller\GenerateControllerClass',
-            'ZF2rapid\Task\Controller\GenerateControllerFactory',
-            'ZF2rapid\Task\Controller\UpdateControllerConfig',
-            'ZF2rapid\Task\Action\GenerateActionView',
+            'ZF2rapid\Task\CreateStructure\CreateControllerStructure',
+            'ZF2rapid\Task\GenerateClass\GenerateControllerClass',
+            'ZF2rapid\Task\GenerateFactory\GenerateControllerFactory',
+            'ZF2rapid\Task\UpdateConfig\UpdateControllerConfig',
+            'ZF2rapid\Task\GenerateAction\GenerateActionMethod',
+            'ZF2rapid\Task\GenerateAction\GenerateActionView',
         );
 
     /**

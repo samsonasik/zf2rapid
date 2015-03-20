@@ -6,57 +6,66 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Controller;
+namespace ZF2rapid\Task\GenerateFactory;
 
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Generator\ClassFileGenerator;
-use ZF2rapid\Generator\ControllerFactoryGenerator;
+use ZF2rapid\Generator\FactoryGenerator;
 use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class GenerateControllerFactory
+ * Class GenerateControllerPluginFactory
  *
- * @package ZF2rapid\Task\Controller
+ * @package ZF2rapid\Task\ControllerPlugin
  */
-class GenerateControllerFactory extends AbstractTask
+abstract class AbstractGenerateFactory extends AbstractTask
 {
     /**
-     * Process the command
+     * Generate the factory
      *
-     * @return integer
+     * @param string $factoryDir
+     * @param string $factoryName
+     * @param string $factoryText
+     * @param string $namespaceName
+     * @param string $managerName
+     *
+     * @return bool
      */
-    public function processCommandTask()
-    {
+    protected function generateFactory(
+        $factoryDir, $factoryName, $factoryText, $namespaceName, $managerName
+    ) {
         if (!$this->params->paramFactory) {
-            return 0;
+            return true;
         }
 
         // output message
         $this->console->writeTaskLine(
-            'Writing controller factory file...'
+            'Writing ' . $factoryText . ' factory file...'
         );
 
-        // set factory class
-        $factoryFile = $this->params->controllerDir . '/'
-            . $this->params->paramController . 'ControllerFactory.php';
+        // set factory file
+        $factoryFile = $factoryDir . '/' . $factoryName . 'Factory.php';
 
         // check if factory file exists
         if (file_exists($factoryFile)) {
             $this->console->writeFailLine(
-                'The factory for controller ' . $this->console->colorize(
-                    $this->params->paramController, Color::GREEN
+                'The factory for ' . $factoryText . ' '
+                . $this->console->colorize(
+                    $factoryName, Color::GREEN
                 ) . ' already exists for module ' . $this->console->colorize(
                     $this->params->paramModule, Color::GREEN
                 ) . '.'
             );
 
-            return 1;
+            return false;
         }
 
         // create class
-        $class = new ControllerFactoryGenerator(
-            $this->params->paramController,
+        $class = new FactoryGenerator(
+            $factoryName,
             $this->params->paramModule,
+            $namespaceName,
+            $managerName,
             $this->params->config
         );
 
@@ -68,6 +77,6 @@ class GenerateControllerFactory extends AbstractTask
         // write file
         file_put_contents($factoryFile, $file->generate());
 
-        return 0;
+        return true;
     }
 }

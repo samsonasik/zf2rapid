@@ -27,10 +27,10 @@ class CreateControllerPlugin extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
-            'ZF2rapid\Task\ControllerPlugin\CreateControllerPluginStructure',
-            'ZF2rapid\Task\ControllerPlugin\GenerateControllerPluginClass',
-            'ZF2rapid\Task\ControllerPlugin\GenerateControllerPluginFactory',
-            'ZF2rapid\Task\ControllerPlugin\UpdateControllerPluginConfig',
+            'ZF2rapid\Task\CreateStructure\CreateControllerPluginStructure',
+            'ZF2rapid\Task\GenerateClass\GenerateControllerPluginClass',
+            'ZF2rapid\Task\GenerateFactory\GenerateControllerPluginFactory',
+            'ZF2rapid\Task\UpdateConfig\UpdateControllerPluginConfig',
         );
 
     /**

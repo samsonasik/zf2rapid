@@ -6,17 +6,16 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Check;
+namespace ZF2rapid\Task\GenerateClass;
 
-use Zend\Console\ColorInterface as Color;
-use ZF2rapid\Task\AbstractTask;
+use ZF2rapid\Generator\ControllerPluginClassGenerator;
 
 /**
- * Class ControllerPluginExists
+ * Class GenerateControllerPluginClass
  *
- * @package ZF2rapid\Task\Check
+ * @package ZF2rapid\Task\GenerateClass
  */
-class ControllerPluginExists extends AbstractFileExists
+class GenerateControllerPluginClass extends AbstractGenerateClass
 {
     /**
      * Process the command
@@ -25,13 +24,13 @@ class ControllerPluginExists extends AbstractFileExists
      */
     public function processCommandTask()
     {
-        $result = $this->checkFileExists(
+        $result = $this->generateClass(
             $this->params->controllerPluginDir,
             $this->params->paramControllerPlugin,
-            'controller plugin'
+            'controller plugin',
+            new ControllerPluginClassGenerator($this->params->config)
         );
 
         return $result == true ? 0 : 1;
     }
-
 }

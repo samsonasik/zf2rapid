@@ -21,6 +21,7 @@ use Zend\Code\Generator\MethodGenerator;
  * @package ZF2rapid\Generator
  */
 class ControllerPluginClassGenerator extends ClassGenerator
+    implements ClassGeneratorInterface
 {
     /**
      * @var array
@@ -28,19 +29,28 @@ class ControllerPluginClassGenerator extends ClassGenerator
     protected $config = array();
 
     /**
-     * @param null|string $controllerPluginName
-     * @param null|string $moduleName
-     * @param array       $config
+     * @param array $config
      */
-    public function __construct(
-        $controllerPluginName, $moduleName, array $config = array()
-    ) {
+    public function __construct(array $config = array())
+    {
         // set config data
         $this->config = $config;
 
         // call parent constructor
-        parent::__construct(
-            $controllerPluginName,
+        parent::__construct();
+    }
+
+    /**
+     * Build the class
+     *
+     * @param string $className
+     * @param string $moduleName
+     */
+    public function build($className, $moduleName)
+    {
+        // set name and namespace
+        $this->setName($className);
+        $this->setNamespaceName(
             $moduleName . '\\' . $this->config['namespaceControllerPlugin']
         );
 
@@ -50,23 +60,23 @@ class ControllerPluginClassGenerator extends ClassGenerator
 
         // add methods
         $this->addInvokeMethod();
-        $this->addClassDocBlock($controllerPluginName, $moduleName);
+        $this->addClassDocBlock($className, $moduleName);
     }
 
     /**
      * Add a class doc block
      *
-     * @param string $controllerPluginName
+     * @param string $className
      * @param string $moduleName
      */
-    protected function addClassDocBlock($controllerPluginName, $moduleName)
+    protected function addClassDocBlock($className, $moduleName)
     {
         // check for api docs
         if ($this->config['flagAddDocBlocks']) {
             $this->setDocBlock(
                 new DocBlockGenerator(
                     $this->getName(),
-                    'Provides the ' . $controllerPluginName . ' plugin for the '
+                    'Provides the ' . $className . ' plugin for the '
                     . $moduleName . ' Module',
                     array(
                         new GenericTag('package', $this->getNamespaceName()),
@@ -83,7 +93,7 @@ class ControllerPluginClassGenerator extends ClassGenerator
     {
         // set action body
         $body = array(
-            '// add plugin code here',
+            '// add controller plugin code here',
         );
         $body = implode(AbstractGenerator::LINE_FEED, $body);
 
@@ -96,7 +106,7 @@ class ControllerPluginClassGenerator extends ClassGenerator
         if ($this->config['flagAddDocBlocks']) {
             $method->setDocBlock(
                 new DocBlockGenerator(
-                    'Called when plugin is executed',
+                    'Called when controller plugin is executed',
                     null,
                     array(
                         new ReturnTag(array('mixed')),

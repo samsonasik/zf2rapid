@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Action;
+namespace ZF2rapid\Task\GenerateAction;
 
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Reflection\FileReflection;
@@ -18,7 +18,7 @@ use ZF2rapid\Task\AbstractTask;
 /**
  * Class GenerateActionMethod
  *
- * @package ZF2rapid\Task\Action
+ * @package ZF2rapid\Task\GenerateAction
  */
 class GenerateActionMethod extends AbstractTask
 {
@@ -53,14 +53,19 @@ class GenerateActionMethod extends AbstractTask
         // setup class generator with reflected class
         $class = ClassGenerator::fromReflection($classReflection);
 
+        // set action
+        $action = isset($this->params->paramAction)
+            ? $this->params->paramAction
+            : 'Index';
+
         // set method to check
-        $checkMethod = strtolower($this->params->paramAction) . 'action';
+        $checkMethod = strtolower($action) . 'action';
 
         // check for action method
         if ($class->hasMethod($checkMethod)) {
             $this->console->writeFailLine(
                 'The action ' . $this->console->colorize(
-                    $this->params->paramAction, Color::GREEN
+                    $action, Color::GREEN
                 ) . ' already exists in controller ' . $this->console->colorize(
                     $this->params->paramController, Color::GREEN
                 ) . ' of module ' . $this->console->colorize(
@@ -77,7 +82,8 @@ class GenerateActionMethod extends AbstractTask
         $class->setExtendedClass('AbstractActionController');
         $class->addMethodFromGenerator(
             new ActionMethodGenerator(
-                $this->params->paramAction, $this->params->paramController,
+                $action,
+                $this->params->paramController,
                 $this->params->config
             )
         );

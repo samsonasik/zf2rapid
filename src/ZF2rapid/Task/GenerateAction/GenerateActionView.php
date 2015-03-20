@@ -6,19 +6,19 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Controller;
+namespace ZF2rapid\Task\GenerateAction;
 
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Task\AbstractTask;
+use ZF2rapid\Generator\ActionViewGenerator;
 use ZF2rapid\Generator\ClassFileGenerator;
-use ZF2rapid\Generator\ControllerClassGenerator;
 
 /**
- * Class GenerateControllerClass
+ * Class GenerateActionView
  *
- * @package ZF2rapid\Task\Controller
+ * @package ZF2rapid\Task\GenerateAction
  */
-class GenerateControllerClass extends AbstractTask
+class GenerateActionView extends AbstractTask
 {
     /**
      * Process the command
@@ -29,18 +29,25 @@ class GenerateControllerClass extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Writing controller class file...'
+            'Writing action view script...'
         );
 
-        // set controller class and namespace
-        $controllerFile = $this->params->controllerDir . '/'
-            . $this->params->paramController . 'Controller.php';
+        // set action
+        if ($this->params->paramAction) {
+            $action = $this->filterCamelCaseToDash($this->params->paramAction);
+        } else {
+            $action = 'index';
+        }
+
+        // set action file
+        $actionFile = $this->params->controllerViewDir . DIRECTORY_SEPARATOR
+            . $action . '.phtml';
 
         // check if controller file exists
-        if (file_exists($controllerFile)) {
+        if (file_exists($actionFile)) {
             $this->console->writeFailLine(
-                'The controller ' . $this->console->colorize(
-                    $this->params->paramController, Color::GREEN
+                'The action view script ' . $this->console->colorize(
+                    $actionFile, Color::GREEN
                 ) . ' already exists for module ' . $this->console->colorize(
                     $this->params->paramModule, Color::GREEN
                 ) . '.'
@@ -50,19 +57,19 @@ class GenerateControllerClass extends AbstractTask
         }
 
         // create class
-        $class = new ControllerClassGenerator(
+        $view = new ActionViewGenerator(
+            $this->filterDashToCamelCase($action),
             $this->params->paramController,
-            $this->params->paramModule,
-            $this->params->config
+            $this->params->paramModule
         );
 
         // create file
         $file = new ClassFileGenerator(
-            $class->generate(), $this->params->config
+            $view->generate(), $this->params->config
         );
 
         // write file
-        file_put_contents($controllerFile, $file->generate());
+        file_put_contents($actionFile, $file->generate());
 
         return 0;
     }

@@ -18,11 +18,11 @@ use Zend\Code\Generator\MethodGenerator;
 use Zend\Code\Generator\ParameterGenerator;
 
 /**
- * Class ControllerPluginFactoryGenerator
+ * Class FactoryGenerator
  *
  * @package ZF2rapid\Generator
  */
-class ControllerPluginFactoryGenerator extends ClassGenerator
+class FactoryGenerator extends ClassGenerator
 {
     /**
      * @var array
@@ -30,20 +30,23 @@ class ControllerPluginFactoryGenerator extends ClassGenerator
     protected $config = array();
 
     /**
-     * @param null|string $controllerPluginName
-     * @param null|string $moduleName
-     * @param array       $config
+     * @param string $className
+     * @param string $moduleName
+     * @param string $namespaceName
+     * @param string $managerName
+     * @param array  $config
      */
     public function __construct(
-        $controllerPluginName, $moduleName, array $config = array()
+        $className, $moduleName, $namespaceName, $managerName,
+        array $config = array()
     ) {
         // set config data
         $this->config = $config;
 
         // call parent constructor
         parent::__construct(
-            $controllerPluginName . 'Factory',
-            $moduleName . '\\' . $this->config['namespaceControllerPlugin']
+            $className . 'Factory',
+            $moduleName . '\\' . $namespaceName
         );
 
         // add used namespaces and extended classes
@@ -53,23 +56,23 @@ class ControllerPluginFactoryGenerator extends ClassGenerator
         $this->setImplementedInterfaces(array('FactoryInterface'));
 
         // add methods
-        $this->addCreateServiceMethod($controllerPluginName);
-        $this->addClassDocBlock($controllerPluginName);
+        $this->addCreateServiceMethod($className, $managerName);
+        $this->addClassDocBlock($className);
     }
 
     /**
      * Add a class doc block
      *
-     * @param string $controllerClass
+     * @param string $className
      */
-    protected function addClassDocBlock($controllerClass)
+    protected function addClassDocBlock($className)
     {
         // check for api docs
         if ($this->config['flagAddDocBlocks']) {
             $this->setDocBlock(
                 new DocBlockGenerator(
                     $this->getName(),
-                    'Creates an instance of ' . $controllerClass,
+                    'Creates an instance of ' . $className,
                     array(
                         new GenericTag('package', $this->getNamespaceName()),
                     )
@@ -81,18 +84,19 @@ class ControllerPluginFactoryGenerator extends ClassGenerator
     /**
      * Generate the create service method
      *
-     * @param string $controllerPluginName
+     * @param string $className
+     * @param string $managerName
      */
-    protected function addCreateServiceMethod($controllerPluginName)
+    protected function addCreateServiceMethod($className, $managerName)
     {
         // set action body
         $body = array(
-            '/** @var ServiceLocatorAwareInterface $controllerPluginManager */',
-            '$serviceLocator = $controllerPluginManager->getServiceLocator();',
+            '/** @var ServiceLocatorAwareInterface $' . $managerName . ' */',
+            '$serviceLocator = $' . $managerName . '->getServiceLocator();',
             '',
-            '$plugin = new ' . $controllerPluginName . '();',
+            '$instance = new ' . $className . '();',
             '',
-            'return $plugin;',
+            'return $instance;',
         );
         $body = implode(AbstractGenerator::LINE_FEED, $body);
 
@@ -103,7 +107,7 @@ class ControllerPluginFactoryGenerator extends ClassGenerator
         $method->setParameters(
             array(
                 new ParameterGenerator(
-                    'controllerPluginManager', 'ServiceLocatorInterface'
+                    $managerName, 'ServiceLocatorInterface'
                 ),
             )
         );
@@ -116,12 +120,12 @@ class ControllerPluginFactoryGenerator extends ClassGenerator
                     null,
                     array(
                         new ParamTag(
-                            'controllerPluginManager',
+                            $managerName,
                             array(
                                 'ServiceLocatorInterface',
                             )
                         ),
-                        new ReturnTag(array($controllerPluginName)),
+                        new ReturnTag(array($className)),
                     )
                 )
             );

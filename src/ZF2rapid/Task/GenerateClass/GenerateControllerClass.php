@@ -6,17 +6,19 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Check;
+namespace ZF2rapid\Task\GenerateClass;
 
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Task\AbstractTask;
+use ZF2rapid\Generator\ClassFileGenerator;
+use ZF2rapid\Generator\ControllerClassGenerator;
 
 /**
- * Class ControllerExists
+ * Class GenerateControllerClass
  *
- * @package ZF2rapid\Task\Check
+ * @package ZF2rapid\Task\GenerateClass
  */
-class ControllerExists extends AbstractFileExists
+class GenerateControllerClass extends AbstractGenerateClass
 {
     /**
      * Process the command
@@ -25,13 +27,13 @@ class ControllerExists extends AbstractFileExists
      */
     public function processCommandTask()
     {
-        $result = $this->checkFileExists(
+        $result = $this->generateClass(
             $this->params->controllerDir,
             $this->params->paramController . 'Controller',
-            'controller'
+            'controller',
+            new ControllerClassGenerator($this->params->config)
         );
 
         return $result == true ? 0 : 1;
     }
-
 }

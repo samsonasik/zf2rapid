@@ -27,10 +27,10 @@ class CreateViewHelper extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
-            'ZF2rapid\Task\ViewHelper\CreateViewHelperStructure',
-            'ZF2rapid\Task\ViewHelper\GenerateViewHelperClass',
-            'ZF2rapid\Task\ViewHelper\GenerateViewHelperFactory',
-            'ZF2rapid\Task\ViewHelper\UpdateViewHelperConfig',
+            'ZF2rapid\Task\CreateStructure\CreateViewHelperStructure',
+            'ZF2rapid\Task\GenerateClass\GenerateViewHelperClass',
+            'ZF2rapid\Task\GenerateFactory\GenerateViewHelperFactory',
+            'ZF2rapid\Task\UpdateConfig\UpdateViewHelperConfig',
         );
 
     /**

@@ -6,17 +6,16 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Module;
+namespace ZF2rapid\Task\CreateStructure;
 
 use Zend\Console\ColorInterface as Color;
-use ZF2rapid\Task\AbstractTask;
 
 /**
  * Class CreateModuleStructure
  *
  * @package ZF2rapid\Task\Module
  */
-class CreateModuleStructure extends AbstractTask
+class CreateModuleStructure extends AbstractCreateStructureTask
 {
     /**
      * Process the command

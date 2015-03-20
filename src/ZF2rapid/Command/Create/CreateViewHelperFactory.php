@@ -28,8 +28,8 @@ class CreateViewHelperFactory extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Check\ViewHelperExists',
-            'ZF2rapid\Task\ViewHelper\GenerateViewHelperFactory',
-            'ZF2rapid\Task\ViewHelper\UpdateViewHelperConfig',
+            'ZF2rapid\Task\GenerateFactory\GenerateViewHelperFactory',
+            'ZF2rapid\Task\UpdateConfig\UpdateViewHelperConfig',
         );
 
     /**

@@ -8,15 +8,12 @@
  */
 namespace ZF2rapid\Task\Check;
 
-use Zend\Console\ColorInterface as Color;
-use ZF2rapid\Task\AbstractTask;
-
 /**
  * Class ViewHelperExists
  *
  * @package ZF2rapid\Task\Check
  */
-class ViewHelperExists extends AbstractTask
+class ViewHelperExists extends AbstractFileExists
 {
     /**
      * Process the command
@@ -25,29 +22,13 @@ class ViewHelperExists extends AbstractTask
      */
     public function processCommandTask()
     {
-        // output message
-        $this->console->writeTaskLine(
-            'Checking view helper...'
+        $result = $this->checkFileExists(
+            $this->params->viewHelperDir,
+            $this->params->paramViewHelper,
+            'view helper'
         );
 
-        // set controller file
-        $controllerFile = $this->params->viewHelperDir . '/'
-            . $this->params->paramViewHelper . '.php';
-
-        // check for module directory
-        if (!file_exists($controllerFile)) {
-            $this->console->writeFailLine(
-                'The view helper ' . $this->console->colorize(
-                    $this->params->paramViewHelper, Color::GREEN
-                ) . ' does not exist in module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . '.'
-            );
-
-            return 1;
-        }
-
-        return 0;
+        return $result == true ? 0 : 1;
     }
 
 }

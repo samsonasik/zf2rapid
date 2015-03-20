@@ -20,7 +20,7 @@ use Zend\Code\Generator\MethodGenerator;
  *
  * @package ZF2rapid\Generator
  */
-class ViewHelperClassGenerator extends ClassGenerator
+class ViewHelperClassGenerator extends ClassGenerator implements ClassGeneratorInterface
 {
     /**
      * @var array
@@ -28,19 +28,28 @@ class ViewHelperClassGenerator extends ClassGenerator
     protected $config = array();
 
     /**
-     * @param null|string $viewHelperName
-     * @param null|string $moduleName
-     * @param array       $config
+     * @param array $config
      */
-    public function __construct(
-        $viewHelperName, $moduleName, array $config = array()
-    ) {
+    public function __construct(array $config = array())
+    {
         // set config data
         $this->config = $config;
 
         // call parent constructor
-        parent::__construct(
-            $viewHelperName,
+        parent::__construct();
+    }
+
+    /**
+     * Build the class
+     *
+     * @param string $className
+     * @param string $moduleName
+     */
+    public function build($className, $moduleName)
+    {
+        // set name and namespace
+        $this->setName($className);
+        $this->setNamespaceName(
             $moduleName . '\\' . $this->config['namespaceViewHelper']
         );
 
@@ -50,7 +59,7 @@ class ViewHelperClassGenerator extends ClassGenerator
 
         // add methods
         $this->addInvokeMethod();
-        $this->addClassDocBlock($viewHelperName, $moduleName);
+        $this->addClassDocBlock($className, $moduleName);
     }
 
     /**

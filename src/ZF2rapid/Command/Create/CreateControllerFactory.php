@@ -28,8 +28,8 @@ class CreateControllerFactory extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Check\ControllerExists',
-            'ZF2rapid\Task\Controller\GenerateControllerFactory',
-            'ZF2rapid\Task\Controller\UpdateControllerConfig',
+            'ZF2rapid\Task\GenerateFactory\GenerateControllerFactory',
+            'ZF2rapid\Task\UpdateConfig\UpdateControllerConfig',
         );
 
     /**

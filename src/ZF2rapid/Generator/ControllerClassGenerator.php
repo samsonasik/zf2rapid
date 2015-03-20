@@ -8,12 +8,9 @@
  */
 namespace ZF2rapid\Generator;
 
-use Zend\Code\Generator\AbstractGenerator;
 use Zend\Code\Generator\ClassGenerator;
 use Zend\Code\Generator\DocBlock\Tag\GenericTag;
-use Zend\Code\Generator\DocBlock\Tag\ReturnTag;
 use Zend\Code\Generator\DocBlockGenerator;
-use Zend\Code\Generator\MethodGenerator;
 
 /**
  * Class ControllerClassGenerator
@@ -21,6 +18,7 @@ use Zend\Code\Generator\MethodGenerator;
  * @package ZF2rapid\Generator
  */
 class ControllerClassGenerator extends ClassGenerator
+    implements ClassGeneratorInterface
 {
     /**
      * @var array
@@ -28,19 +26,28 @@ class ControllerClassGenerator extends ClassGenerator
     protected $config = array();
 
     /**
-     * @param null|string $controllerName
-     * @param null|string $moduleName
-     * @param array       $config
+     * @param array $config
      */
-    public function __construct(
-        $controllerName, $moduleName, array $config = array()
-    ) {
+    public function __construct(array $config = array())
+    {
         // set config data
         $this->config = $config;
 
         // call parent constructor
-        parent::__construct(
-            $controllerName . 'Controller',
+        parent::__construct();
+    }
+
+    /**
+     * Build the class
+     *
+     * @param string $className
+     * @param string $moduleName
+     */
+    public function build($className, $moduleName)
+    {
+        // set name and namespace
+        $this->setName($className);
+        $this->setNamespaceName(
             $moduleName . '\\' . $this->config['namespaceController']
         );
 
@@ -49,9 +56,8 @@ class ControllerClassGenerator extends ClassGenerator
         $this->addUse('Zend\View\Model\ViewModel');
         $this->setExtendedClass('AbstractActionController');
 
-        // add methods
-        $this->addActionMethod('index');
-        $this->addClassDocBlock($controllerName, $moduleName);
+        // add doc block
+        $this->addClassDocBlock($className, $moduleName);
     }
 
     /**
@@ -76,42 +82,4 @@ class ControllerClassGenerator extends ClassGenerator
             );
         }
     }
-
-    /**
-     * Generate an action method method
-     *
-     * @param string $action
-     */
-    protected function addActionMethod($action = 'index')
-    {
-        // set action body
-        $body = array(
-            '$viewModel = new ViewModel();',
-            '',
-            'return $viewModel;',
-        );
-        $body = implode(AbstractGenerator::LINE_FEED, $body);
-
-        // create method
-        $method = new MethodGenerator();
-        $method->setName($action . 'Action');
-        $method->setBody($body);
-
-        // check for api docs
-        if ($this->config['flagAddDocBlocks']) {
-            $method->setDocBlock(
-                new DocBlockGenerator(
-                    ucfirst($action) . ' action for ' . $this->getName(),
-                    null,
-                    array(
-                        new ReturnTag(array('ViewModel')),
-                    )
-                )
-            );
-        }
-
-        // add method
-        $this->addMethodFromGenerator($method);
-    }
-
 }
