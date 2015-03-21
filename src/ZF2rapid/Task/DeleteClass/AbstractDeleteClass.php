@@ -6,50 +6,53 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\ViewHelper;
+namespace ZF2rapid\Task\DeleteClass;
 
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class DeleteViewHelper
+ * Class AbstractDeleteClass
  *
- * @package ZF2rapid\Task\ViewHelper
+ * @package ZF2rapid\Task\DeleteClass
  */
-class DeleteViewHelper extends AbstractTask
+abstract class AbstractDeleteClass extends AbstractTask
 {
     /**
-     * Process the command
+     * Delete class
      *
-     * @return integer
+     * @param string $classDir
+     * @param string $className
+     * @param string $classText
+     *
+     * @return bool
      */
-    public function processCommandTask()
+    public function deleteClass($classDir, $className, $classText)
     {
         // output message
         $this->console->writeTaskLine(
-            'Deleting view helper file...'
+            'Deleting ' . $classText . ' file...'
         );
 
-        // set view helper file
-        $viewHelperFile = $this->params->viewHelperDir . '/'
-            . $this->params->paramViewHelper . '.php';
+        // set file
+        $file = $classDir . '/' . $className . '.php';
 
         // check if factory file exists
-        if (!file_exists($viewHelperFile)) {
+        if (!file_exists($file)) {
             $this->console->writeFailLine(
-                'The view helper ' . $this->console->colorize(
-                    $this->params->paramViewHelper, Color::GREEN
+                'The ' . $classText . ' file ' . $this->console->colorize(
+                    $this->params->paramController, Color::GREEN
                 ) . ' does not exists for module ' . $this->console->colorize(
                     $this->params->paramModule, Color::GREEN
                 ) . '.'
             );
 
-            return 1;
+            return false;
         }
 
         // delete file
-        unlink($viewHelperFile);
+        unlink($file);
 
-        return 0;
+        return true;
     }
 }

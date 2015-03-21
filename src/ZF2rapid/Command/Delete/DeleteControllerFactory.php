@@ -28,8 +28,8 @@ class DeleteControllerFactory extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Check\ControllerExists',
-            'ZF2rapid\Task\Controller\DeleteControllerFactory',
-            'ZF2rapid\Task\Controller\UpdateControllerConfig',
+            'ZF2rapid\Task\DeleteFactory\DeleteControllerFactory',
+            'ZF2rapid\Task\UpdateConfig\UpdateControllerConfig',
         );
 
     /**

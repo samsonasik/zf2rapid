@@ -12,7 +12,7 @@ use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class ViewHelperExists
+ * Class AbstractFileExists
  *
  * @package ZF2rapid\Task\Check
  */

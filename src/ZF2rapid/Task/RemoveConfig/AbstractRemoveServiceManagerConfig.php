@@ -6,33 +6,30 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Controller;
+namespace ZF2rapid\Task\RemoveConfig;
 
-use Zend\Code\Generator\ValueGenerator;
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Generator\ConfigArrayGenerator;
 use ZF2rapid\Generator\ConfigFileGenerator;
 use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class RemoveControllerConfig
+ * Class AbstractRemoveServiceManagerConfig
  *
- * @package ZF2rapid\Task\Controller
+ * @package ZF2rapid\Task\RemoveConfig
  */
-class RemoveControllerConfig extends AbstractTask
+abstract class AbstractRemoveServiceManagerConfig extends AbstractTask
 {
     /**
-     * Process the command
+     * Remove service manager config
      *
-     * @return integer
+     * @param string $configType
+     * @param string $configKey
+     *
+     * @return bool
      */
-    public function processCommandTask()
+    public function removeConfig($configType, $configKey)
     {
-        // output message
-        $this->console->writeTaskLine(
-            'Writing configuration file...'
-        );
-
         // set config dir
         $configFile = $this->params->moduleConfigDir . '/module.config.php';
 
@@ -44,28 +41,24 @@ class RemoveControllerConfig extends AbstractTask
                 ) . ' does not exist.'
             );
 
-            return 1;
+            return false;
         }
 
         // get config data from file
         $configData = include $configFile;
 
-        // set controller key
-        $ctrlKey = $this->params->paramModule . '\\'
-            . $this->params->paramController;
-
         // delete factories key if set
-        if (isset($configData['controllers']['factories'])
-            && isset($configData['controllers']['factories'][$ctrlKey])
+        if (isset($configData[$configType]['factories'])
+            && isset($configData[$configType]['factories'][$configKey])
         ) {
-            unset($configData['controllers']['factories'][$ctrlKey]);
+            unset($configData[$configType]['factories'][$configKey]);
         }
 
         // delete invokables key if set
-        if (isset($configData['controllers']['invokables'])
-            && isset($configData['controllers']['invokables'][$ctrlKey])
+        if (isset($configData[$configType]['invokables'])
+            && isset($configData[$configType]['invokables'][$configKey])
         ) {
-            unset($configData['controllers']['invokables'][$ctrlKey]);
+            unset($configData[$configType]['invokables'][$configKey]);
         }
 
         // create config array
@@ -79,6 +72,6 @@ class RemoveControllerConfig extends AbstractTask
         // write file
         file_put_contents($configFile, $file->generate());
 
-        return 0;
+        return true;
     }
 }

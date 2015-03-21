@@ -28,9 +28,9 @@ class DeleteViewHelper extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Check\ViewHelperExists',
-            'ZF2rapid\Task\ViewHelper\DeleteViewHelper',
-            'ZF2rapid\Task\ViewHelper\DeleteViewHelperFactory',
-            'ZF2rapid\Task\ViewHelper\RemoveViewHelperConfig',
+            'ZF2rapid\Task\DeleteClass\DeleteViewHelper',
+            'ZF2rapid\Task\DeleteFactory\DeleteViewHelperFactory',
+            'ZF2rapid\Task\RemoveConfig\RemoveViewHelperConfig',
         );
 
     /**

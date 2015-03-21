@@ -6,41 +6,44 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Controller;
+namespace ZF2rapid\Task\DeleteFactory;
 
 use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class DeleteControllerFactory
+ * Class DeleteControllerPluginFactory
  *
- * @package ZF2rapid\Task\Controller
+ * @package ZF2rapid\Task\DeleteFactory
  */
-class DeleteControllerFactory extends AbstractTask
+abstract class AbstractDeleteFactory extends AbstractTask
 {
     /**
-     * Process the command
+     * Delete Factory
      *
-     * @return integer
+     * @param string $classDir
+     * @param string $className
+     * @param string $classText
+     *
+     * @return boolean
      */
-    public function processCommandTask()
+    public function deleteFactory($classDir, $className, $classText)
     {
         // set factory class
-        $factoryFile = $this->params->controllerDir . '/'
-            . $this->params->paramController . 'ControllerFactory.php';
+        $factoryFile = $classDir . '/' . $className . 'Factory.php';
 
         // check if factory file exists
         if (!file_exists($factoryFile)) {
-            return 0;
+            return true;
         }
 
         // output message
         $this->console->writeTaskLine(
-            'Deleting controller factory file...'
+            'Deleting ' . $classText . ' factory file...'
         );
 
         // delete file
         unlink($factoryFile);
 
-        return 0;
+        return true;
     }
 }

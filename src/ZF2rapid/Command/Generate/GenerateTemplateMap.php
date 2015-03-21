@@ -12,11 +12,11 @@ use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Command\AbstractCommand;
 
 /**
- * Class GenerateTemplatemap
+ * Class GenerateTemplateMap
  *
  * @package ZF2rapid\Command\Generate
  */
-class GenerateTemplatemap extends AbstractCommand
+class GenerateTemplateMap extends AbstractCommand
 {
     /**
      * @var array
@@ -27,7 +27,7 @@ class GenerateTemplatemap extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
-            'ZF2rapid\Task\Module\GenerateTemplatemap',
+            'ZF2rapid\Task\GenerateMap\GenerateTemplateMap',
         );
 
     /**

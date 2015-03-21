@@ -6,16 +6,16 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Module;
+namespace ZF2rapid\Task\GenerateMap;
 
 use ZF2rapid\Task\AbstractTask;
 
 /**
- * Class GenerateTemplatemap
+ * Class GenerateTemplateMap
  *
- * @package ZF2rapid\Task\Module
+ * @package ZF2rapid\Task\GenerateMap
  */
-class GenerateTemplatemap extends AbstractTask
+class GenerateTemplateMap extends AbstractTask
 {
     /**
      * Process the command

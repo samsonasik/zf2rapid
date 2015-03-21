@@ -28,9 +28,9 @@ class DeleteControllerPlugin extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Check\ControllerPluginExists',
-            'ZF2rapid\Task\ControllerPlugin\DeleteControllerPlugin',
-            'ZF2rapid\Task\ControllerPlugin\DeleteControllerPluginFactory',
-            'ZF2rapid\Task\ControllerPlugin\RemoveControllerPluginConfig',
+            'ZF2rapid\Task\DeleteClass\DeleteControllerPlugin',
+            'ZF2rapid\Task\DeleteFactory\DeleteControllerPluginFactory',
+            'ZF2rapid\Task\RemoveConfig\RemoveControllerPluginConfig',
         );
 
     /**

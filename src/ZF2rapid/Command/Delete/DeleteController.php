@@ -28,10 +28,10 @@ class DeleteController extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Check\ControllerExists',
-            'ZF2rapid\Task\Controller\DeleteController',
-            'ZF2rapid\Task\Controller\DeleteControllerFactory',
-            'ZF2rapid\Task\Controller\RemoveControllerConfig',
-            'ZF2rapid\Task\Controller\RemoveControllerViews',
+            'ZF2rapid\Task\DeleteClass\DeleteController',
+            'ZF2rapid\Task\DeleteFactory\DeleteControllerFactory',
+            'ZF2rapid\Task\RemoveConfig\RemoveControllerConfig',
+            'ZF2rapid\Task\DeleteViews\RemoveControllerViews',
         );
 
     /**

@@ -6,14 +6,14 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\Controller;
+namespace ZF2rapid\Task\DeleteViews;
 
 use ZF2rapid\Task\AbstractTask;
 
 /**
  * Class RemoveControllerViews
  *
- * @package ZF2rapid\Task\Controller
+ * @package ZF2rapid\Task\DeleteViews
  */
 class RemoveControllerViews extends AbstractTask
 {

@@ -413,7 +413,7 @@ return array(
         'filters'              => array(
             'module' => new NormalizeParamFilter(),
         ),
-        'handler'              => 'ZF2rapid\Command\Generate\GenerateClassmap',
+        'handler'              => 'ZF2rapid\Command\Generate\GenerateClassMap',
     ),
     array(
         'name'                 => 'generate-templatemap',
@@ -430,7 +430,7 @@ return array(
         'filters'              => array(
             'module' => new NormalizeParamFilter(),
         ),
-        'handler'              => 'ZF2rapid\Command\Generate\GenerateTemplatemap',
+        'handler'              => 'ZF2rapid\Command\Generate\GenerateTemplateMap',
     ),
     array(
         'name'                 => 'show-actions',

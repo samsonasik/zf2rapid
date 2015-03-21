@@ -28,8 +28,8 @@ class DeleteAction extends AbstractCommand
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
             'ZF2rapid\Task\Check\ControllerExists',
-            'ZF2rapid\Task\Action\DeleteActionMethod',
-            'ZF2rapid\Task\Action\DeleteActionView',
+            'ZF2rapid\Task\DeleteAction\DeleteActionMethod',
+            'ZF2rapid\Task\DeleteAction\DeleteActionView',
         );
 
     /**
