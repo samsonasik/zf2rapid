@@ -148,6 +148,22 @@ class Params extends AbstractTask
             }
         }
 
+        if ($this->route->getMatchedParam('validator')) {
+            $this->params->paramValidator
+                = $this->route->getMatchedParam('validator');
+
+            if ($this->params->moduleSrcDir) {
+                $this->params->validatorDir = $this->params->moduleSrcDir
+                    . DIRECTORY_SEPARATOR
+                    . str_replace(
+                        '\\',
+                        DIRECTORY_SEPARATOR,
+                        $this->params->config['namespaceValidator']
+                    );
+
+            }
+        }
+
         if ($this->route->getMatchedParam('factory')) {
             $this->params->paramFactory = $this->route->getMatchedParam(
                 'factory'

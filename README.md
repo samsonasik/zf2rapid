@@ -18,8 +18,8 @@ tbd
 
 * Create, delete and show controller plugins    (done)
 * Create, delete and show view helper           (done)
-* Create, delete and show filters               (in progress)
-* Create, delete and show validators            (todo)
+* Create, delete and show filters               (done)
+* Create, delete and show validators            (in progress)
 * Create, delete and show input filters         (todo)
 * Create, delete and show forms                 (todo)
 * Create, delete and show hydrators             (todo)

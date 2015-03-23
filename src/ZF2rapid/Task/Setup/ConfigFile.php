@@ -36,6 +36,7 @@ class ConfigFile extends AbstractTask
             'namespaceControllerPlugin' => 'Controller\\Plugin',
             'namespaceViewHelper'       => 'View\\Helper',
             'namespaceFilter'           => 'Filter',
+            'namespaceValidator'        => 'Validator',
         );
 
     /**

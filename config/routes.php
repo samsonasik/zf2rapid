@@ -174,6 +174,47 @@ return array(
         'handler'              => 'ZF2rapid\Command\Create\CreateFilterFactory',
     ),
     array(
+        'name'                 => 'create-validator',
+        'route'                => 'create-validator <module> <validator> [<path>] [--factory|-f]:factory',
+        'description'          => 'Create a new validator for module within the specified path',
+        'short_description'    => 'Create new validator',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to create the validator in; mandatory',
+            '<validator>'  => 'The name of the validator to create; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to create a new validator in; defaults to current working directory',
+            '--factory|-f' => 'Whether or not to create a factory for the new validator (disabled by default)',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => false,
+        ),
+        'filters'              => array(
+            'module'    => new NormalizeParamFilter(),
+            'validator' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateValidator',
+    ),
+    array(
+        'name'                 => 'create-validator-factory',
+        'route'                => 'create-validator-factory <module> <validator> [<path>]',
+        'description'          => 'Create a factory for an existing validator for module within the specified path',
+        'short_description'    => 'Create factory for validator',
+        'options_descriptions' => array(
+            '<module>'    => 'The name of the module to create the validator factory in; mandatory',
+            '<validator>' => 'The name of the validator to create the factory for; mandatory',
+            '<path>'      => 'The directory of the ZF2 project to create the validator factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => true,
+        ),
+        'filters'              => array(
+            'module'    => new NormalizeParamFilter(),
+            'validator' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateValidatorFactory',
+    ),
+    array(
         'name'                 => 'create-module',
         'route'                => 'create-module <module> [<path>]',
         'description'          => 'Create a new module within the specified path',
@@ -423,6 +464,46 @@ return array(
         'handler'              => 'ZF2rapid\Command\Delete\DeleteFilterFactory',
     ),
     array(
+        'name'                 => 'delete-validator',
+        'route'                => 'delete-validator <module> <validator> [<path>]',
+        'description'          => 'Delete an existing validator for module within the specified path',
+        'short_description'    => 'Delete validator',
+        'options_descriptions' => array(
+            '<module>'    => 'The name of the module to delete the validator in; mandatory',
+            '<validator>' => 'The name of the validator to delete; mandatory',
+            '<path>'      => 'The directory of the ZF2 project to delete the validator in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'    => new NormalizeParamFilter(),
+            'validator' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteValidator',
+    ),
+    array(
+        'name'                 => 'delete-validator-factory',
+        'route'                => 'delete-validator-factory <module> <validator> [<path>]',
+        'description'          => 'Delete the factory for an existing validator for module within the specified path',
+        'short_description'    => 'Delete factory for validator',
+        'options_descriptions' => array(
+            '<module>'    => 'The name of the module to delete the validator factory in; mandatory',
+            '<validator>' => 'The name of the validator to delete the factory for; mandatory',
+            '<path>'      => 'The directory of the ZF2 project to delete the validator factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'    => new NormalizeParamFilter(),
+            'validator' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteValidatorFactory',
+    ),
+    array(
         'name'                 => 'delete-module',
         'route'                => 'delete-module <module> [<path>]',
         'description'          => 'Delete an existing module within the specified path',
@@ -587,6 +668,24 @@ return array(
             'modules' => new NormalizeListFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Show\ShowFilters',
+    ),
+    array(
+        'name'                 => 'show-validators',
+        'route'                => 'show-validators [<path>] [--modules=]',
+        'description'          => 'Show all validators for the modules of the current ZF2 project specified within the path',
+        'short_description'    => 'Show all validators for the modules',
+        'options_descriptions' => array(
+            '<path>'    => 'The directory of the ZF2 project to fetch validators for; defaults to current working directory',
+            '--modules' => 'Comma-separated list of modules to show validators for; optional',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'modules' => array(),
+        ),
+        'filters'              => array(
+            'modules' => new NormalizeListFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Show\ShowValidators',
     ),
     array(
         'name'                 => 'show-modules',
