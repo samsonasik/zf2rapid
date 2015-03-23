@@ -174,6 +174,96 @@ return array(
         'handler'              => 'ZF2rapid\Command\Create\CreateFilterFactory',
     ),
     array(
+        'name'                 => 'create-input-filter',
+        'route'                => 'create-input-filter <module> <inputFilter> [<path>] [--factory|-f]:factory',
+        'description'          => 'Create a new input filter for module within the specified path',
+        'short_description'    => 'Create new input filter',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to create the input filter in; mandatory',
+            '<inputFilter>' => 'The name of the input filter to create; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to create a new input filter in; defaults to current working directory',
+            '--factory|-f'       => 'Whether or not to create a factory for the new input filter (disabled by default)',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => false,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'inputFilter' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateInputFilter',
+    ),
+    array(
+        'name'                 => 'create-input-filter-factory',
+        'route'                => 'create-input-filter-factory <module> <inputFilter> [<path>]',
+        'description'          => 'Create a factory for an existing input filter for module within the specified path',
+        'short_description'    => 'Create factory for input filter',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to create the input filter factory in; mandatory',
+            '<inputFilter>' => 'The name of the input filter to create the factory for; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to create the input filter factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => true,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'inputFilter' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateInputFilterFactory',
+    ),
+    array(
+        'name'                 => 'create-module',
+        'route'                => 'create-module <module> [<path>]',
+        'description'          => 'Create a new module within the specified path',
+        'short_description'    => 'Create new module',
+        'options_descriptions' => array(
+            '<module>' => 'The name of the module to create; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to create a new module in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path' => '.',
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateModule',
+    ),
+    array(
+        'name'                 => 'create-project',
+        'route'                => 'create-project <path>',
+        'description'          => 'Create a new ZF2 project within the specified path',
+        'short_description'    => 'Create new ZF2 project',
+        'options_descriptions' => array(
+            '<path>' => 'The directory to install the new ZF2 project in; mandatory',
+        ),
+        'defaults'             => array(
+            'path' => false,
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateProject',
+    ),
+    array(
+        'name'                 => 'create-routing',
+        'route'                => 'create-routing <module> [<path>] [--strict|-s]:strict',
+        'description'          => 'Create the routing for an existing module within the specified path',
+        'short_description'    => 'Create routing for module',
+        'options_descriptions' => array(
+            '<module>'    => 'The name of the module to create the routing for; mandatory',
+            '<path>'      => 'The directory of the ZF2 project to create the module routing in; defaults to current working directory',
+            '--strict|-s' => 'In strict mode routing only allows existing controllers and actions for the routing (disabled by default)',
+        ),
+        'defaults'             => array(
+            'path'   => '.',
+            'strict' => false,
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateRouting',
+    ),
+    array(
         'name'                 => 'create-validator',
         'route'                => 'create-validator <module> <validator> [<path>] [--factory|-f]:factory',
         'description'          => 'Create a new validator for module within the specified path',
@@ -213,55 +303,6 @@ return array(
             'validator' => new NormalizeParamFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Create\CreateValidatorFactory',
-    ),
-    array(
-        'name'                 => 'create-module',
-        'route'                => 'create-module <module> [<path>]',
-        'description'          => 'Create a new module within the specified path',
-        'short_description'    => 'Create new module',
-        'options_descriptions' => array(
-            '<module>' => 'The name of the module to create; mandatory',
-            '<path>'   => 'The directory of the ZF2 project to create a new module in; defaults to current working directory',
-        ),
-        'defaults'             => array(
-            'path' => '.',
-        ),
-        'filters'              => array(
-            'module' => new NormalizeParamFilter(),
-        ),
-        'handler'              => 'ZF2rapid\Command\Create\CreateModule',
-    ),
-    array(
-        'name'                 => 'create-routing',
-        'route'                => 'create-routing <module> [<path>] [--strict|-s]:strict',
-        'description'          => 'Create the routing for an existing module within the specified path',
-        'short_description'    => 'Create routing for module',
-        'options_descriptions' => array(
-            '<module>'    => 'The name of the module to create the routing for; mandatory',
-            '<path>'      => 'The directory of the ZF2 project to create the module routing in; defaults to current working directory',
-            '--strict|-s' => 'In strict mode routing only allows existing controllers and actions for the routing (disabled by default)',
-        ),
-        'defaults'             => array(
-            'path'   => '.',
-            'strict' => false,
-        ),
-        'filters'              => array(
-            'module' => new NormalizeParamFilter(),
-        ),
-        'handler'              => 'ZF2rapid\Command\Create\CreateRouting',
-    ),
-    array(
-        'name'                 => 'create-project',
-        'route'                => 'create-project <path>',
-        'description'          => 'Create a new ZF2 project within the specified path',
-        'short_description'    => 'Create new ZF2 project',
-        'options_descriptions' => array(
-            '<path>' => 'The directory to install the new ZF2 project in; mandatory',
-        ),
-        'defaults'             => array(
-            'path' => false,
-        ),
-        'handler'              => 'ZF2rapid\Command\Create\CreateProject',
     ),
     array(
         'name'                 => 'create-view-helper',
@@ -464,6 +505,63 @@ return array(
         'handler'              => 'ZF2rapid\Command\Delete\DeleteFilterFactory',
     ),
     array(
+        'name'                 => 'delete-input-filter',
+        'route'                => 'delete-input-filter <module> <inputFilter> [<path>]',
+        'description'          => 'Delete an existing input filter for module within the specified path',
+        'short_description'    => 'Delete input filter',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to delete the input filter in; mandatory',
+            '<inputFilter>' => 'The name of the input filter to delete; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to delete the input filter in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'inputFilter' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteInputFilter',
+    ),
+    array(
+        'name'                 => 'delete-input-filter-factory',
+        'route'                => 'delete-input-filter-factory <module> <inputFilter> [<path>]',
+        'description'          => 'Delete the factory for an existing input filter for module within the specified path',
+        'short_description'    => 'Delete factory for input filter',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to delete the input filter factory in; mandatory',
+            '<inputFilter>' => 'The name of the input filter to delete the factory for; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to delete the input filter factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'inputFilter' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteInputFilterFactory',
+    ),
+    array(
+        'name'                 => 'delete-module',
+        'route'                => 'delete-module <module> [<path>]',
+        'description'          => 'Delete an existing module within the specified path',
+        'short_description'    => 'Delete existing module',
+        'options_descriptions' => array(
+            '<module>' => 'The name of the module to delete; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to delete an existing module in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path' => '.',
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteModule',
+    ),
+    array(
         'name'                 => 'delete-validator',
         'route'                => 'delete-validator <module> <validator> [<path>]',
         'description'          => 'Delete an existing validator for module within the specified path',
@@ -502,23 +600,6 @@ return array(
             'validator' => new NormalizeParamFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Delete\DeleteValidatorFactory',
-    ),
-    array(
-        'name'                 => 'delete-module',
-        'route'                => 'delete-module <module> [<path>]',
-        'description'          => 'Delete an existing module within the specified path',
-        'short_description'    => 'Delete existing module',
-        'options_descriptions' => array(
-            '<module>' => 'The name of the module to delete; mandatory',
-            '<path>'   => 'The directory of the ZF2 project to delete an existing module in; defaults to current working directory',
-        ),
-        'defaults'             => array(
-            'path' => '.',
-        ),
-        'filters'              => array(
-            'module' => new NormalizeParamFilter(),
-        ),
-        'handler'              => 'ZF2rapid\Command\Delete\DeleteModule',
     ),
     array(
         'name'                 => 'delete-view-helper',
@@ -670,6 +751,37 @@ return array(
         'handler'              => 'ZF2rapid\Command\Show\ShowFilters',
     ),
     array(
+        'name'                 => 'show-input-filters',
+        'route'                => 'show-input-filters [<path>] [--modules=]',
+        'description'          => 'Show all input filters for the modules of the current ZF2 project specified within the path',
+        'short_description'    => 'Show all input filters for the modules',
+        'options_descriptions' => array(
+            '<path>'    => 'The directory of the ZF2 project to fetch input filters for; defaults to current working directory',
+            '--modules' => 'Comma-separated list of modules to show input filters for; optional',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'modules' => array(),
+        ),
+        'filters'              => array(
+            'modules' => new NormalizeListFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Show\ShowInputFilters',
+    ),
+    array(
+        'name'                 => 'show-modules',
+        'route'                => 'show-modules [<path>]',
+        'description'          => 'Show all modules of the current ZF2 project specified within the path',
+        'short_description'    => 'Show all modules for the ZF2 project',
+        'options_descriptions' => array(
+            '<path>' => 'The directory of the ZF2 project to fetch modules for; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path' => '.',
+        ),
+        'handler'              => 'ZF2rapid\Command\Show\ShowModules',
+    ),
+    array(
         'name'                 => 'show-validators',
         'route'                => 'show-validators [<path>] [--modules=]',
         'description'          => 'Show all validators for the modules of the current ZF2 project specified within the path',
@@ -686,19 +798,6 @@ return array(
             'modules' => new NormalizeListFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Show\ShowValidators',
-    ),
-    array(
-        'name'                 => 'show-modules',
-        'route'                => 'show-modules [<path>]',
-        'description'          => 'Show all modules of the current ZF2 project specified within the path',
-        'short_description'    => 'Show all modules for the ZF2 project',
-        'options_descriptions' => array(
-            '<path>' => 'The directory of the ZF2 project to fetch modules for; defaults to current working directory',
-        ),
-        'defaults'             => array(
-            'path' => '.',
-        ),
-        'handler'              => 'ZF2rapid\Command\Show\ShowModules',
     ),
     array(
         'name'                 => 'show-version',

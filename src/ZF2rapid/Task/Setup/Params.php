@@ -164,6 +164,22 @@ class Params extends AbstractTask
             }
         }
 
+        if ($this->route->getMatchedParam('inputFilter')) {
+            $this->params->paramInputFilter
+                = $this->route->getMatchedParam('inputFilter');
+
+            if ($this->params->moduleSrcDir) {
+                $this->params->inputFilterDir = $this->params->moduleSrcDir
+                    . DIRECTORY_SEPARATOR
+                    . str_replace(
+                        '\\',
+                        DIRECTORY_SEPARATOR,
+                        $this->params->config['namespaceInputFilter']
+                    );
+
+            }
+        }
+
         if ($this->route->getMatchedParam('factory')) {
             $this->params->paramFactory = $this->route->getMatchedParam(
                 'factory'
