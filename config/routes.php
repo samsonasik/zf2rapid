@@ -174,6 +174,47 @@ return array(
         'handler'              => 'ZF2rapid\Command\Create\CreateFilterFactory',
     ),
     array(
+        'name'                 => 'create-form',
+        'route'                => 'create-form <module> <form> [<path>] [--factory|-f]:factory',
+        'description'          => 'Create a new form for module within the specified path',
+        'short_description'    => 'Create new form',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to create the form in; mandatory',
+            '<form>' => 'The name of the form to create; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to create a new form in; defaults to current working directory',
+            '--factory|-f'       => 'Whether or not to create a factory for the new form (disabled by default)',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => false,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'form' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateForm',
+    ),
+    array(
+        'name'                 => 'create-form-factory',
+        'route'                => 'create-form-factory <module> <form> [<path>]',
+        'description'          => 'Create a factory for an existing form for module within the specified path',
+        'short_description'    => 'Create factory for form',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to create the form factory in; mandatory',
+            '<form>' => 'The name of the form to create the factory for; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to create the form factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => true,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'form' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateFormFactory',
+    ),
+    array(
         'name'                 => 'create-input-filter',
         'route'                => 'create-input-filter <module> <inputFilter> [<path>] [--factory|-f]:factory',
         'description'          => 'Create a new input filter for module within the specified path',
@@ -505,6 +546,46 @@ return array(
         'handler'              => 'ZF2rapid\Command\Delete\DeleteFilterFactory',
     ),
     array(
+        'name'                 => 'delete-form',
+        'route'                => 'delete-form <module> <form> [<path>]',
+        'description'          => 'Delete an existing form for module within the specified path',
+        'short_description'    => 'Delete form',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to delete the form in; mandatory',
+            '<form>' => 'The name of the form to delete; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to delete the form in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'form' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteForm',
+    ),
+    array(
+        'name'                 => 'delete-form-factory',
+        'route'                => 'delete-form-factory <module> <form> [<path>]',
+        'description'          => 'Delete the factory for an existing form for module within the specified path',
+        'short_description'    => 'Delete factory for form',
+        'options_descriptions' => array(
+            '<module>'           => 'The name of the module to delete the form factory in; mandatory',
+            '<form>' => 'The name of the form to delete the factory for; mandatory',
+            '<path>'             => 'The directory of the ZF2 project to delete the form factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module'           => new NormalizeParamFilter(),
+            'form' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteFormFactory',
+    ),
+    array(
         'name'                 => 'delete-input-filter',
         'route'                => 'delete-input-filter <module> <inputFilter> [<path>]',
         'description'          => 'Delete an existing input filter for module within the specified path',
@@ -749,6 +830,24 @@ return array(
             'modules' => new NormalizeListFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Show\ShowFilters',
+    ),
+    array(
+        'name'                 => 'show-forms',
+        'route'                => 'show-forms [<path>] [--modules=]',
+        'description'          => 'Show all forms for the modules of the current ZF2 project specified within the path',
+        'short_description'    => 'Show all forms for the modules',
+        'options_descriptions' => array(
+            '<path>'    => 'The directory of the ZF2 project to fetch forms for; defaults to current working directory',
+            '--modules' => 'Comma-separated list of modules to show forms for; optional',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'modules' => array(),
+        ),
+        'filters'              => array(
+            'modules' => new NormalizeListFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Show\ShowForms',
     ),
     array(
         'name'                 => 'show-input-filters',

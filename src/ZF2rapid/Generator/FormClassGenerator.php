@@ -16,11 +16,11 @@ use Zend\Code\Generator\DocBlockGenerator;
 use Zend\Code\Generator\MethodGenerator;
 
 /**
- * Class InputFilterClassGenerator
+ * Class FormClassGenerator
  *
  * @package ZF2rapid\Generator
  */
-class InputFilterClassGenerator extends ClassGenerator
+class FormClassGenerator extends ClassGenerator
     implements ClassGeneratorInterface
 {
     /**
@@ -51,12 +51,12 @@ class InputFilterClassGenerator extends ClassGenerator
         // set name and namespace
         $this->setName($className);
         $this->setNamespaceName(
-            $moduleName . '\\' . $this->config['namespaceInputFilter']
+            $moduleName . '\\' . $this->config['namespaceForm']
         );
 
         // add used namespaces and extended classes
-        $this->addUse('Zend\InputFilter\InputFilter');
-        $this->setExtendedClass('InputFilter');
+        $this->addUse('Zend\Form\Form');
+        $this->setExtendedClass('Form');
 
         // add methods
         $this->addInitMethod();
@@ -76,7 +76,7 @@ class InputFilterClassGenerator extends ClassGenerator
             $this->setDocBlock(
                 new DocBlockGenerator(
                     $this->getName(),
-                    'Provides the ' . $className . ' input filter for the '
+                    'Provides the ' . $className . ' form for the '
                     . $moduleName . ' Module',
                     array(
                         new GenericTag('package', $this->getNamespaceName()),
@@ -93,7 +93,7 @@ class InputFilterClassGenerator extends ClassGenerator
     {
         // set action body
         $body = array(
-            '// add input objects here',
+            '// add form elements and form configuration here',
         );
         $body = implode(AbstractGenerator::LINE_FEED, $body);
 
@@ -106,7 +106,7 @@ class InputFilterClassGenerator extends ClassGenerator
         if ($this->config['flagAddDocBlocks']) {
             $method->setDocBlock(
                 new DocBlockGenerator(
-                    'Generate input filter by adding inputs'
+                    'Generate form by adding elements'
                 )
             );
         }

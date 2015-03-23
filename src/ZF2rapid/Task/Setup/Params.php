@@ -180,6 +180,22 @@ class Params extends AbstractTask
             }
         }
 
+        if ($this->route->getMatchedParam('form')) {
+            $this->params->paramForm
+                = $this->route->getMatchedParam('form');
+
+            if ($this->params->moduleSrcDir) {
+                $this->params->formDir = $this->params->moduleSrcDir
+                    . DIRECTORY_SEPARATOR
+                    . str_replace(
+                        '\\',
+                        DIRECTORY_SEPARATOR,
+                        $this->params->config['namespaceForm']
+                    );
+
+            }
+        }
+
         if ($this->route->getMatchedParam('factory')) {
             $this->params->paramFactory = $this->route->getMatchedParam(
                 'factory'

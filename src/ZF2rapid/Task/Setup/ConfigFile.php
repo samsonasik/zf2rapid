@@ -38,6 +38,7 @@ class ConfigFile extends AbstractTask
             'namespaceFilter'           => 'Filter',
             'namespaceValidator'        => 'Validator',
             'namespaceInputFilter'      => 'InputFilter',
+            'namespaceForm'             => 'Form',
         );
 
     /**
