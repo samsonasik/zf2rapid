@@ -9,11 +9,11 @@
 namespace ZF2rapid\Task\RemoveConfig;
 
 /**
- * Class RemoveControllerPluginConfig
+ * Class RemoveFilterConfig
  *
  * @package ZF2rapid\Task\RemoveConfig
  */
-class RemoveControllerPluginConfig extends AbstractRemoveServiceManagerConfig
+class RemoveFilterConfig extends AbstractRemoveServiceManagerConfig
 {
     /**
      * Process the command
@@ -24,14 +24,14 @@ class RemoveControllerPluginConfig extends AbstractRemoveServiceManagerConfig
     {
         // output message
         $this->console->writeTaskLine(
-            'Writing controller plugin configuration...'
+            'Writing filter configuration...'
         );
 
         $configKey = lcfirst($this->params->paramModule)
-            . $this->params->paramControllerPlugin;
+            . $this->params->paramFilter;
 
         $result = $this->removeConfig(
-            'controller_plugins',
+            'filters',
             $configKey
         );
 

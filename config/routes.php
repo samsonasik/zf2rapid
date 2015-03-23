@@ -133,6 +133,47 @@ return array(
         'handler'              => 'ZF2rapid\Command\Create\CreateControllerPluginFactory',
     ),
     array(
+        'name'                 => 'create-filter',
+        'route'                => 'create-filter <module> <filter> [<path>] [--factory|-f]:factory',
+        'description'          => 'Create a new filter for module within the specified path',
+        'short_description'    => 'Create new filter',
+        'options_descriptions' => array(
+            '<module>'     => 'The name of the module to create the filter in; mandatory',
+            '<filter>'     => 'The name of the filter to create; mandatory',
+            '<path>'       => 'The directory of the ZF2 project to create a new filter in; defaults to current working directory',
+            '--factory|-f' => 'Whether or not to create a factory for the new filter (disabled by default)',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => false,
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+            'filter' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateFilter',
+    ),
+    array(
+        'name'                 => 'create-filter-factory',
+        'route'                => 'create-filter-factory <module> <filter> [<path>]',
+        'description'          => 'Create a factory for an existing filter for module within the specified path',
+        'short_description'    => 'Create factory for filter',
+        'options_descriptions' => array(
+            '<module>' => 'The name of the module to create the filter factory in; mandatory',
+            '<filter>' => 'The name of the filter to create the factory for; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to create the filter factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'factory' => true,
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+            'filter' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Create\CreateFilterFactory',
+    ),
+    array(
         'name'                 => 'create-module',
         'route'                => 'create-module <module> [<path>]',
         'description'          => 'Create a new module within the specified path',
@@ -342,6 +383,46 @@ return array(
         'handler'              => 'ZF2rapid\Command\Delete\DeleteControllerPluginFactory',
     ),
     array(
+        'name'                 => 'delete-filter',
+        'route'                => 'delete-filter <module> <filter> [<path>]',
+        'description'          => 'Delete an existing filter for module within the specified path',
+        'short_description'    => 'Delete filter',
+        'options_descriptions' => array(
+            '<module>' => 'The name of the module to delete the filter in; mandatory',
+            '<filter>' => 'The name of the filter to delete; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to delete the filter in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+            'filter' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteFilter',
+    ),
+    array(
+        'name'                 => 'delete-filter-factory',
+        'route'                => 'delete-filter-factory <module> <filter> [<path>]',
+        'description'          => 'Delete the factory for an existing filter for module within the specified path',
+        'short_description'    => 'Delete factory for filter',
+        'options_descriptions' => array(
+            '<module>' => 'The name of the module to delete the filter factory in; mandatory',
+            '<filter>' => 'The name of the filter to delete the factory for; mandatory',
+            '<path>'   => 'The directory of the ZF2 project to delete the filter factory in; defaults to current working directory',
+        ),
+        'defaults'             => array(
+            'path'          => '.',
+            'removeFactory' => true,
+        ),
+        'filters'              => array(
+            'module' => new NormalizeParamFilter(),
+            'filter' => new NormalizeParamFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Delete\DeleteFilterFactory',
+    ),
+    array(
         'name'                 => 'delete-module',
         'route'                => 'delete-module <module> [<path>]',
         'description'          => 'Delete an existing module within the specified path',
@@ -488,6 +569,24 @@ return array(
             'modules' => new NormalizeListFilter(),
         ),
         'handler'              => 'ZF2rapid\Command\Show\ShowControllerPlugins',
+    ),
+    array(
+        'name'                 => 'show-filters',
+        'route'                => 'show-filters [<path>] [--modules=]',
+        'description'          => 'Show all filters for the modules of the current ZF2 project specified within the path',
+        'short_description'    => 'Show all filters for the modules',
+        'options_descriptions' => array(
+            '<path>'    => 'The directory of the ZF2 project to fetch filters for; defaults to current working directory',
+            '--modules' => 'Comma-separated list of modules to show filters for; optional',
+        ),
+        'defaults'             => array(
+            'path'    => '.',
+            'modules' => array(),
+        ),
+        'filters'              => array(
+            'modules' => new NormalizeListFilter(),
+        ),
+        'handler'              => 'ZF2rapid\Command\Show\ShowFilters',
     ),
     array(
         'name'                 => 'show-modules',

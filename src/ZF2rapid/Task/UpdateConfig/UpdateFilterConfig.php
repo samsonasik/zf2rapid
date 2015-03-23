@@ -6,14 +6,14 @@
  * @copyright Copyright (c) 2014 - 2015 Ralf Eggert
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
-namespace ZF2rapid\Task\RemoveConfig;
+namespace ZF2rapid\Task\UpdateConfig;
 
 /**
- * Class RemoveControllerPluginConfig
+ * Class UpdateFilterConfig
  *
- * @package ZF2rapid\Task\RemoveConfig
+ * @package ZF2rapid\Task\UpdateConfig
  */
-class RemoveControllerPluginConfig extends AbstractRemoveServiceManagerConfig
+class UpdateFilterConfig extends AbstractUpdateServiceManagerConfig
 {
     /**
      * Process the command
@@ -24,15 +24,17 @@ class RemoveControllerPluginConfig extends AbstractRemoveServiceManagerConfig
     {
         // output message
         $this->console->writeTaskLine(
-            'Writing controller plugin configuration...'
+            'Writing filter configuration...'
         );
 
         $configKey = lcfirst($this->params->paramModule)
-            . $this->params->paramControllerPlugin;
+            . $this->params->paramFilter;
 
-        $result = $this->removeConfig(
-            'controller_plugins',
-            $configKey
+        $result = $this->updateConfig(
+            'filters',
+            $configKey,
+            $this->params->paramFilter,
+            $this->params->config['namespaceFilter']
         );
 
         return $result == true ? 0 : 1;
