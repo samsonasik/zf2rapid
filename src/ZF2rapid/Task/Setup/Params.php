@@ -196,6 +196,28 @@ class Params extends AbstractTask
             }
         }
 
+        if ($this->route->getMatchedParam('hydrator')) {
+            $this->params->paramHydrator
+                = $this->route->getMatchedParam('hydrator');
+
+            if ($this->params->moduleSrcDir) {
+                $this->params->hydratorDir = $this->params->moduleSrcDir
+                    . DIRECTORY_SEPARATOR
+                    . str_replace(
+                        '\\',
+                        DIRECTORY_SEPARATOR,
+                        $this->params->config['namespaceHydrator']
+                    );
+
+            }
+
+            if ($this->route->getMatchedParam('baseHydrator')) {
+                $this->params->paramBaseHydrator = $this->route->getMatchedParam(
+                    'baseHydrator'
+                );
+            }
+        }
+
         if ($this->route->getMatchedParam('factory')) {
             $this->params->paramFactory = $this->route->getMatchedParam(
                 'factory'
