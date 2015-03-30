@@ -140,6 +140,14 @@ The screen should look like this:
 
 ## Command-Guide
 
+### Help
+
+For each command you can display the command help with all supported arguments.
+
+```console
+$ zf2rapid help create-module 
+```
+
 ### Projects
 
 When creating a new project you need to specify the `<path>` to create the 
@@ -166,14 +174,54 @@ $ zf2rapid tool-config --configKey=namespaceHydrator
 ```
 
 You can change the value for a configuration single configuration key, for 
-example the namespace to be used for hydrators (please note: you need to use the
-double backslash to define a namespace with at least two levels.
+example the namespace to be used for hydrators (Please note that you need to 
+use the double backslash to define a namespace with at least two levels).
 
 ```console
 $ zf2rapid tool-config --configKey=namespaceHydrator --configValue=Model\\Hydrator
 ```
 
 ### Modules
+
+When creating a new module you need to specify the `<module>`. Optionally, you 
+can specify the `<path>` of the Zend Framework 2 project to create the new
+module in. You will be asked in which application configuration file the new 
+module should be activated.
+
+```console
+$ zf2rapid create-module <module> [<path>]
+```
+
+You can activate a module manually for any application configuration file. You
+need to specify the `<module>` and optionally the `<path>` of the Zend 
+Framework 2 project.
+ 
+```console
+$ zf2rapid activate-module <module> [<path>]
+```
+
+You can deactivate a module manually in any application configuration file. You
+need to specify the `<module>` and optionally the `<path>` of the Zend 
+Framework 2 project.
+ 
+```console
+$ zf2rapid deactivate-module <module> [<path>]
+```
+
+You can delete a module `<module>`. Optionally, you can specify the `<path>` of 
+the Zend Framework 2 project to delete the module from.
+ 
+```console
+$ zf2rapid delete-module <module> [<path>]
+```
+
+You can display all modules of the current Zend Framework 2 project. Optionally, 
+you can specify the `<path>` of the Zend Framework 2 project to display the 
+modules from.
+
+```console
+$ zf2rapid show-modules [<path>]
+```
 
 ### Controllers
 
