@@ -131,8 +131,8 @@ Apache 2:
 
 Run project in your browser:
 
- * (http://mynewproject/)
- * (http://mynewproject/shop/basket/show)
+ * [http://mynewproject/](http://mynewproject/)
+ * [http://mynewproject/shop/basket/show](http://mynewproject/shop/basket/show)
 
 ## Command-Guide
 
