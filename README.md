@@ -43,7 +43,7 @@ An important note for all Windows users. ZF2rapid is not tested on Windows yet!
 
 ## Installation
 
-### ZIP file and Composer
+### Installation with ZIP file and Composer
 
 Download the [ZIP file](https://github.com/ZFrapid/zf2rapid/archive/master.zip), 
 unzip its contents and move all files to you prefered path.
@@ -67,13 +67,56 @@ Show the ZF2rapid command overview:
 $ ./bin/zf2rapid.php
 ```
 
-### PHAR file
+### Installation with PHAR file
 
 tbd
 
 ## Quick-Guide
 
-tbd
+Create a new project to a custom path and switch to the new project path:
+
+```console
+$ zf2rapid create-project mynewproject
+$ cd mynewproject/
+```
+
+Show installed modules, controllers and actions:
+
+```console
+$ zf2rapid show-modules 
+$ zf2rapid show-controllers 
+$ zf2rapid show-actions
+```
+
+Create a new module, a new controller with a factory and some new actions
+
+```console
+$ zf2rapid create-module Shop
+$ zf2rapid create-controller Shop Basket -f
+$ zf2rapid create-action Shop basket show
+$ zf2rapid create-action Shop basket send
+$ zf2rapid create-action Shop basket cancel
+```
+
+Show installed modules, controllers and actions again:
+
+```console
+$ zf2rapid show-modules 
+$ zf2rapid show-controllers 
+$ zf2rapid show-actions
+```
+
+Create routing for new module
+
+```console
+$  zf2rapid create-routing Shop -s
+```
+
+Create an virtual host `mynewproject` with the document root 
+`mynewproject/public/` and run it in your browser:
+
+http://mynewproject/
+http://mynewproject/shop/basket/show
 
 ## Command-Guide
 
