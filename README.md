@@ -134,6 +134,10 @@ Run project in your browser:
  * [http://mynewproject/](http://mynewproject/)
  * [http://mynewproject/shop/basket/show](http://mynewproject/shop/basket/show)
 
+The screen should look like this:
+
+![Screen shot new project](screen_new_project.jpg)
+
 ## Command-Guide
 
 tbd
