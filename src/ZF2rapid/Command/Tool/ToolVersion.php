@@ -31,7 +31,7 @@ class ToolVersion extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2rapid tool version...');
+        $this->console->writeGoLine('command_tool_version_start');
     }
 
     /**
@@ -40,8 +40,6 @@ class ToolVersion extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2rapid tool version was successfully displayed.'
-        );
+        $this->console->writeOkLine('command_tool_version_stop');
     }
 }

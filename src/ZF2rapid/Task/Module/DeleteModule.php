@@ -9,7 +9,6 @@
 namespace ZF2rapid\Task\Module;
 
 use Zend\Console\ColorInterface as Color;
-use Zend\Console\Prompt\Confirm;
 use ZF2rapid\Task\AbstractTask;
 
 /**
@@ -28,66 +27,57 @@ class DeleteModule extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Deleting module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' ...'
+            'task_module_delete_module_deleting',
+            array(
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
-
-        // write prompt badge
-        $this->console->writeLine();
-        $this->console->write(
-            ' WARN ', Color::NORMAL, Color::RED
-        );
-        $this->console->write(' ');
 
         // output confirm prompt
-        $deletePrompt       = new Confirm(
-            'Are you sure you want to delete the module? [y/n] ',
-            'y',
-            'n'
+        $deleteConfirmation = $this->console->writeConfirmPrompt(
+            'task_module_delete_module_prompt_1',
+            'task_module_delete_module_yes_answer',
+            'task_module_delete_module_no_answer'
         );
-        $deleteConfirmation = $deletePrompt->show();
 
         if (!$deleteConfirmation) {
             // output success message
             $this->console->writeOkLine(
-                'The ZF2 module '
-                . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . ' was NOT deleted from '
-                . $this->console->colorize(
-                    $this->params->projectModuleDir, Color::GREEN
-                ) . '.'
+                'task_module_delete_module_not_deleted',
+                array(
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->projectModuleDir, Color::GREEN
+                    )
+                )
             );
 
             return 1;
         }
 
-        // write prompt badge
-        $this->console->writeLine();
-        $this->console->write(
-            ' WARN ', Color::NORMAL, Color::RED
-        );
-        $this->console->write(' ');
-
         // output confirm prompt
-        $deletePrompt       = new Confirm(
-            'Are you REALLY sure that you want to delete the module and all of its files? [y/n] ',
-            'y',
-            'n'
+        $deleteConfirmation = $this->console->writeConfirmPrompt(
+            'task_module_delete_module_prompt_2',
+            'task_module_delete_module_yes_answer',
+            'task_module_delete_module_no_answer'
         );
-        $deleteConfirmation = $deletePrompt->show();
 
         if (!$deleteConfirmation) {
             // output success message
             $this->console->writeOkLine(
-                'The ZF2 module '
-                . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . ' was NOT deleted from '
-                . $this->console->colorize(
-                    $this->params->projectModuleDir, Color::GREEN
-                ) . '.'
+                'task_module_delete_module_not_deleted',
+                array(
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->projectModuleDir, Color::GREEN
+                    )
+                )
             );
 
             return 1;

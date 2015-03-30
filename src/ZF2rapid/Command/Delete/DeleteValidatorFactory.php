@@ -38,7 +38,7 @@ class DeleteValidatorFactory extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting factory for validator...');
+        $this->console->writeGoLine('command_delete_validator_factory_start');
     }
 
     /**
@@ -47,12 +47,15 @@ class DeleteValidatorFactory extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 validator '
-            . $this->console->colorize(
-                $this->params->paramValidator, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_validator_factory_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramValidator, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

@@ -8,9 +8,9 @@
  */
 namespace ZF2rapid\Task\Module;
 
-use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Generator\ClassFileGenerator;
 use ZF2rapid\Generator\ModuleClassGenerator;
+use ZF2rapid\Task\AbstractTask;
 
 /**
  * Class GenerateModuleClass
@@ -28,7 +28,9 @@ class GenerateModuleClass extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Writing module class file...', false
+            'task_module_generate_module_class_writing',
+            array(),
+            false
         );
 
         // create class

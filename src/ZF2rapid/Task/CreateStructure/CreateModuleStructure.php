@@ -27,9 +27,12 @@ class CreateModuleStructure extends AbstractCreateStructureTask
         // check for module directory
         if (is_dir($this->params->moduleDir)) {
             $this->console->writeFailLine(
-                'The module directory ' . $this->console->colorize(
-                    $this->params->moduleDir, Color::GREEN
-                ) . ' exists already.'
+                'task_create_structure_module_dir_exists',
+                array(
+                    $this->console->colorize(
+                        $this->params->moduleDir, Color::GREEN
+                    )
+                )
             );
 
             return 1;
@@ -38,9 +41,12 @@ class CreateModuleStructure extends AbstractCreateStructureTask
         // create module directory
         if (!mkdir($this->params->moduleDir)) {
             $this->console->writeFailLine(
-                'The module directory ' . $this->console->colorize(
-                    $this->params->moduleDir, Color::GREEN
-                ) . ' could not be created.'
+                'task_create_structure_module_dir_not_created',
+                array(
+                    $this->console->colorize(
+                        $this->params->moduleDir, Color::GREEN
+                    )
+                )
             );
 
             return 1;
@@ -49,9 +55,12 @@ class CreateModuleStructure extends AbstractCreateStructureTask
         // create config module
         if (!mkdir($this->params->moduleConfigDir, 0777, true)) {
             $this->console->writeFailLine(
-                'The module config directory ' . $this->console->colorize(
-                    $this->params->moduleConfigDir, Color::GREEN
-                ) . ' could not be created.',
+                'task_create_structure_module_config_dir_not_created',
+                array(
+                    $this->console->colorize(
+                        $this->params->moduleConfigDir, Color::GREEN
+                    )
+                ),
                 false
             );
 
@@ -61,9 +70,12 @@ class CreateModuleStructure extends AbstractCreateStructureTask
         // create src module
         if (!mkdir($this->params->moduleSrcDir, 0777, true)) {
             $this->console->writeFailLine(
-                'The module src directory ' . $this->console->colorize(
-                    $this->params->moduleSrcDir, Color::GREEN
-                ) . ' could not be created.'
+                'task_create_structure_module_src_dir_not_created',
+                array(
+                    $this->console->colorize(
+                        $this->params->moduleSrcDir, Color::GREEN
+                    )
+                )
             );
 
             return 1;
@@ -72,9 +84,12 @@ class CreateModuleStructure extends AbstractCreateStructureTask
         // create view module
         if (!mkdir($this->params->moduleViewDir, 0777, true)) {
             $this->console->writeFailLine(
-                'The module view directory ' . $this->console->colorize(
-                    $this->params->moduleViewDir, Color::GREEN
-                ) . ' could not be created.'
+                'task_create_structure_module_view_dir_not_created',
+                array(
+                    $this->console->colorize(
+                        $this->params->moduleViewDir, Color::GREEN
+                    )
+                )
             );
 
             return 1;
@@ -82,9 +97,12 @@ class CreateModuleStructure extends AbstractCreateStructureTask
 
         // output message
         $this->console->writeTaskLine(
-            'Module root ' . $this->console->colorize(
-                $this->params->moduleDir, Color::GREEN
-            ) . ' was created.'
+            'task_create_structure_module_root_created',
+            array(
+                $this->console->colorize(
+                    $this->params->moduleDir, Color::GREEN
+                )
+            )
         );
 
         return 0;

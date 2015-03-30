@@ -41,9 +41,12 @@ class DownloadSkeletonApplication extends AbstractTask
         if (!file_exists($this->params->tmpFile)) {
             // output message
             $this->console->writeTaskLine(
-                'Downloading ' . $this->console->colorize(
-                    $this->params->skeletonName, Color::GREEN
-                ) . '...'
+                'task_install_download_skeleton_downloading',
+                array(
+                    $this->console->colorize(
+                        $this->params->skeletonName, Color::GREEN
+                    )
+                )
             );
 
             // get skeleton app
@@ -51,9 +54,12 @@ class DownloadSkeletonApplication extends AbstractTask
         }
 
         $this->console->writeTaskLine(
-            'Getting ' . $this->console->colorize(
-                $this->params->skeletonName, Color::GREEN
-            ) . ' from cache...'
+            'task_install_download_skeleton_from_cache',
+            array(
+                $this->console->colorize(
+                    $this->params->skeletonName, Color::GREEN
+                )
+            )
         );
 
         return 0;
@@ -74,12 +80,13 @@ class DownloadSkeletonApplication extends AbstractTask
         // check if file was readable
         if (empty($content)) {
             // stop with error
-            $this->console->writeLine();
-
             $this->console->writeFailLine(
-                'Downloading of file from url ' . $this->console->colorize(
-                    $this->params->skeletonUrl, Color::GREEN
-                ) . ' failed.'
+                'task_install_download_skeleton_download_failed',
+                array(
+                    $this->console->colorize(
+                        $this->params->skeletonUrl, Color::GREEN
+                    )
+                )
             );
 
             return false;

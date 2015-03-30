@@ -35,7 +35,7 @@ class ShowVersion extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 version...');
+        $this->console->writeGoLine('command_show_version_start');
     }
 
     /**
@@ -44,8 +44,6 @@ class ShowVersion extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2 version was successfully displayed.'
-        );
+        $this->console->writeOkLine('command_show_version_stop');
     }
 }

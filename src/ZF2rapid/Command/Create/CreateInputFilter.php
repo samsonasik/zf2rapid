@@ -27,6 +27,7 @@ class CreateInputFilter extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\CreateStructure\CreateInputFilterStructure',
             'ZF2rapid\Task\GenerateClass\GenerateInputFilterClass',
             'ZF2rapid\Task\GenerateFactory\GenerateInputFilterFactory',
@@ -39,7 +40,7 @@ class CreateInputFilter extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new input filter...');
+        $this->console->writeGoLine('command_create_input_filter_start');
     }
 
     /**
@@ -48,12 +49,15 @@ class CreateInputFilter extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 input filter '
-            . $this->console->colorize(
-                $this->params->paramInputFilter, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_input_filter_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramInputFilter, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

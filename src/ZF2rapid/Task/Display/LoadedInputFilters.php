@@ -27,23 +27,33 @@ class LoadedInputFilters extends AbstractTask
     {
         // output done message
         $this->console->writeTaskLine(
-            'The following input filters were found in '
-            . $this->console->colorize($this->params->projectPath, Color::GREEN)
+            'task_display_loaded_input_filters_found_in_path',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
+            )
         );
 
         // loop through modules
         foreach ($this->params->loadedModules as $moduleName => $moduleObject) {
             $this->console->writeListItemLine(
-                'Module ' . $this->console->colorize(
-                    $moduleName, Color::GREEN
-                ) . ' (Class ' . $this->console->colorize(
-                    get_class($moduleObject), Color::BLUE
-                ) . ')'
+                'task_display_loaded_input_filters_module_class',
+                array(
+                    $this->console->colorize(
+                        $moduleName, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        get_class($moduleObject), Color::BLUE
+                    )
+                )
             );
 
             // check for empty input filter list
             if (empty($this->params->loadedInputFilters[$moduleName])) {
-                $this->console->writeListItemLineLevel2('No input filters found');
+                $this->console->writeListItemLineLevel2(
+                    'task_display_loaded_input_filters_no_input_filters'
+                );
 
                 continue;
             }
@@ -54,8 +64,11 @@ class LoadedInputFilters extends AbstractTask
                 as $pluginType => $pluginList
             ) {
                 $this->console->writeListItemLineLevel2(
-                    'Type ' . $this->console->colorize(
-                        $pluginType, Color::GREEN
+                    'task_display_loaded_input_filters_type',
+                    array(
+                        $this->console->colorize(
+                            $pluginType, Color::GREEN
+                        ),
                     ),
                     false
                 );
@@ -65,11 +78,15 @@ class LoadedInputFilters extends AbstractTask
                     $pluginList as $pluginName => $pluginClass
                 ) {
                     $this->console->writeListItemLineLevel3(
-                        'InputFilter ' . $this->console->colorize(
-                            $pluginName, Color::GREEN
-                        ) . ' (Class ' . $this->console->colorize(
-                            $pluginClass, Color::BLUE
-                        ) . ')',
+                        'task_display_loaded_input_filters_input_filter_class',
+                        array(
+                            $this->console->colorize(
+                                $pluginName, Color::GREEN
+                            ),
+                            $this->console->colorize(
+                                $pluginClass, Color::BLUE
+                            )
+                        ),
                         false
                     );
                 }

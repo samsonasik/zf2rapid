@@ -10,6 +10,7 @@ namespace ZF2rapid\Console;
 
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\Console\ColorInterface as Color;
+use Zend\I18n\Translator\Translator;
 use ZF\Console\Application as ZFApplication;
 use ZF\Console\Dispatcher;
 use ZF\Console\RouteCollection;
@@ -37,15 +38,27 @@ class Application extends ZFApplication
     const VERSION = '0.3.0';
 
     /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
      * Overwritten constructor to simplify application instantiation
      *
-     * @param string           $routes
+     * @param string $routes
      * @param ConsoleInterface $console
-     * @param Dispatcher       $dispatcher
+     * @param Dispatcher $dispatcher
      */
     public function __construct(
-        $routes, ConsoleInterface $console, Dispatcher $dispatcher = null
+        $routes, ConsoleInterface $console, Translator $translator = null,
+        Dispatcher $dispatcher = null
     ) {
+        if ($translator) {
+            $this->translator = $translator;
+
+            $routes = $this->translateRoutes($routes);
+        }
+
         // call parent constructor
         parent::__construct(
             self::NAME . ' - ' . self::SLOGAN,
@@ -74,6 +87,44 @@ class Application extends ZFApplication
         // change banner and footer
         $this->setBanner(array($this, 'writeApplicationBanner'));
         $this->setFooter(array($this, 'writeApplicationFooter'));
+    }
+
+    /**
+     * Translate the route texts
+     *
+     * @param array $routes
+     *
+     * @return array
+     */
+    protected function translateRoutes(array $routes = array())
+    {
+        foreach ($routes as $routeKey => $routeParams) {
+            if (isset($routeParams['description'])) {
+                $routes[$routeKey]['description']
+                    = $this->translator->translate(
+                    $routeParams['description']
+                );
+            }
+            if (isset($routeParams['short_description'])) {
+                $routes[$routeKey]['short_description']
+                    = $this->translator->translate(
+                    $routeParams['short_description']
+                );
+            }
+            if (isset($routeParams['options_descriptions'])) {
+                foreach (
+                    $routeParams['options_descriptions'] as
+                    $optionKey => $optionText
+                ) {
+                    $routes[$routeKey]['options_descriptions'][$optionKey]
+                        = $this->translator->translate(
+                        $optionText
+                    );
+                }
+            }
+        }
+
+        return $routes;
     }
 
     /**

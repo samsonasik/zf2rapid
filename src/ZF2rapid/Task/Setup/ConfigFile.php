@@ -69,7 +69,7 @@ class ConfigFile extends AbstractTask
         // check if file is writable
         if (!is_writable($this->params->projectPath)) {
             $this->console->writeFailLine(
-                'The ZF2rapid configuration file is not writable.'
+                'task_setup_config_file_not_writable'
             );
 
             return 1;

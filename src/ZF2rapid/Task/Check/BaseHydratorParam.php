@@ -49,10 +49,10 @@ class BaseHydratorParam extends AbstractTask
         $hydratorClass = 'Zend\Stdlib\Hydrator\\' . $baseHydrator;
 
         $this->console->writeFailLine(
-            'The base hydrator '
-            . $this->console->colorize(
-                $hydratorClass, Color::GREEN
-            ) . ' is unknown.'
+            'task_check_base_hydrator_param_unknown',
+            array(
+                $this->console->colorize($hydratorClass, Color::GREEN)
+            )
         );
 
         return false;

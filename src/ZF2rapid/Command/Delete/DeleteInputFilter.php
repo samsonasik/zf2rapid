@@ -39,7 +39,7 @@ class DeleteInputFilter extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting input filter...');
+        $this->console->writeGoLine('command_delete_input_filter_start');
     }
 
     /**
@@ -48,12 +48,15 @@ class DeleteInputFilter extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The input filter '
-            . $this->console->colorize(
-                $this->params->paramInputFilter, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_input_filter_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramInputFilter, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

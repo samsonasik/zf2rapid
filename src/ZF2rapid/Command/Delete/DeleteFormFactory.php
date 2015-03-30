@@ -38,7 +38,7 @@ class DeleteFormFactory extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting factory for form...');
+        $this->console->writeGoLine('command_delete_form_factory_start');
     }
 
     /**
@@ -47,12 +47,15 @@ class DeleteFormFactory extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 form '
-            . $this->console->colorize(
-                $this->params->paramForm, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_form_factory_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramForm, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

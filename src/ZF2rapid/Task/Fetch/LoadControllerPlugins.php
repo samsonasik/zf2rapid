@@ -46,8 +46,11 @@ class LoadControllerPlugins extends AbstractTask
         }
 
         $this->console->writeTaskLine(
-            'No controller plugins were found in ' . $this->console->colorize(
-                $this->params->projectPath, Color::GREEN
+            'task_fetch_load_controller_plugins_not_found',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
             )
         );
 
@@ -80,7 +83,8 @@ class LoadControllerPlugins extends AbstractTask
         }
 
         // loop through plugins
-        foreach ($moduleConfig['controller_plugins'] as $type => $loadedPlugins) {
+        foreach ($moduleConfig['controller_plugins'] as $type => $loadedPlugins)
+        {
             // skip if not invokable nor factory
             if (!in_array($type, array('invokables', 'factories'))) {
                 continue;
@@ -106,7 +110,7 @@ class LoadControllerPlugins extends AbstractTask
                     $classReflection = new ClassReflection($pluginClass);
 
                     // get create method and doc block
-                    $method = $classReflection->getMethod('createService');
+                    $method   = $classReflection->getMethod('createService');
                     $docBlock = $method->getDocBlock();
 
                     // check doc block for return tag and use class

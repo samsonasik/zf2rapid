@@ -8,6 +8,7 @@
  * @license   http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
+use Zend\I18n\Translator\Translator;
 use ZF2rapid\Console\Application;
 use ZF2rapid\Console\Console;
 
@@ -17,10 +18,27 @@ define('ZF2RAPID_ROOT', realpath(__DIR__ . '/..'));
 // get vendor autoloading
 include ZF2RAPID_ROOT . '/vendor/autoload.php';
 
+// set locale
+Locale::setDefault('en_US');
+
+// setup translator
+$translator = new Translator();
+$translator->addTranslationFilePattern(
+    'PhpArray',
+    ZF2RAPID_ROOT . '/language',
+    '%s.php',
+    'default'
+);
+
+// setup console
+$console = new Console();
+$console->setTranslator($translator);
+
 // configure applications
 $application = new Application(
     include ZF2RAPID_ROOT . '/config/routes.php',
-    new Console()
+    $console,
+    $translator
 );
 
 // run application

@@ -8,11 +8,10 @@
  */
 namespace ZF2rapid\Task\Module;
 
-use Zend\Code\Generator\ValueGenerator;
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Generator\ConfigArrayGenerator;
-use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Generator\ConfigFileGenerator;
+use ZF2rapid\Task\AbstractTask;
 
 /**
  * Class DeactivateModule
@@ -30,9 +29,12 @@ class DeactivateModule extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Deactivating module in config file ' . $this->console->colorize(
-                $this->params->configFile, Color::GREEN
-            ) . ' ...'
+            'task_module_deactivate_module_config_file',
+            array(
+                $this->console->colorize(
+                    $this->params->configFile, Color::GREEN
+                )
+            )
         );
 
         // check for chosen config file
@@ -58,9 +60,12 @@ class DeactivateModule extends AbstractTask
             // check for chosen config file
             if ($this->params->configFile && !file_exists($configFile)) {
                 $this->console->writeFailLine(
-                    'The chosen config file ' . $this->console->colorize(
-                        $configFile, Color::GREEN
-                    ) . ' does not exist.'
+                    'task_module_deactivate_module_config_file_not_exists',
+                    array(
+                        $this->console->colorize(
+                            $configFile, Color::GREEN
+                        )
+                    )
                 );
 
                 return 1;
@@ -74,14 +79,20 @@ class DeactivateModule extends AbstractTask
                 || !isset($configData['modules'])
             ) {
                 $this->console->writeFailLine(
-                    'The chosen config file ' . $this->console->colorize(
-                        $configFile, Color::GREEN
-                    ) . ' is not a ZF2 application configuration file.'
+                    'task_module_deactivate_module_not_zf2_config_file',
+                    array(
+                        $this->console->colorize(
+                            $configFile, Color::GREEN
+                        )
+                    )
                 );
                 $this->console->writeFailLine(
-                    'The array section ' . $this->console->colorize(
-                        'modules', Color::GREEN
-                    ) . ' does not exist.'
+                    'task_module_deactivate_module_no_modules_array_section',
+                    array(
+                        $this->console->colorize(
+                            'modules', Color::GREEN
+                        )
+                    )
                 );
 
                 return 1;

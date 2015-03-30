@@ -27,6 +27,7 @@ class CreateForm extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\CreateStructure\CreateFormStructure',
             'ZF2rapid\Task\GenerateClass\GenerateFormClass',
             'ZF2rapid\Task\GenerateFactory\GenerateFormFactory',
@@ -39,7 +40,7 @@ class CreateForm extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new form...');
+        $this->console->writeGoLine('command_create_form_start');
     }
 
     /**
@@ -48,12 +49,15 @@ class CreateForm extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 form '
-            . $this->console->colorize(
-                $this->params->paramForm, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_form_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramForm, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

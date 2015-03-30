@@ -38,11 +38,14 @@ abstract class AbstractFileExists extends AbstractTask
         // check for module directory
         if (!file_exists($file)) {
             $this->console->writeFailLine(
-                'The ' . $fileText . ' ' . $this->console->colorize(
-                    $fileClass, Color::GREEN
-                ) . ' does not exist in module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . '.'
+                'task_check_file_exists_not_found',
+                array(
+                    $fileText,
+                    $this->console->colorize($fileClass, Color::GREEN),
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    )
+                )
             );
 
             return false;

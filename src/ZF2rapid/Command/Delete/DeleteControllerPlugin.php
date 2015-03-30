@@ -39,7 +39,7 @@ class DeleteControllerPlugin extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting controller plugin...');
+        $this->console->writeGoLine('command_delete_controller_plugin_start');
     }
 
     /**
@@ -48,12 +48,15 @@ class DeleteControllerPlugin extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The controller plugin '
-            . $this->console->colorize(
-                $this->params->paramControllerPlugin, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_controller_plugin_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramControllerPlugin, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

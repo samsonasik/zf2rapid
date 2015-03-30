@@ -38,7 +38,7 @@ class ShowInputFilters extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 input filters...');
+        $this->console->writeGoLine('command_show_input_filters_start');
     }
 
     /**
@@ -47,8 +47,6 @@ class ShowInputFilters extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2 input filters were successfully displayed.'
-        );
+        $this->console->writeOkLine('command_show_input_filters_stop');
     }
 }

@@ -27,6 +27,7 @@ class CreateFilter extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\CreateStructure\CreateFilterStructure',
             'ZF2rapid\Task\GenerateClass\GenerateFilterClass',
             'ZF2rapid\Task\GenerateFactory\GenerateFilterFactory',
@@ -39,7 +40,7 @@ class CreateFilter extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new filter...');
+        $this->console->writeGoLine('command_create_filter_start');
     }
 
     /**
@@ -48,12 +49,15 @@ class CreateFilter extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 filter '
-            . $this->console->colorize(
-                $this->params->paramFilter, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_filter_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramFilter, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

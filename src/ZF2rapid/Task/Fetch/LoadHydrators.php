@@ -46,8 +46,11 @@ class LoadHydrators extends AbstractTask
         }
 
         $this->console->writeTaskLine(
-            'No hydrators were found in ' . $this->console->colorize(
-                $this->params->projectPath, Color::GREEN
+            'task_fetch_load_hydrators_not_found',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
             )
         );
 

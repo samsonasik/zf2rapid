@@ -27,23 +27,33 @@ class LoadedControllers extends AbstractTask
     {
         // output done message
         $this->console->writeTaskLine(
-            'The following controllers were found in '
-            . $this->console->colorize($this->params->projectPath, Color::GREEN)
+            'task_display_loaded_controllers_found_in_path',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
+            )
         );
 
         // loop through modules
         foreach ($this->params->loadedModules as $moduleName => $moduleObject) {
             $this->console->writeListItemLine(
-                'Module ' . $this->console->colorize(
-                    $moduleName, Color::GREEN
-                ) . ' (Class ' . $this->console->colorize(
-                    get_class($moduleObject), Color::BLUE
-                ) . ')'
+                'task_display_loaded_controllers_module_class',
+                array(
+                    $this->console->colorize(
+                        $moduleName, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        get_class($moduleObject), Color::BLUE
+                    )
+                )
             );
 
             // check for empty controller list
             if (empty($this->params->loadedControllers[$moduleName])) {
-                $this->console->writeListItemLineLevel2('No controllers found');
+                $this->console->writeListItemLineLevel2(
+                    'task_display_loaded_controllers_no_controllers'
+                );
 
                 continue;
             }
@@ -54,22 +64,29 @@ class LoadedControllers extends AbstractTask
                 as $controllerType => $moduleControllers
             ) {
                 $this->console->writeListItemLineLevel2(
-                    'Type ' . $this->console->colorize(
-                        $controllerType, Color::GREEN
+                    'task_display_loaded_controllers_type',
+                    array(
+                        $this->console->colorize(
+                            $controllerType, Color::GREEN
+                        ),
                     ),
                     false
                 );
 
                 // output controllers for module
                 foreach (
-                    $moduleControllers as $ctrlName => $ctrlClass
+                    $moduleControllers as $controllerName => $controllerClass
                 ) {
                     $this->console->writeListItemLineLevel3(
-                        'Controller ' . $this->console->colorize(
-                            $ctrlName, Color::GREEN
-                        ) . ' (Class ' . $this->console->colorize(
-                            $ctrlClass, Color::BLUE
-                        ) . ')',
+                        'task_display_loaded_controllers_controller_class',
+                        array(
+                            $this->console->colorize(
+                                $controllerName, Color::GREEN
+                            ),
+                            $this->console->colorize(
+                                $controllerClass, Color::BLUE
+                            )
+                        ),
                         false
                     );
                 }

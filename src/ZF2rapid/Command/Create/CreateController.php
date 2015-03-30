@@ -27,6 +27,7 @@ class CreateController extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\CreateStructure\CreateControllerStructure',
             'ZF2rapid\Task\GenerateClass\GenerateControllerClass',
             'ZF2rapid\Task\GenerateFactory\GenerateControllerFactory',
@@ -41,7 +42,7 @@ class CreateController extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new controller...');
+        $this->console->writeGoLine('command_create_controller_start');
     }
 
     /**
@@ -50,11 +51,15 @@ class CreateController extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 controller ' . $this->console->colorize(
-                $this->params->paramController, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_controller_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramController, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

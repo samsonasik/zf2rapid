@@ -8,10 +8,8 @@
  */
 namespace ZF2rapid\Task\Module;
 
-use Zend\Console\ColorInterface as Color;
-use Zend\Console\Prompt\Select;
-use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Console\Console;
+use ZF2rapid\Task\AbstractTask;
 
 /**
  * Class ChooseApplicationConfigFile
@@ -27,13 +25,6 @@ class ChooseApplicationConfigFile extends AbstractTask
      */
     public function processCommandTask()
     {
-        // write prompt badge
-        $this->console->writeLine();
-        $this->console->write(
-            ' pick ', Color::NORMAL, Color::RED
-        );
-        $this->console->write(' ');
-
         // set filter dirs
         $filterDirs = array('..', '.', 'autoload');
 
@@ -51,16 +42,10 @@ class ChooseApplicationConfigFile extends AbstractTask
             unset($configFiles[$key]);
         }
 
-        // output select prompt
-        $configFilePrompt = new Select(
-            'Which configuration file should be updated to activate the module?',
-            $configFiles,
-            false,
-            false
+        $chosenConfigFile = $this->console->writeSelectPrompt(
+            'task_module_choose_config_file_prompt',
+            $configFiles
         );
-        $chosenConfigFile = $configFilePrompt->show();
-
-        $this->console->writeLine();
 
         // set skeleton application name
         $this->params->configFile = $configFiles[$spaces . $chosenConfigFile];

@@ -27,6 +27,7 @@ class CreateValidatorFactory extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\Check\ValidatorExists',
             'ZF2rapid\Task\GenerateFactory\GenerateValidatorFactory',
             'ZF2rapid\Task\UpdateConfig\UpdateValidatorConfig',
@@ -38,7 +39,7 @@ class CreateValidatorFactory extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating factory for validator...');
+        $this->console->writeGoLine('command_create_validator_factory_start');
     }
 
     /**
@@ -47,12 +48,15 @@ class CreateValidatorFactory extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 validator '
-            . $this->console->colorize(
-                $this->params->paramValidator, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_validator_factory_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramValidator, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

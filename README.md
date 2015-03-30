@@ -26,20 +26,23 @@ tbd
 
 ### Version 0.4.0
 
-* Internationalize ZF2rapid                     (todo)
+* ~~Create route classes instead of array configs~~ (wontfix)
+* Internationalize ZF2rapid                     (inprogress)
 * Build PHAR file                               (todo)
-* Create route classes instead of array configs (todo)
 
 ### Version 0.5.0
 
-* Write tests for ZF2rapid                      (todo)
 * Write documentation                           (todo)
+* Write tutorial                                (todo)
 
 ### Version 0.6.0
 
-* Write tutorial                                (todo)
-* Add CRUD commands                             (todo)
+* Write tests for ZF2rapid                      (todo)
 
 ### Version 0.7.0
+
+* Add CRUD commands                             (todo)
+
+### Version 0.8.0
 
 * Add module inspections                        (todo)

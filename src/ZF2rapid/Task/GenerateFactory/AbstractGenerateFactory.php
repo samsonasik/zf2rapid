@@ -40,7 +40,10 @@ abstract class AbstractGenerateFactory extends AbstractTask
 
         // output message
         $this->console->writeTaskLine(
-            'Writing ' . $factoryText . ' factory file...'
+            'task_generate_class_writing',
+            array(
+                $factoryText
+            )
         );
 
         // set factory file
@@ -49,12 +52,16 @@ abstract class AbstractGenerateFactory extends AbstractTask
         // check if factory file exists
         if (file_exists($factoryFile)) {
             $this->console->writeFailLine(
-                'The factory for ' . $factoryText . ' '
-                . $this->console->colorize(
-                    $factoryName, Color::GREEN
-                ) . ' already exists for module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . '.'
+                'task_generate_factory_exists',
+                array(
+                    $factoryText,
+                    $this->console->colorize(
+                        $factoryName, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    )
+                )
             );
 
             return false;

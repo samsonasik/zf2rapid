@@ -1,24 +1,25 @@
 {
-    "name": "zfrapid/zf2rapid",
-    "description": "Console application to create ZF2 application rapidly.",
-    "license": "The MIT License (MIT)",
-    "homepage": "http://to.be.named",
-    "require": {
-        "php": ">=5.3.23",
-        "zfcampus/zf-console": "1.*",
-        "zendframework/zend-code": "2.*",
-        "zendframework/zend-filter": "2.*",
-        "zendframework/zend-loader": "2.*",
-        "zendframework/zend-modulemanager": "2.*",
-        "zendframework/zend-mvc": "2.*",
-        "zendframework/zend-servicemanager": "2.*",
-        "zendframework/zend-version": "2.*",
-        "zendframework/zend-view": "2.*"
-    },
-    "autoload": {
-        "psr-4": {
-            "ZF2rapid\\": "src/ZF2rapid"
-        }
-    },
-    "bin": ["bin/zf2rapid.php"]
+  "name": "zfrapid/zf2rapid",
+  "description": "Console application to create ZF2 application rapidly.",
+  "license": "The MIT License (MIT)",
+  "homepage": "http://to.be.named",
+  "require": {
+    "php": ">=5.3.23",
+    "zfcampus/zf-console": "1.*",
+    "zendframework/zend-code": "2.*",
+    "zendframework/zend-filter": "2.*",
+    "zendframework/zend-i18n": "2.*",
+    "zendframework/zend-loader": "2.*",
+    "zendframework/zend-modulemanager": "2.*",
+    "zendframework/zend-mvc": "2.*",
+    "zendframework/zend-servicemanager": "2.*",
+    "zendframework/zend-version": "2.*",
+    "zendframework/zend-view": "2.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "ZF2rapid\\": "src/ZF2rapid"
+    }
+  },
+  "bin": ["bin/zf2rapid.php"]
 }

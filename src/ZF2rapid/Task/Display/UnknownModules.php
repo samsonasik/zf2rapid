@@ -43,16 +43,21 @@ class UnknownModules extends AbstractTask
         if (count($unknownModules) > 0) {
             // output done message
             $this->console->writeWarnLine(
-                'The following modules do not exist in '
-                . $this->console->colorize(
-                    $this->params->projectPath, Color::GREEN
+                'task_display_unknown_modules_not_exist',
+                array(
+                    $this->console->colorize(
+                        $this->params->projectPath, Color::GREEN
+                    ),
                 )
             );
 
             foreach ($unknownModules as $moduleName) {
                 $this->console->writeListItemLine(
-                    'Module ' . $this->console->colorize(
-                        $moduleName, Color::GREEN
+                    'task_display_unknown_modules_module',
+                    array(
+                        $this->console->colorize(
+                            $moduleName, Color::GREEN
+                        ),
                     )
                 );
             }

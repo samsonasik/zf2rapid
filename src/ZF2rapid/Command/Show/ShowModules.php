@@ -36,7 +36,7 @@ class ShowModules extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 modules...');
+        $this->console->writeGoLine('command_show_modules_start');
     }
 
     /**
@@ -45,8 +45,6 @@ class ShowModules extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2 modules were successfully displayed.'
-        );
+        $this->console->writeOkLine('command_show_modules_stop');
     }
 }

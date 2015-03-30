@@ -30,7 +30,12 @@ class UnzipSkeletonApplication extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Unzipping ' . $this->params->skeletonName . '...'
+            'task_install_unzip_skeleton_unzipping',
+            array(
+                $this->console->colorize(
+                    $this->params->skeletonName, Color::GREEN
+                )
+            )
         );
 
         // initialize archive
@@ -41,19 +46,20 @@ class UnzipSkeletonApplication extends AbstractTask
             // check numFiles
             if ($zipArchive->numFiles == 0) {
                 // stop with error
-                $this->console->writeLine();
-
                 $this->console->writeFailLine(
-                    'Zip file from url ' . $this->console->colorize(
-                        $this->params->skeletonUrl, Color::GREEN
-                    ) . ' does not contain any files.'
+                    'task_install_unzip_skeleton_file_empty',
+                    array(
+                        $this->console->colorize(
+                            $this->params->skeletonUrl, Color::GREEN
+                        )
+                    )
                 );
 
                 return 1;
             }
 
             // get top dir
-            $topDir      = $zipArchive->statIndex(0);
+            $topDir = $zipArchive->statIndex(0);
             $this->params->tmpSkeleton = $this->params->tmpDir
                 . DIRECTORY_SEPARATOR
                 . rtrim($topDir['name'], DIRECTORY_SEPARATOR);
@@ -61,19 +67,22 @@ class UnzipSkeletonApplication extends AbstractTask
             // try to extract files
             if (!$zipArchive->extractTo($this->params->tmpDir)) {
                 // stop with error
-                $this->console->writeLine();
-
                 $this->console->writeFailLine(
-                    'Unzipping of file ' . $this->console->colorize(
-                        $this->params->tmpFile, Color::GREEN
-                    ) . ' failed.'
+                    'task_install_unzip_skeleton_unzip_failed',
+                    array(
+                        $this->console->colorize(
+                            $this->params->tmpFile, Color::GREEN
+                        )
+                    )
                 );
 
                 return 1;
             }
 
             // copy files from tmp to project path
-            $result = $this->copyFiles($this->params->tmpSkeleton, $this->params->projectPath);
+            $result = $this->copyFiles(
+                $this->params->tmpSkeleton, $this->params->projectPath
+            );
 
             // close archive
             $zipArchive->close();
@@ -82,12 +91,13 @@ class UnzipSkeletonApplication extends AbstractTask
 
             // check for error while copying files
             if (false === $result) {
-                $this->console->writeLine();
-
                 $this->console->writeFailLine(
-                    'Copying of files from file ' . $this->console->colorize(
-                        $this->params->tmpFile, Color::GREEN
-                    ) . ' failed.'
+                    'task_install_unzip_skeleton_copy_failed',
+                    array(
+                        $this->console->colorize(
+                            $this->params->tmpFile, Color::GREEN
+                        )
+                    )
                 );
 
                 return 1;

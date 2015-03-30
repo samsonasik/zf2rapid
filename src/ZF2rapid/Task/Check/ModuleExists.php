@@ -33,11 +33,15 @@ class ModuleExists extends AbstractTask
         // check for module directory
         if (!is_dir($this->params->moduleDir)) {
             $this->console->writeFailLine(
-                'The module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . ' does not exist in ' . $this->console->colorize(
-                    $this->params->projectModuleDir, Color::GREEN
-                ) . '.'
+                'task_check_module_not_exists',
+                array(
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->projectModuleDir, Color::GREEN
+                    )
+                )
             );
 
             return 1;

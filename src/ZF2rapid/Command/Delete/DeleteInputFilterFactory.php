@@ -38,7 +38,9 @@ class DeleteInputFilterFactory extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting factory for input filter...');
+        $this->console->writeGoLine(
+            'command_delete_input_filter_factory_start'
+        );
     }
 
     /**
@@ -47,12 +49,15 @@ class DeleteInputFilterFactory extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 input filter '
-            . $this->console->colorize(
-                $this->params->paramInputFilter, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_input_filter_factory_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramInputFilter, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

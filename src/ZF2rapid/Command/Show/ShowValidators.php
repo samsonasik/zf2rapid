@@ -38,7 +38,7 @@ class ShowValidators extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 validators...');
+        $this->console->writeGoLine('command_show_validators_start');
     }
 
     /**
@@ -47,8 +47,6 @@ class ShowValidators extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2 validators were successfully displayed.'
-        );
+        $this->console->writeOkLine('command_show_validators_stop');
     }
 }

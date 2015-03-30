@@ -38,7 +38,7 @@ class DeleteModule extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting existing module...');
+        $this->console->writeGoLine('command_delete_module_start');
     }
 
     /**
@@ -47,9 +47,12 @@ class DeleteModule extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The existing ZF2 module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_module_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

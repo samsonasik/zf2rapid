@@ -27,6 +27,7 @@ class CreateHydratorFactory extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\Check\HydratorExists',
             'ZF2rapid\Task\GenerateFactory\GenerateHydratorFactory',
             'ZF2rapid\Task\UpdateConfig\UpdateHydratorConfig',
@@ -38,7 +39,7 @@ class CreateHydratorFactory extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating factory for hydrator...');
+        $this->console->writeGoLine('command_create_hydrator_factory_start');
     }
 
     /**
@@ -47,12 +48,15 @@ class CreateHydratorFactory extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 hydrator '
-            . $this->console->colorize(
-                $this->params->paramHydrator, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_hydrator_factory_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramHydrator, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

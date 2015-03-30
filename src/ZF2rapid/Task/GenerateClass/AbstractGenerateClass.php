@@ -35,7 +35,10 @@ abstract class AbstractGenerateClass extends AbstractTask
     ) {
         // output message
         $this->console->writeTaskLine(
-            'Writing ' . $classText . ' class file...'
+            'task_generate_class_writing',
+            array(
+                $classText
+            )
         );
 
         // set class file
@@ -44,11 +47,16 @@ abstract class AbstractGenerateClass extends AbstractTask
         // check if controller plugin file exists
         if (file_exists($classFile)) {
             $this->console->writeFailLine(
-                'The ' . $classText . ' ' . $this->console->colorize(
-                    $className, Color::GREEN
-                ) . ' already exists for module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . '.'
+                'task_generate_class_exists',
+                array(
+                    $classText,
+                    $this->console->colorize(
+                        $className, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    )
+                )
             );
 
             return false;

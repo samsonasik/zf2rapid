@@ -29,9 +29,7 @@ class DeleteActionMethod extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeTaskLine(
-            'Deleting action method from controller...'
-        );
+        $this->console->writeTaskLine('task_delete_action_method_deleting');
 
         // set controller file and action method
         $controllerFile = $this->params->controllerDir . '/'
@@ -58,13 +56,18 @@ class DeleteActionMethod extends AbstractTask
         // check for action method
         if (!$class->hasMethod($actionMethod)) {
             $this->console->writeFailLine(
-                'The action ' . $this->console->colorize(
-                    $this->params->paramAction, Color::GREEN
-                ) . ' does not exist in controller ' . $this->console->colorize(
-                    $this->params->paramController, Color::GREEN
-                ) . ' of module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . '.'
+                'task_delete_action_method_not_exists',
+                array(
+                    $this->console->colorize(
+                        $this->params->paramAction, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->paramController, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    )
+                )
             );
 
             return 1;

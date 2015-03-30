@@ -25,7 +25,7 @@ class RunComposer extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeTaskLine('Installing dependencies...');
+        $this->console->writeTaskLine('task_install_run_composer_running');
 
         /**
          * @todo check on Windows

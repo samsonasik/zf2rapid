@@ -39,7 +39,7 @@ class DeleteValidator extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting validator...');
+        $this->console->writeGoLine('command_delete_validator_start');
     }
 
     /**
@@ -48,12 +48,15 @@ class DeleteValidator extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The validator '
-            . $this->console->colorize(
-                $this->params->paramValidator, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_validator_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramValidator, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

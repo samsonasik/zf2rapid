@@ -38,7 +38,7 @@ class ShowViewHelpers extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 view helpers...');
+        $this->console->writeGoLine('command_show_view_helpers_start');
     }
 
     /**
@@ -47,8 +47,6 @@ class ShowViewHelpers extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2 view helpers were successfully displayed.'
-        );
+        $this->console->writeOkLine('command_show_view_helpers_stop');
     }
 }

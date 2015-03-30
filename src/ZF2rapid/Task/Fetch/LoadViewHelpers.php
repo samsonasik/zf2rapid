@@ -46,8 +46,11 @@ class LoadViewHelpers extends AbstractTask
         }
 
         $this->console->writeTaskLine(
-            'No view helpers were found in ' . $this->console->colorize(
-                $this->params->projectPath, Color::GREEN
+            'task_fetch_load_view_helpers_not_found',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
             )
         );
 

@@ -42,11 +42,15 @@ class DeleteActionView extends AbstractTask
         // check if controller file exists
         if (!file_exists($actionFile)) {
             $this->console->writeFailLine(
-                'The action view script ' . $this->console->colorize(
-                    $actionFile, Color::GREEN
-                ) . ' does not exist for module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . '.'
+                'task_delete_action_view_not_exists',
+                array(
+                    $this->console->colorize(
+                        $actionFile, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    )
+                )
             );
 
             return 1;

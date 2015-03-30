@@ -27,6 +27,7 @@ class CreateViewHelperFactory extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\Check\ViewHelperExists',
             'ZF2rapid\Task\GenerateFactory\GenerateViewHelperFactory',
             'ZF2rapid\Task\UpdateConfig\UpdateViewHelperConfig',
@@ -38,7 +39,7 @@ class CreateViewHelperFactory extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating factory for view helper...');
+        $this->console->writeGoLine('command_create_view_helper_factory_start');
     }
 
     /**
@@ -47,12 +48,15 @@ class CreateViewHelperFactory extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 view helper '
-            . $this->console->colorize(
-                $this->params->paramViewHelper, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_view_helper_factory_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramViewHelper, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

@@ -46,8 +46,11 @@ class LoadValidators extends AbstractTask
         }
 
         $this->console->writeTaskLine(
-            'No validators were found in ' . $this->console->colorize(
-                $this->params->projectPath, Color::GREEN
+            'task_fetch_load_validators_not_found',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
             )
         );
 

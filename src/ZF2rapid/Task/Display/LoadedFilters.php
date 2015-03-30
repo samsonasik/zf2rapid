@@ -27,23 +27,33 @@ class LoadedFilters extends AbstractTask
     {
         // output done message
         $this->console->writeTaskLine(
-            'The following filters were found in '
-            . $this->console->colorize($this->params->projectPath, Color::GREEN)
+            'task_display_loaded_filters_found_in_path',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
+            )
         );
 
         // loop through modules
         foreach ($this->params->loadedModules as $moduleName => $moduleObject) {
             $this->console->writeListItemLine(
-                'Module ' . $this->console->colorize(
-                    $moduleName, Color::GREEN
-                ) . ' (Class ' . $this->console->colorize(
-                    get_class($moduleObject), Color::BLUE
-                ) . ')'
+                'task_display_loaded_filters_module_class',
+                array(
+                    $this->console->colorize(
+                        $moduleName, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        get_class($moduleObject), Color::BLUE
+                    )
+                )
             );
 
             // check for empty filter list
             if (empty($this->params->loadedFilters[$moduleName])) {
-                $this->console->writeListItemLineLevel2('No filters found');
+                $this->console->writeListItemLineLevel2(
+                    'task_display_loaded_filters_no_filters'
+                );
 
                 continue;
             }
@@ -54,8 +64,11 @@ class LoadedFilters extends AbstractTask
                 as $pluginType => $pluginList
             ) {
                 $this->console->writeListItemLineLevel2(
-                    'Type ' . $this->console->colorize(
-                        $pluginType, Color::GREEN
+                    'task_display_loaded_filters_type',
+                    array(
+                        $this->console->colorize(
+                            $pluginType, Color::GREEN
+                        ),
                     ),
                     false
                 );
@@ -65,11 +78,15 @@ class LoadedFilters extends AbstractTask
                     $pluginList as $pluginName => $pluginClass
                 ) {
                     $this->console->writeListItemLineLevel3(
-                        'Filter ' . $this->console->colorize(
-                            $pluginName, Color::GREEN
-                        ) . ' (Class ' . $this->console->colorize(
-                            $pluginClass, Color::BLUE
-                        ) . ')',
+                        'task_display_loaded_filters_filter_class',
+                        array(
+                            $this->console->colorize(
+                                $pluginName, Color::GREEN
+                            ),
+                            $this->console->colorize(
+                                $pluginClass, Color::BLUE
+                            )
+                        ),
                         false
                     );
                 }

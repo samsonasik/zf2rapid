@@ -46,8 +46,11 @@ class LoadInputFilters extends AbstractTask
         }
 
         $this->console->writeTaskLine(
-            'No input filters were found in ' . $this->console->colorize(
-                $this->params->projectPath, Color::GREEN
+            'task_fetch_load_input_filters_not_found',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
             )
         );
 

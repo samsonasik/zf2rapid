@@ -40,9 +40,12 @@ class ProjectPathEmpty extends AbstractTask
             if (count($dir) > 0) {
                 // stop with error
                 $this->console->writeFailLine(
-                    'The specified project path ' . $this->console->colorize(
-                        $this->params->projectPath, Color::GREEN
-                    ) . ' is not empty. ZF2 project can not be installed here.'
+                    'task_check_project_path_not_empty',
+                    array(
+                        $this->console->colorize(
+                            $this->params->projectPath, Color::GREEN
+                        )
+                    )
                 );
 
                 return 1;
@@ -52,9 +55,12 @@ class ProjectPathEmpty extends AbstractTask
             mkdir($this->params->projectPath, 0777, true);
 
             $this->console->writeTaskLine(
-                'Project path ' . $this->console->colorize(
-                    realpath($this->params->projectPath), Color::GREEN
-                ) . ' was created.'
+                'task_check_project_path_created',
+                array(
+                    $this->console->colorize(
+                        realpath($this->params->projectPath), Color::GREEN
+                    )
+                )
             );
         }
 

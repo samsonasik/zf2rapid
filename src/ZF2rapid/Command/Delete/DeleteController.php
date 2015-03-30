@@ -40,7 +40,7 @@ class DeleteController extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting controller...');
+        $this->console->writeGoLine('command_delete_controller_start');
     }
 
     /**
@@ -49,11 +49,15 @@ class DeleteController extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The controller ' . $this->console->colorize(
-                $this->params->paramController, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_controller_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramController, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

@@ -27,23 +27,33 @@ class LoadedActions extends AbstractTask
     {
         // output done message
         $this->console->writeTaskLine(
-            'The following controller-actions were found in '
-            . $this->console->colorize($this->params->projectPath, Color::GREEN)
+            'task_display_loaded_actions_found_in_path',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
+            )
         );
 
         // loop through modules
         foreach ($this->params->loadedModules as $moduleName => $moduleObject) {
             $this->console->writeListItemLine(
-                'Module ' . $this->console->colorize(
-                    $moduleName, Color::GREEN
-                ) . ' (Class ' . $this->console->colorize(
-                    get_class($moduleObject), Color::BLUE
-                ) . ')'
+                'task_display_loaded_actions_module_class',
+                array(
+                    $this->console->colorize(
+                        $moduleName, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        get_class($moduleObject), Color::BLUE
+                    )
+                )
             );
 
             // check for empty controller list
             if (empty($this->params->loadedControllers[$moduleName])) {
-                $this->console->writeListItemLineLevel2('No controllers found');
+                $this->console->writeListItemLineLevel2(
+                    'task_display_loaded_actions_no_controllers'
+                );
 
                 continue;
             }
@@ -58,11 +68,15 @@ class LoadedActions extends AbstractTask
                     $moduleControllers as $controllerName => $controllerClass
                 ) {
                     $this->console->writeListItemLineLevel2(
-                        'Controller ' . $this->console->colorize(
-                            $controllerName, Color::GREEN
-                        ) . ' (Class ' . $this->console->colorize(
-                            $controllerClass, Color::BLUE
-                        ) . ')',
+                        'task_display_loaded_actions_controller_class',
+                        array(
+                            $this->console->colorize(
+                                $controllerName, Color::GREEN
+                            ),
+                            $this->console->colorize(
+                                $controllerClass, Color::BLUE
+                            )
+                        ),
                         false
                     );
 
@@ -71,20 +85,20 @@ class LoadedActions extends AbstractTask
                         $this->params->loadedActions[$moduleName][$controllerName]
                         as $actionName => $actionFile
                     ) {
-                        $line = 'Action ' . $this->console->colorize(
-                                $actionName, Color::GREEN
-                            );
-
-                        if ($actionFile) {
-                            $line .= ' (View file ' . $this->console->colorize(
+                        $this->console->writeListItemLineLevel3(
+                            'task_display_loaded_actions_action_file',
+                            array(
+                                $this->console->colorize(
+                                    $actionName, Color::GREEN
+                                ),
+                                $this->console->colorize(
                                     $actionFile, Color::BLUE
-                                ) . ')';
-                        }
-
-                        $this->console->writeListItemLineLevel3($line, false);
+                                )
+                            ),
+                            false
+                        );
                     }
 
-                    $this->console->writeLine();
                 }
             }
         }

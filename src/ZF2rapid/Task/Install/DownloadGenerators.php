@@ -42,7 +42,7 @@ class DownloadGenerators extends AbstractTask
 
             // output message
             $this->console->writeTaskLine(
-                'Download class map generator...'
+                'task_install_download_generators_class_map'
             );
         }
 
@@ -58,7 +58,7 @@ class DownloadGenerators extends AbstractTask
 
             // output message
             $this->console->writeTaskLine(
-                'Download template map generator...'
+                'task_install_download_generators_template_map'
             );
         }
 

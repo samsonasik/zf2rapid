@@ -26,7 +26,7 @@ class RemoveControllerViews extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Deleting controller view path...'
+            'task_delete_views_controller_view_path'
         );
 
         // create src module

@@ -27,6 +27,7 @@ class CreateAction extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\Check\ControllerExists',
             'ZF2rapid\Task\GenerateAction\GenerateActionMethod',
             'ZF2rapid\Task\GenerateAction\GenerateActionView',
@@ -38,7 +39,7 @@ class CreateAction extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new controller action...');
+        $this->console->writeGoLine('command_create_action_start');
     }
 
     /**
@@ -47,13 +48,18 @@ class CreateAction extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 controller action ' . $this->console->colorize(
-                $this->params->paramAction, Color::GREEN
-            ) . ' for controller ' . $this->console->colorize(
-                $this->params->paramController, Color::GREEN
-            ) . ' and module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_action_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramAction, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramController, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

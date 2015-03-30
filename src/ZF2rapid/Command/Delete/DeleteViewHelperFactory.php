@@ -38,7 +38,7 @@ class DeleteViewHelperFactory extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting factory for view helper...');
+        $this->console->writeGoLine('command_delete_view_helper_factory_start');
     }
 
     /**
@@ -47,12 +47,15 @@ class DeleteViewHelperFactory extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 view helper '
-            . $this->console->colorize(
-                $this->params->paramViewHelper, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_view_helper_factory_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramViewHelper, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

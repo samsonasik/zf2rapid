@@ -38,7 +38,7 @@ class ShowForms extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 forms...');
+        $this->console->writeGoLine('command_show_forms_start');
     }
 
     /**
@@ -47,8 +47,6 @@ class ShowForms extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2 forms were successfully displayed.'
-        );
+        $this->console->writeOkLine('command_show_forms_stop');
     }
 }

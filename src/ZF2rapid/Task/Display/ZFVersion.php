@@ -51,16 +51,23 @@ class ZFVersion extends AbstractTask
 
         // output success message
         $this->console->writeTaskLine(
-            'A ZF2 library was found in ' . $this->console->colorize(
-                $projectPath . $library, Color::GREEN
+            'task_display_zfversion_path',
+            array(
+                $this->console->colorize(
+                    $projectPath . $library, Color::GREEN
+                )
             )
         );
 
         $this->console->writeIndentedLine(
-            'The project in ' . $this->console->colorize(
-                $projectPath, Color::GREEN
-            ) . ' uses Zend Framework Version ' . $this->console->colorize(
-                Version::VERSION, Color::BLUE
+            'task_display_zfversion_version',
+            array(
+                $this->console->colorize(
+                    $projectPath, Color::GREEN
+                ),
+                $this->console->colorize(
+                    Version::VERSION, Color::BLUE
+                )
             )
         );
 

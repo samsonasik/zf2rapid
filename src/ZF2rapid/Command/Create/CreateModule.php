@@ -42,7 +42,7 @@ class CreateModule extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new module...');
+        $this->console->writeGoLine('command_create_module_start');
     }
 
     /**
@@ -51,9 +51,12 @@ class CreateModule extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_module_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

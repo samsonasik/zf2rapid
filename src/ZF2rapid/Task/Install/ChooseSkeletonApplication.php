@@ -9,10 +9,8 @@
 namespace ZF2rapid\Task\Install;
 
 use Zend\Console\ColorInterface as Color;
-use Zend\Console\Prompt\Line;
-use Zend\Console\Prompt\Select;
-use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Console\Console;
+use ZF2rapid\Task\AbstractTask;
 
 /**
  * Class ChooseSkeletonApplication
@@ -38,32 +36,20 @@ class ChooseSkeletonApplication extends AbstractTask
      */
     public function processCommandTask()
     {
-        // write prompt badge
-        $this->console->writeLine();
-        $this->console->write(
-            $this->console->colorize(' pick ', Color::NORMAL, Color::RED) . ' '
-        );
-
         // set indention
         $spaces = Console::INDENTION_PROMPT_OPTIONS;
 
         // define options for select prompt
         $options = array(
-            $spaces . 'a' => 'Official Zend Skeleton Application',
-            $spaces . 'b' => 'ZF2rapid Skeleton Application',
-            $spaces . 'c' => 'Your Skeleton Application',
+            $spaces . 'a' => 'task_install_choose_skeleton_official',
+            $spaces . 'b' => 'task_install_choose_skeleton_zf2rapid',
+            $spaces . 'c' => 'task_install_choose_skeleton_custom',
         );
 
-        // output select prompt
-        $skeletonPrompt = new Select(
-            'Which Skeleton Application would you like to install?',
-            $options,
-            false,
-            false
+        $skeletonAnswer = $this->console->writeSelectPrompt(
+            'task_install_choose_skeleton_prompt',
+            $options
         );
-        $skeletonAnswer = $skeletonPrompt->show();
-
-        $this->console->writeLine();
 
         // set url depending on select prompt answer
         switch ($skeletonAnswer) {
@@ -72,22 +58,9 @@ class ChooseSkeletonApplication extends AbstractTask
                 break;
 
             case 'c':
-                // write prompt badge
-                $this->console->write(
-                    ' pick ', Color::NORMAL, Color::RED
+                $this->params->skeletonUrl = $this->console->writeLinePrompt(
+                    'task_install_choose_skeleton_enter_url'
                 );
-                $this->console->write(' ');
-
-                // output select prompt
-                $urlPrompt = new Line(
-                    'Please provide url for your skeleton application file: ',
-                    false
-                );
-                $urlAnswer = $urlPrompt->show();
-
-                $this->console->writeLine();
-
-                $this->params->skeletonUrl = $urlAnswer;
                 break;
 
             default:
@@ -99,8 +72,13 @@ class ChooseSkeletonApplication extends AbstractTask
 
         // write which skeleton application was chosen
         $this->console->writeTaskLine(
-            $this->console->colorize($this->params->skeletonName, Color::GREEN)
-            . ' will be installed now.');
+            'task_install_choose_skeleton_installation',
+            array(
+                $this->console->colorize(
+                    $this->params->skeletonName, Color::GREEN
+                )
+            )
+        );
 
         return 0;
     }

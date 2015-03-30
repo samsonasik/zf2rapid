@@ -35,7 +35,7 @@ class ToolConfiguration extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Manage ZF2rapid tool configuration...');
+        $this->console->writeGoLine('command_tool_configuration_start');
     }
 
     /**
@@ -44,8 +44,6 @@ class ToolConfiguration extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2rapid tool configuration was successfully managed.'
-        );
+        $this->console->writeOkLine('command_tool_configuration_stop');
     }
 }

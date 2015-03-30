@@ -30,9 +30,7 @@ class GenerateActionMethod extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeTaskLine(
-            'Writing action method for controller...'
-        );
+        $this->console->writeTaskLine('task_generate_action_method_writing');
 
         // set controller file and action method
         $controllerFile = $this->params->controllerDir . '/'
@@ -64,13 +62,18 @@ class GenerateActionMethod extends AbstractTask
         // check for action method
         if ($class->hasMethod($checkMethod)) {
             $this->console->writeFailLine(
-                'The action ' . $this->console->colorize(
-                    $action, Color::GREEN
-                ) . ' already exists in controller ' . $this->console->colorize(
-                    $this->params->paramController, Color::GREEN
-                ) . ' of module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . '.'
+                'task_generate_action_method_exists',
+                array(
+                    $this->console->colorize(
+                        $action, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->paramController, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    )
+                )
             );
 
             return 1;

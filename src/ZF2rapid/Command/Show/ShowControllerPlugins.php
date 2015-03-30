@@ -38,7 +38,7 @@ class ShowControllerPlugins extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 controller plugins...');
+        $this->console->writeGoLine('command_show_controller_plugins_start');
     }
 
     /**
@@ -47,8 +47,6 @@ class ShowControllerPlugins extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2 controller plugins were successfully displayed.'
-        );
+        $this->console->writeOkLine('command_show_controller_plugins_stop');
     }
 }

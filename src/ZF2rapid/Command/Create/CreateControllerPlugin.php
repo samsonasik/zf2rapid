@@ -27,6 +27,7 @@ class CreateControllerPlugin extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\CreateStructure\CreateControllerPluginStructure',
             'ZF2rapid\Task\GenerateClass\GenerateControllerPluginClass',
             'ZF2rapid\Task\GenerateFactory\GenerateControllerPluginFactory',
@@ -39,7 +40,7 @@ class CreateControllerPlugin extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new controller plugin...');
+        $this->console->writeGoLine('command_create_controller_plugin_start');
     }
 
     /**
@@ -48,12 +49,15 @@ class CreateControllerPlugin extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The new ZF2 controller plugin '
-            . $this->console->colorize(
-                $this->params->paramControllerPlugin, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_controller_plugin_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramControllerPlugin, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

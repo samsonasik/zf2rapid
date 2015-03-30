@@ -29,7 +29,7 @@ class UpdateViewManagerConfig extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Writing view manager configuration...'
+            'task_module_update_view_manager_writing'
         );
 
         // set config dir
@@ -38,9 +38,10 @@ class UpdateViewManagerConfig extends AbstractTask
         // create src module
         if (!file_exists($configFile)) {
             $this->console->writeFailLine(
-                'The module config file ' . $this->console->colorize(
-                    $configFile, Color::GREEN
-                ) . ' does not exist.'
+                'task_module_update_view_manager_config_file_not_exists',
+                array(
+                    $this->console->colorize($configFile, Color::GREEN),
+                )
             );
 
             return 1;

@@ -38,7 +38,7 @@ class ShowHydrators extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 hydrators...');
+        $this->console->writeGoLine('command_show_hydrators_start');
     }
 
     /**
@@ -47,8 +47,6 @@ class ShowHydrators extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2 hydrators were successfully displayed.'
-        );
+        $this->console->writeOkLine('command_show_hydrators_stop');
     }
 }

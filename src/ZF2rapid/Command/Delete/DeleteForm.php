@@ -39,7 +39,7 @@ class DeleteForm extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting form...');
+        $this->console->writeGoLine('command_delete_form_start');
     }
 
     /**
@@ -48,12 +48,15 @@ class DeleteForm extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The form '
-            . $this->console->colorize(
-                $this->params->paramForm, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_form_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramForm, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

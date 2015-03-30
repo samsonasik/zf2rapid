@@ -13,6 +13,10 @@ use Zend\Console\Adapter\AdapterInterface;
 use Zend\Console\Charset\CharsetInterface;
 use Zend\Console\ColorInterface as Color;
 use Zend\Console\Console as ZendConsole;
+use Zend\Console\Prompt\Confirm;
+use Zend\Console\Prompt\Line;
+use Zend\Console\Prompt\Select;
+use Zend\I18n\Translator\Translator;
 
 /**
  * Class Console
@@ -37,11 +41,24 @@ class Console implements AdapterInterface, ConsoleInterface
     protected $adapter;
 
     /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
      * Get platform based console adapter
      */
     function __construct()
     {
         $this->adapter = ZendConsole::getInstance();
+    }
+
+    /**
+     * @param Translator $translator
+     */
+    public function setTranslator(Translator $translator)
+    {
+        $this->translator = $translator;
     }
 
     /**
@@ -384,26 +401,135 @@ class Console implements AdapterInterface, ConsoleInterface
     }
 
     /**
+     * Write a customizable prompt
+     *
+     * @param $message
+     * @param $options
+     *
+     * @return string
+     */
+    public function writeSelectPrompt($message, &$options)
+    {
+        // translate options
+        foreach ($options as $optionKey => $optionValue) {
+            $options[$optionKey] = $this->translator->translate($optionValue);
+        }
+
+        // write prompt badge
+        $this->writeBadge('badge_pick', Color::RED);
+
+        // output prompt
+        $prompt = new Select(
+            $this->translator->translate($message),
+            $options,
+            false,
+            false
+        );
+
+        $answer = $prompt->show();
+
+        $this->writeLine();
+
+        return $answer;
+    }
+
+    /**
+     * Write a customizable line prompt
+     *
+     * @param $message
+     *
+     * @return string
+     */
+    public function writeLinePrompt($message)
+    {
+        // write prompt badge
+        $this->writeBadge('badge_pick', Color::RED);
+
+        // output prompt
+        $prompt = new Line(
+            $this->translator->translate($message),
+            false
+        );
+
+        $answer = $prompt->show();
+
+        $this->writeLine();
+
+        return $answer;
+    }
+
+    /**
+     * Write a customizable confirm prompt
+     *
+     * @param string $message
+     * @param string $yes
+     * @param string $no
+     *
+     * @return bool
+     */
+    public function writeConfirmPrompt($message, $yes, $no)
+    {
+        // write prompt badge
+        $this->writeBadge('badge_pick', Color::RED);
+
+        // output prompt
+        $prompt = new Confirm(
+            $this->translator->translate($message),
+            $this->translator->translate($yes),
+            $this->translator->translate($no)
+        );
+
+        $answer = $prompt->show();
+
+        $this->writeLine();
+
+        return $answer;
+    }
+
+    /**
+     * Write a customizable badge
+     *
+     * @param string $badgeText
+     * @param string $badgeColor
+     */
+    public function writeBadge($badgeText, $badgeColor)
+    {
+        $this->adapter->write(
+            $this->translator->translate($badgeText),
+            Color::NORMAL,
+            $badgeColor
+        );
+        $this->adapter->write(' ');
+    }
+
+    /**
      * Write a line with customizable badge
      *
      * @param string $message
+     * @param array  $placeholders
      * @param string $badgeText
      * @param string $badgeColor
      * @param bool   $preNewLine
      * @param bool   $postNewLine
      */
     public function writeBadgeLine(
-        $message, $badgeText, $badgeColor, $preNewLine = false, $postNewLine = false
+        $message, array $placeholders = array(), $badgeText, $badgeColor,
+        $preNewLine = false, $postNewLine = false
     ) {
         if ($preNewLine) {
             $this->adapter->writeLine();
         }
 
         $this->adapter->write(
-            $badgeText, Color::NORMAL, $badgeColor
+            $this->translator->translate($badgeText),
+            Color::NORMAL,
+            $badgeColor
         );
+
         $this->adapter->write(' ');
-        $this->adapter->writeLine($message);
+        $this->adapter->writeLine(
+            vsprintf($this->translator->translate($message), $placeholders)
+        );
 
         if ($postNewLine) {
             $this->adapter->writeLine();
@@ -414,117 +540,134 @@ class Console implements AdapterInterface, ConsoleInterface
      * Write an indented line
      *
      * @param string $message
+     * @param array  $placeholders
      */
-    public function writeIndentedLine($message)
+    public function writeIndentedLine($message, array $placeholders = array())
     {
         $this->adapter->writeLine();
         $this->adapter->write('       ');
-        $this->adapter->writeLine($message);
+        $this->adapter->writeLine(
+            vsprintf($this->translator->translate($message), $placeholders)
+        );
     }
 
     /**
      * Write a list item line
      *
      * @param string $message
+     * @param array  $placeholders
      */
-    public function writeListItemLine($message)
+    public function writeListItemLine($message, array $placeholders = array())
     {
-        $this->adapter->writeLine();
         $this->adapter->write('       * ');
-        $this->adapter->writeLine($message);
+        $this->adapter->writeLine(
+            vsprintf($this->translator->translate($message), $placeholders)
+        );
     }
 
     /**
      * Write a list item line for second level
      *
      * @param string $message
+     * @param array  $placeholders
      */
-    public function writeListItemLineLevel2($message)
+    public function writeListItemLineLevel2($message, array $placeholders = array())
     {
         $this->adapter->write('         * ');
-        $this->adapter->writeLine($message);
+        $this->adapter->writeLine(
+            vsprintf($this->translator->translate($message), $placeholders)
+        );
     }
 
     /**
      * Write a list item line for third level
      *
      * @param string $message
+     * @param array  $placeholders
      */
-    public function writeListItemLineLevel3($message)
+    public function writeListItemLineLevel3($message, array $placeholders = array())
     {
         $this->adapter->write('           * ');
-        $this->adapter->writeLine($message);
+        $this->adapter->writeLine(
+            vsprintf($this->translator->translate($message), $placeholders)
+        );
     }
 
     /**
      * Write a line with a yellow GO badge
      *
-     * @param      $message
+     * @param string $message
+     * @param array $placeholders
      */
-    public function writeGoLine($message)
+    public function writeGoLine($message, array $placeholders = array())
     {
         $this->writeBadgeLine(
-            $message, '  GO  ', Color::YELLOW, false, true
+            $message, $placeholders, 'badge_go', Color::YELLOW, false, true
         );
     }
 
     /**
      * Write a line with a Blue Done badge
      *
-     * @param      $message
+     * @param string $message
+     * @param array $placeholders
      */
-    public function writeTaskLine($message)
+    public function writeTaskLine($message, array $placeholders = array())
     {
         $this->writeBadgeLine(
-            $message, ' task ', Color::BLUE, false, false
+            $message, $placeholders, 'badge_task', Color::BLUE, false, false
         );
     }
 
     /**
      * Write a line with a green OK badge
      *
-     * @param      $message
+     * @param string $message
+     * @param array $placeholders
      */
-    public function writeOkLine($message)
+    public function writeOkLine($message, array $placeholders = array())
     {
         $this->writeBadgeLine(
-            $message, '  OK  ', Color::GREEN, true, true
+            $message, $placeholders, 'badge_ok', Color::GREEN, true, true
         );
     }
 
     /**
      * Write a line with a red Fail badge
      *
-     * @param      $message
+     * @param string $message
+     * @param array $placeholders
      */
-    public function writeFailLine($message)
+    public function writeFailLine($message, array $placeholders = array())
     {
         $this->writeBadgeLine(
-            $message, ' FAIL ', Color::RED, true, true
+            $message, $placeholders, 'badge_fail', Color::RED, true, true
         );
     }
 
     /**
      * Write a line with a red Warn badge
      *
-     * @param      $message
+     * @param string $message
+     * @param array $placeholders
      */
-    public function writeWarnLine($message)
+    public function writeWarnLine($message, array $placeholders = array())
     {
         $this->writeBadgeLine(
-            $message, ' WARN ', Color::RED, true, true
+            $message, $placeholders, 'badge_warning', Color::RED, true, true
         );
     }
 
     /**
      * Write a line with a yellow to-do badge
      *
-     * @param      $message
+     * @param string $message
+     * @param array $placeholders
      */
-    public function writeTodoLine($message)
+    public function writeTodoLine($message, array $placeholders = array())
     {
         $this->writeBadgeLine(
-            $message, ' todo ', Color::GREEN, false, true
+            $message, $placeholders, 'badge_todo', Color::GREEN, false, true
         );
     }
 

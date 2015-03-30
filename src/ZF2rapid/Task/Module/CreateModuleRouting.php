@@ -9,7 +9,6 @@
 namespace ZF2rapid\Task\Module;
 
 use Zend\Console\ColorInterface as Color;
-use Zend\Console\Prompt\Confirm;
 use ZF2rapid\Generator\ConfigArrayGenerator;
 use ZF2rapid\Generator\ConfigFileGenerator;
 use ZF2rapid\Task\AbstractTask;
@@ -29,9 +28,7 @@ class CreateModuleRouting extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeTaskLine(
-            'Writing routing configuration...'
-        );
+        $this->console->writeTaskLine('task_module_create_routing_writing');
 
         // set config dir
         $configFile = $this->params->moduleConfigDir . '/module.config.php';
@@ -39,9 +36,10 @@ class CreateModuleRouting extends AbstractTask
         // create src module
         if (!file_exists($configFile)) {
             $this->console->writeFailLine(
-                'The module config file ' . $this->console->colorize(
-                    $configFile, Color::GREEN
-                ) . ' does not exist.'
+                'task_module_create_routing_config_file_not_exists',
+                array(
+                    $this->console->colorize($configFile, Color::GREEN),
+                )
             );
 
             return 1;
@@ -55,9 +53,12 @@ class CreateModuleRouting extends AbstractTask
             || count($configData['controllers']) == 0
         ) {
             $this->console->writeFailLine(
-                'No controller exist in the module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . '.'
+                'task_module_create_routing_controller_not_exists',
+                array(
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    ),
+                )
             );
 
             return 1;
@@ -69,29 +70,25 @@ class CreateModuleRouting extends AbstractTask
         // check for existing router config
         if (isset($configData['router'])) {
             // check for existing routes config
-            if (isset($configData['router']['routes']) && isset($configData['router']['routes'][$routingKey])) {
-                // write prompt badge
-                $this->console->writeLine();
-                $this->console->write(
-                    ' WARN ', Color::NORMAL, Color::RED
-                );
-                $this->console->write(' ');
-
+            if (isset($configData['router']['routes'])
+                && isset($configData['router']['routes'][$routingKey])
+            ) {
                 // output confirm prompt
-                $deletePrompt       = new Confirm(
-                    'Are you sure you want to overwrite the existing routing for this module? [y/n] ',
-                    'y',
-                    'n'
+                $deleteConfirmation = $this->console->writeConfirmPrompt(
+                    'task_module_create_routing_prompt_1',
+                    'task_module_create_routing_yes_answer',
+                    'task_module_create_routing_no_answer'
                 );
-                $deleteConfirmation = $deletePrompt->show();
 
                 if (!$deleteConfirmation) {
                     // output success message
                     $this->console->writeOkLine(
-                        'The routing for module '
-                        . $this->console->colorize(
-                            $this->params->paramModule, Color::GREEN
-                        ) . ' was NOT overwritten.'
+                        'task_module_create_routing_not_overwritten',
+                        array(
+                            $this->console->colorize(
+                                $this->params->paramModule, Color::GREEN
+                            )
+                        )
                     );
 
                     return 1;

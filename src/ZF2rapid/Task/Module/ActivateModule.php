@@ -8,11 +8,10 @@
  */
 namespace ZF2rapid\Task\Module;
 
-use Zend\Code\Generator\ValueGenerator;
 use Zend\Console\ColorInterface as Color;
 use ZF2rapid\Generator\ConfigArrayGenerator;
-use ZF2rapid\Task\AbstractTask;
 use ZF2rapid\Generator\ConfigFileGenerator;
+use ZF2rapid\Task\AbstractTask;
 
 /**
  * Class ActivateModule
@@ -30,20 +29,27 @@ class ActivateModule extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Activating module in config file ' . $this->console->colorize(
-                $this->params->configFile, Color::GREEN
-            ) . ' ...'
+            'task_module_activate_module_config_file',
+            array(
+                $this->console->colorize(
+                    $this->params->configFile, Color::GREEN
+                )
+            )
         );
 
         // set config dir and file
-        $configFile = $this->params->projectConfigDir . '/' . $this->params->configFile;
+        $configFile
+            = $this->params->projectConfigDir . '/' . $this->params->configFile;
 
         // create src module
         if (!file_exists($configFile)) {
             $this->console->writeFailLine(
-                'The chosen config file ' . $this->console->colorize(
-                    $configFile, Color::GREEN
-                ) . ' does not exist.'
+                'task_module_activate_module_config_file_not_exists',
+                array(
+                    $this->console->colorize(
+                        $configFile, Color::GREEN
+                    )
+                )
             );
 
             return 1;
@@ -55,14 +61,20 @@ class ActivateModule extends AbstractTask
         // create src module
         if (!is_array($configData) || !isset($configData['modules'])) {
             $this->console->writeFailLine(
-                'The chosen config file ' . $this->console->colorize(
-                    $configFile, Color::GREEN
-                ) . ' is not a ZF2 application configuration file.'
+                'task_module_activate_module_not_zf2_config_file',
+                array(
+                    $this->console->colorize(
+                        $configFile, Color::GREEN
+                    )
+                )
             );
             $this->console->writeFailLine(
-                'The array section ' . $this->console->colorize(
-                    'modules', Color::GREEN
-                ) . ' does not exist.'
+                'task_module_activate_module_no_modules_array_section',
+                array(
+                    $this->console->colorize(
+                        'modules', Color::GREEN
+                    )
+                )
             );
 
             return 1;

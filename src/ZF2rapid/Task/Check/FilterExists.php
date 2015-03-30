@@ -8,9 +8,6 @@
  */
 namespace ZF2rapid\Task\Check;
 
-use Zend\Console\ColorInterface as Color;
-use ZF2rapid\Task\AbstractTask;
-
 /**
  * Class FilterExists
  *

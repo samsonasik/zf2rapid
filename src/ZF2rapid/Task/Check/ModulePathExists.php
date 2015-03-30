@@ -29,8 +29,11 @@ class ModulePathExists extends AbstractTask
         if (!file_exists($this->params->projectModuleDir)) {
             // output fail message
             $this->console->writeFailLine(
-                'There is no ZF2 project within ' . $this->console->colorize(
-                    $this->params->projectModuleDir, Color::GREEN
+                'task_check_project_path_not_exists',
+                array(
+                    $this->console->colorize(
+                        $this->params->projectModuleDir, Color::GREEN
+                    )
                 )
             );
 

@@ -27,6 +27,7 @@ class CreateControllerFactory extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\Check\ControllerExists',
             'ZF2rapid\Task\GenerateFactory\GenerateControllerFactory',
             'ZF2rapid\Task\UpdateConfig\UpdateControllerConfig',
@@ -38,7 +39,7 @@ class CreateControllerFactory extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating factory for controller...');
+        $this->console->writeGoLine('command_create_controller_factory_start');
     }
 
     /**
@@ -47,11 +48,15 @@ class CreateControllerFactory extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 controller ' . $this->console->colorize(
-                $this->params->paramController, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_controller_factory_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramController, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

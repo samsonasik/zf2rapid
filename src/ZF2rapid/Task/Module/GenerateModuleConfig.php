@@ -28,7 +28,7 @@ class GenerateModuleConfig extends AbstractTask
     {
         // output message
         $this->console->writeTaskLine(
-            'Writing module configuration file...'
+            'task_module_generate_module_config_writing'
         );
 
         // setup config data for view manager

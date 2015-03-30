@@ -27,23 +27,33 @@ class LoadedValidators extends AbstractTask
     {
         // output done message
         $this->console->writeTaskLine(
-            'The following validators were found in '
-            . $this->console->colorize($this->params->projectPath, Color::GREEN)
+            'task_display_loaded_validators_found_in_path',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
+            )
         );
 
         // loop through modules
         foreach ($this->params->loadedModules as $moduleName => $moduleObject) {
             $this->console->writeListItemLine(
-                'Module ' . $this->console->colorize(
-                    $moduleName, Color::GREEN
-                ) . ' (Class ' . $this->console->colorize(
-                    get_class($moduleObject), Color::BLUE
-                ) . ')'
+                'task_display_loaded_validators_module_class',
+                array(
+                    $this->console->colorize(
+                        $moduleName, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        get_class($moduleObject), Color::BLUE
+                    )
+                )
             );
 
             // check for empty validator list
             if (empty($this->params->loadedValidators[$moduleName])) {
-                $this->console->writeListItemLineLevel2('No validators found');
+                $this->console->writeListItemLineLevel2(
+                    'task_display_loaded_validators_no_validators'
+                );
 
                 continue;
             }
@@ -54,8 +64,11 @@ class LoadedValidators extends AbstractTask
                 as $pluginType => $pluginList
             ) {
                 $this->console->writeListItemLineLevel2(
-                    'Type ' . $this->console->colorize(
-                        $pluginType, Color::GREEN
+                    'task_display_loaded_validators_type',
+                    array(
+                        $this->console->colorize(
+                            $pluginType, Color::GREEN
+                        ),
                     ),
                     false
                 );
@@ -65,11 +78,15 @@ class LoadedValidators extends AbstractTask
                     $pluginList as $pluginName => $pluginClass
                 ) {
                     $this->console->writeListItemLineLevel3(
-                        'Validator ' . $this->console->colorize(
-                            $pluginName, Color::GREEN
-                        ) . ' (Class ' . $this->console->colorize(
-                            $pluginClass, Color::BLUE
-                        ) . ')',
+                        'task_display_loaded_validators_validator_class',
+                        array(
+                            $this->console->colorize(
+                                $pluginName, Color::GREEN
+                            ),
+                            $this->console->colorize(
+                                $pluginClass, Color::BLUE
+                            )
+                        ),
                         false
                     );
                 }

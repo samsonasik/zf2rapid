@@ -39,9 +39,10 @@ abstract class AbstractUpdateServiceManagerConfig extends AbstractTask
         // create src module
         if (!file_exists($configFile)) {
             $this->console->writeFailLine(
-                'The module config file ' . $this->console->colorize(
-                    $configFile, Color::GREEN
-                ) . ' does not exist.'
+                'task_update_config_module_config_not_exists',
+                array(
+                    $this->console->colorize($configFile, Color::GREEN)
+                )
             );
 
             return false;

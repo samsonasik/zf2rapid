@@ -24,7 +24,6 @@ class CreateProject extends AbstractCommand
     protected $tasks
         = array(
             'ZF2rapid\Task\Setup\ProjectPath',
-            'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ProjectPathMandatory',
             'ZF2rapid\Task\Check\ProjectPathEmpty',
@@ -43,7 +42,7 @@ class CreateProject extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new project...');
+        $this->console->writeGoLine('command_create_project_start');
     }
 
     /**
@@ -51,14 +50,15 @@ class CreateProject extends AbstractCommand
      */
     public function stopCommand()
     {
-        $this->console->writeOkLine(
-            'Congratulations! The new ZF2 project was successfully created.'
-        );
+        $this->console->writeOkLine('command_create_project_stop');
 
         $this->console->writeTodoLine(
-            'Please change to working dir ' . $this->console->colorize(
-                realpath($this->params->projectPath), Color::GREEN
-            ) . ' to continue.'
+            'command_create_project_working_dir',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
+            )
         );
     }
 }

@@ -39,7 +39,7 @@ class ShowActions extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Fetching ZF2 controller actions...');
+        $this->console->writeGoLine('command_show_actions_start');
     }
 
     /**
@@ -48,8 +48,6 @@ class ShowActions extends AbstractCommand
     public function stopCommand()
     {
         // output success message
-        $this->console->writeOkLine(
-            'The ZF2 controller actions were successfully displayed.'
-        );
+        $this->console->writeOkLine('command_show_actions_stop');
     }
 }

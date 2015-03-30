@@ -36,7 +36,7 @@ class GenerateClassMap extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Generating classmap...');
+        $this->console->writeGoLine('command_generate_class_map_start');
     }
 
     /**
@@ -45,9 +45,12 @@ class GenerateClassMap extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The classmap for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully generated.'
+            'command_generate_class_map_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

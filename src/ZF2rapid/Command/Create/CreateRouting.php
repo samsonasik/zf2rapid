@@ -27,6 +27,7 @@ class CreateRouting extends AbstractCommand
             'ZF2rapid\Task\Setup\ConfigFile',
             'ZF2rapid\Task\Setup\Params',
             'ZF2rapid\Task\Check\ModulePathExists',
+            'ZF2rapid\Task\Check\ModuleExists',
             'ZF2rapid\Task\Fetch\LoadModules',
             'ZF2rapid\Task\Fetch\LoadControllers',
             'ZF2rapid\Task\Fetch\LoadActions',
@@ -39,7 +40,7 @@ class CreateRouting extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Creating new controller...');
+        $this->console->writeGoLine('command_create_routing_start');
     }
 
     /**
@@ -48,9 +49,12 @@ class CreateRouting extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The routing for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully created.'
+            'command_create_routing_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

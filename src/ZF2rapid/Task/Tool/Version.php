@@ -26,11 +26,11 @@ class Version extends AbstractTask
     {
         // output done message
         $this->console->writeTaskLine(
-            'The current version of '
-            . $this->console->colorize(Application::NAME, Color::GREEN)
-            . ' is '
-            . $this->console->colorize(Application::VERSION, Color::BLUE)
-            . '.'
+            'task_tool_version_show',
+            array(
+                $this->console->colorize(Application::NAME, Color::GREEN),
+                $this->console->colorize(Application::VERSION, Color::BLUE)
+            )
         );
 
         return 0;

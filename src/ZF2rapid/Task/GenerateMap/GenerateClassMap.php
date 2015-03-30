@@ -25,9 +25,7 @@ class GenerateClassMap extends AbstractTask
     public function processCommandTask()
     {
         // output message
-        $this->console->writeTaskLine(
-            'Running classmap generator...'
-        );
+        $this->console->writeTaskLine('task_generate_map_class_map_running');
 
         // define generator files
         $generator = $this->params->projectPath
@@ -36,7 +34,7 @@ class GenerateClassMap extends AbstractTask
         // create src module
         if (!file_exists($generator)) {
             $this->console->writeFailLine(
-                'The classmap generator does not exist in this project.'
+                'task_generate_map_class_map_not_exists'
             );
 
             return 1;

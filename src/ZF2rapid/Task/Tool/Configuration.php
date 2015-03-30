@@ -103,8 +103,7 @@ class Configuration extends AbstractTask
 
         // output fail message
         $this->console->writeFailLine(
-            'It is not possible to change a configuration option '
-            . 'without specifying the configuration key.'
+            'task_tool_configuration_change_missing_config_key'
         );
 
         return false;
@@ -130,9 +129,10 @@ class Configuration extends AbstractTask
 
         // output fail message
         $this->console->writeFailLine(
-            'The configuration key ' . $this->console->colorize(
-                $paramKey, Color::GREEN
-            ) . ' is unknown.'
+            'task_tool_configuration_change_unknown_config_key',
+            array(
+                $this->console->colorize($paramKey, Color::GREEN),
+            )
         );
 
         return false;
@@ -157,14 +157,12 @@ class Configuration extends AbstractTask
         }
 
         $this->console->writeFailLine(
-            'The value for configuration key '
-            . $this->console->colorize(
-                $paramKey, Color::GREEN
-            ) . ' can only be ' . $this->console->colorize(
-                'true', Color::BLUE
-            ) . ' or ' . $this->console->colorize(
-                'false', Color::BLUE
-            ) . '.'
+            'task_tool_configuration_allowed_flag_config_keys',
+            array(
+                $this->console->colorize($paramKey, Color::GREEN),
+                $this->console->colorize('true', Color::BLUE),
+                $this->console->colorize('false', Color::BLUE),
+            )
         );
 
         return false;
@@ -197,10 +195,10 @@ class Configuration extends AbstractTask
         }
 
         $this->console->writeFailLine(
-            'The value for configuration key '
-            . $this->console->colorize(
-                $paramKey, Color::GREEN
-            ) . ' must be a valid namespace.'
+            'task_tool_configuration_allowed_namespace_config_keys',
+            array(
+                $this->console->colorize($paramKey, Color::GREEN),
+            )
         );
 
         return false;
@@ -229,11 +227,11 @@ class Configuration extends AbstractTask
         );
 
         $this->console->writeTaskLine(
-            'The value for configuration key ' . $this->console->colorize(
-                $paramKey, Color::GREEN
-            ) . ' was changed to ' . $this->console->colorize(
-                $paramValue, Color::BLUE
-            ) . '.'
+            'task_tool_configuration_change_config_value_changed',
+            array(
+                $this->console->colorize($paramKey, Color::GREEN),
+                $this->console->colorize($paramValue, Color::BLUE),
+            )
         );
     }
 
@@ -246,12 +244,17 @@ class Configuration extends AbstractTask
     {
         // output found configuration
         $this->console->writeTaskLine(
-            'The following configuration was found in '
-            . $this->console->colorize(
-                $this->params->projectPath . '/' . ConfigFile::CONFIG_FILE_NAME,
-                Color::GREEN
+            'task_tool_configuration_show_configuration_list',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath
+                    . '/' . ConfigFile::CONFIG_FILE_NAME,
+                    Color::GREEN
+                )
             )
         );
+
+        $this->console->writeLine();
 
         // max config key length
         $maxLength = 0;
@@ -274,16 +277,14 @@ class Configuration extends AbstractTask
             }
 
             $this->console->writeListItemLine(
-                $this->console->colorize(
-                    $configKey, Color::GREEN
-                ) . str_pad('', $maxLength - strlen($configKey)) . ' : '
-                . $this->console->colorize(
-                    $configValue, Color::BLUE
+                'task_tool_configuration_show_configuration_key',
+                array(
+                    $this->console->colorize($configKey, Color::GREEN)
+                    . str_pad('', $maxLength - strlen($configKey)),
+                    $this->console->colorize($configValue, Color::BLUE)
                 )
             );
         }
-
-        $this->console->writeLine();
     }
 
 }

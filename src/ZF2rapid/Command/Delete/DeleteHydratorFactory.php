@@ -38,7 +38,7 @@ class DeleteHydratorFactory extends AbstractCommand
     public function startCommand()
     {
         // start output
-        $this->console->writeGoLine('Deleting factory for hydrator...');
+        $this->console->writeGoLine('command_delete_hydrator_factory_start');
     }
 
     /**
@@ -47,12 +47,15 @@ class DeleteHydratorFactory extends AbstractCommand
     public function stopCommand()
     {
         $this->console->writeOkLine(
-            'Congratulations! The factory for ZF2 hydrator '
-            . $this->console->colorize(
-                $this->params->paramHydrator, Color::GREEN
-            ) . ' for module ' . $this->console->colorize(
-                $this->params->paramModule, Color::GREEN
-            ) . ' was successfully deleted.'
+            'command_delete_hydrator_factory_stop',
+            array(
+                $this->console->colorize(
+                    $this->params->paramHydrator, Color::GREEN
+                ),
+                $this->console->colorize(
+                    $this->params->paramModule, Color::GREEN
+                )
+            )
         );
     }
 }

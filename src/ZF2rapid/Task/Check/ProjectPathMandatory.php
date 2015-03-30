@@ -27,7 +27,7 @@ class ProjectPathMandatory extends AbstractTask
         // check if projectPath was set
         if (!$this->params->projectPath) {
             $this->console->writeFailLine(
-                'You must specify a path to create a new ZF2 project.'
+                'task_check_project_path_mandatory'
             );
 
             return 1;

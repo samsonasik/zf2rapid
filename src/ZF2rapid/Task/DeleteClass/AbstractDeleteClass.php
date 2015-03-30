@@ -40,11 +40,16 @@ abstract class AbstractDeleteClass extends AbstractTask
         // check if factory file exists
         if (!file_exists($file)) {
             $this->console->writeFailLine(
-                'The ' . $classText . ' file ' . $this->console->colorize(
-                    $this->params->paramController, Color::GREEN
-                ) . ' does not exists for module ' . $this->console->colorize(
-                    $this->params->paramModule, Color::GREEN
-                ) . '.'
+                'task_delete_class_not_exists',
+                array(
+                    $classText,
+                    $this->console->colorize(
+                        $this->params->paramController, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        $this->params->paramModule, Color::GREEN
+                    )
+                )
             );
 
             return false;

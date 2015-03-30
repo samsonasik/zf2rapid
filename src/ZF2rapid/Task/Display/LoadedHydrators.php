@@ -27,23 +27,33 @@ class LoadedHydrators extends AbstractTask
     {
         // output done message
         $this->console->writeTaskLine(
-            'The following hydrators were found in '
-            . $this->console->colorize($this->params->projectPath, Color::GREEN)
+            'task_display_loaded_hydrators_found_in_path',
+            array(
+                $this->console->colorize(
+                    $this->params->projectPath, Color::GREEN
+                )
+            )
         );
 
         // loop through modules
         foreach ($this->params->loadedModules as $moduleName => $moduleObject) {
             $this->console->writeListItemLine(
-                'Module ' . $this->console->colorize(
-                    $moduleName, Color::GREEN
-                ) . ' (Class ' . $this->console->colorize(
-                    get_class($moduleObject), Color::BLUE
-                ) . ')'
+                'task_display_loaded_hydrators_module_class',
+                array(
+                    $this->console->colorize(
+                        $moduleName, Color::GREEN
+                    ),
+                    $this->console->colorize(
+                        get_class($moduleObject), Color::BLUE
+                    )
+                )
             );
 
             // check for empty hydrator list
             if (empty($this->params->loadedHydrators[$moduleName])) {
-                $this->console->writeListItemLineLevel2('No hydrators found');
+                $this->console->writeListItemLineLevel2(
+                    'task_display_loaded_hydrators_no_hydrators'
+                );
 
                 continue;
             }
@@ -54,8 +64,11 @@ class LoadedHydrators extends AbstractTask
                 as $pluginType => $pluginList
             ) {
                 $this->console->writeListItemLineLevel2(
-                    'Type ' . $this->console->colorize(
-                        $pluginType, Color::GREEN
+                    'task_display_loaded_hydrators_type',
+                    array(
+                        $this->console->colorize(
+                            $pluginType, Color::GREEN
+                        ),
                     ),
                     false
                 );
@@ -65,11 +78,15 @@ class LoadedHydrators extends AbstractTask
                     $pluginList as $pluginName => $pluginClass
                 ) {
                     $this->console->writeListItemLineLevel3(
-                        'Hydrator ' . $this->console->colorize(
-                            $pluginName, Color::GREEN
-                        ) . ' (Class ' . $this->console->colorize(
-                            $pluginClass, Color::BLUE
-                        ) . ')',
+                        'task_display_loaded_hydrators_hydrator_class',
+                        array(
+                            $this->console->colorize(
+                                $pluginName, Color::GREEN
+                            ),
+                            $this->console->colorize(
+                                $pluginClass, Color::BLUE
+                            )
+                        ),
                         false
                     );
                 }
