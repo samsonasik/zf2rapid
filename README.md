@@ -160,25 +160,29 @@ $ zf2rapid create-project <path>
 
 ### Project configuration
 
-You can list the configuration for the current project.
+You can list the configuration for the current project. Optionally, you can 
+specify the `<path>` of the Zend Framework 2 project to show the configuration
+for.
 
 ```console
-$ zf2rapid tool-config
+$ zf2rapid tool-config [<path>]
 ```
 
 You can display the value for a configuration single configuration key, for 
-example the namespace to be used for hydrators.
+example the namespace to be used for hydrators. Optionally, you can specify the 
+`<path>` of the Zend Framework 2 project.
 
 ```console
-$ zf2rapid tool-config --configKey=namespaceHydrator
+$ zf2rapid tool-config  [<path>] --configKey=namespaceHydrator
 ```
 
 You can change the value for a configuration single configuration key, for 
 example the namespace to be used for hydrators (Please note that you need to 
-use the double backslash to define a namespace with at least two levels).
+use the double backslash to define a namespace with at least two levels). 
+Optionally, you can specify the `<path>` of the Zend Framework 2 project.
 
 ```console
-$ zf2rapid tool-config --configKey=namespaceHydrator --configValue=Model\\Hydrator
+$ zf2rapid tool-config  [<path>] --configKey=namespaceHydrator --configValue=Model\\Hydrator
 ```
 
 ### Modules
@@ -228,6 +232,15 @@ $ zf2rapid show-modules [<path>]
 ### Actions
 
 ### Routing
+
+You can create the routing for a module `<module>`. Optionally, you can specify 
+the `<path>` of the Zend Framework 2 project to create the module routing in. 
+In the strict mode the routing only allows existing controllers and actions for 
+the routing (disabled by default). 
+ 
+```console
+$ zf2rapid create-routing <module> [<path>] [--strict|-s]:strict
+```
 
 ### Maps
 
