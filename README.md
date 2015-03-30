@@ -76,8 +76,8 @@ tbd
 Create a new project to a custom path and switch to the new project path:
 
 ```console
-$ zf2rapid create-project mynewproject
-$ cd mynewproject/
+$ zf2rapid create-project /path/to/mynewproject
+$ cd /path/to/mynewproject/
 ```
 
 Show installed modules, controllers and actions:
@@ -112,11 +112,27 @@ Create routing for new module
 $  zf2rapid create-routing Shop -s
 ```
 
-Create an virtual host `mynewproject` with the document root 
-`mynewproject/public/` and run it in your browser:
+Create an Apache 2 virtual host `mynewproject` with the document root 
+`mynewproject/public/`, enable it, add it to your `/etc/hosts` file and restart 
+Apache 2: 
 
-http://mynewproject/
-http://mynewproject/shop/basket/show
+    <VirtualHost *:80>
+        ServerName mynewproject
+        DocumentRoot /path/to/mynewproject/public/
+        
+        SetEnv APPLICATION_ENV development
+        
+        <Directory "/path/to/mynewproject/public/">
+            DirectoryIndex index.php
+            AllowOverride All
+            Require all granted
+        </Directory>
+    </VirtualHost>
+
+Run project in your browser:
+
+ * (http://mynewproject/)
+ * (http://mynewproject/shop/basket/show)
 
 ## Command-Guide
 
