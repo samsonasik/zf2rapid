@@ -27,8 +27,8 @@ tbd
 ### Version 0.4.0
 
 * ~~Create route classes instead of array configs~~ (wontfix)
-* Internationalize ZF2rapid                     (inprogress)
-* Build PHAR file                               (todo)
+* Internationalize ZF2rapid                     (done)
+* Build PHAR file                               (done)
 
 ### Version 0.5.0
 

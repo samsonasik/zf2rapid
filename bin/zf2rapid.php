@@ -13,7 +13,7 @@ use ZF2rapid\Console\Application;
 use ZF2rapid\Console\Console;
 
 // define application root
-define('ZF2RAPID_ROOT', realpath(__DIR__ . '/..'));
+define('ZF2RAPID_ROOT', __DIR__ . '/..');
 
 // get vendor autoloading
 include ZF2RAPID_ROOT . '/vendor/autoload.php';
