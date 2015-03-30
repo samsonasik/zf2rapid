@@ -140,7 +140,62 @@ The screen should look like this:
 
 ## Command-Guide
 
-tbd
+### Projects
+
+When creating a new project you need to specify the `<path>` to create the 
+project in. You will be asked which Skeleton Application you want to install. 
+After project creation you should switch to the new project path.
+
+```console
+$ zf2rapid create-project <path>
+```
+
+### Project configuration
+
+You can list the configuration for the current project.
+
+```console
+$ zf2rapid tool-config
+```
+
+You can display the value for a configuration single configuration key, for 
+example the namespace to be used for hydrators.
+
+```console
+$ zf2rapid tool-config --configKey=namespaceHydrator
+```
+
+You can change the value for a configuration single configuration key, for 
+example the namespace to be used for hydrators (please note: you need to use the
+double backslash to define a namespace with at least two levels.
+
+```console
+$ zf2rapid tool-config --configKey=namespaceHydrator --configValue=Model\\Hydrator
+```
+
+### Modules
+
+### Controllers
+
+### Actions
+
+### Routing
+
+### Maps
+
+### Controller plugins
+
+### View helpers
+
+### Filters
+
+### Validators
+
+### Input Filters
+
+### Forms
+
+### Hydrators
 
 ## Roadmap
 
