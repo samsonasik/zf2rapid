@@ -229,7 +229,75 @@ $ zf2rapid show-modules [<path>]
 
 ### Controllers
 
+When creating a new controller you need to specify the `<module>` and the 
+`<controller>`. Optionally, you can specify the `<path>` of the Zend Framework 
+2 project to create the new controller in. Optionally you can create a factory
+for the new controller.
+
+```console
+$ zf2rapid create-controller <module> <controller> [<path>] [--factory|-f]:factory
+```
+
+You can create a factory for an existing controller by specifying the `<module>` 
+and the `<controller>`. Optionally, you can specify the `<path>` of the Zend 
+Framework 2 project.
+
+```console
+$ zf2rapid create-controller-factory <module> <controller> [<path>]
+```
+
+You can delete an existing factory for a controller by specifying the `<module>` 
+and the `<controller>`. Optionally, you can specify the `<path>` of the Zend 
+Framework 2 project. The controller for this factory will not be deleted.
+
+```console
+$ zf2rapid delete-controller-factory <module> <controller> [<path>]
+```
+
+You can delete a controller by specifying the `<module>` and the `<controller>`. 
+Optionally, you can specify the `<path>` of the Zend Framework 2 project. Any 
+existing factory for this controller will also be deleted.  
+
+```console
+$ zf2rapid delete-controller <module> <controller> [<path>]
+```
+
+You can display all controllers of the current Zend Framework 2 project. 
+Optionally, you can specify the `<path>` of the Zend Framework 2 project to 
+display the controllers from. You can also pass a comma-separated list of 
+modules to show the controllers for.
+
+```console
+$ zf2rapid show-controllers [<path>] [--modules=]
+```
+
 ### Actions
+
+When creating a new action you need to specify the `<module>`, the 
+`<controller>` and the `<action>`. Optionally, you can specify the `<path>` of 
+the Zend Framework 2 project to create the new controller action in. The view
+script for this new action will also be created.
+
+```console
+$ zf2rapid create-action <module> <controller> <action> [<path>]
+```
+
+You can delete a action by specifying the `<module>`, the `<controller>` and 
+the `<action>`. Optionally, you can specify the `<path>` of the Zend Framework 
+2 project. Any existing view script for this action will also be deleted.  
+
+```console
+$ zf2rapid delete-action <module> <controller> <action> [<path>]
+```
+
+You can display all actions of the current Zend Framework 2 project. 
+Optionally, you can specify the `<path>` of the Zend Framework 2 project to 
+display the actions from. You can also pass a comma-separated list of 
+modules and controllers to show the actions for.
+
+```console
+$ zf2rapid show-actions [<path>] [--modules=] [--controllers=]
+```
 
 ### Routing
 
@@ -243,6 +311,22 @@ $ zf2rapid create-routing <module> [<path>] [--strict|-s]:strict
 ```
 
 ### Maps
+
+You can create and update a class map for a module `<module>`. Optionally, you 
+can specify the `<path>` of the Zend Framework 2 project to create the class 
+map in. 
+
+```console
+$ zf2rapid generate-classmap <module> [<path>]
+```
+
+You can create and update a template map for a module `<module>`. Optionally, 
+you can specify the `<path>` of the Zend Framework 2 project to create the 
+template map in. 
+
+```console
+$ zf2rapid generate-templatemap <module> [<path>]
+```
 
 ### Controller plugins
 
