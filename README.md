@@ -187,19 +187,21 @@ $ zf2rapid tool-config  [<path>] --configKey=namespaceHydrator --configValue=Mod
 
 The following configuration keys can be changed for your current project:
 
-configFileFormat          | format of the configuration files (not supported yet)
-flagAddDocBlocks          | whether to automatically create doc blocks or not
-fileDocBlockText          | text to be used in a file doc block
-fileDocBlockCopyright     | copyright to be used in a file doc block
-fileDocBlockLicense       | license to be used in a file doc block
-namespaceController       | namespace for all controller classes within a module
-namespaceControllerPlugin | namespace for all controller plugin classes within a module
-namespaceViewHelper       | namespace for all view helper classes within a module
-namespaceFilter           | namespace for all filter classes within a module
-namespaceValidator        | namespace for all validator classes within a module
-namespaceInputFilter      | namespace for all input filter classes within a module
-namespaceForm             | namespace for all form classes within a module
-namespaceHydrator         | namespace for all hydrator classes within a module
+| Option                    | Description                                                 | 
+| ------------------------- | ----------------------------------------------------------- | 
+| configFileFormat          | format of the configuration files (not supported yet)       | 
+| flagAddDocBlocks          | whether to automatically create doc blocks or not           | 
+| fileDocBlockText          | text to be used in a file doc block                         | 
+| fileDocBlockCopyright     | copyright to be used in a file doc block                    | 
+| fileDocBlockLicense       | license to be used in a file doc block                      | 
+| namespaceController       | namespace for all controller classes within a module        | 
+| namespaceControllerPlugin | namespace for all controller plugin classes within a module | 
+| namespaceViewHelper       | namespace for all view helper classes within a module       | 
+| namespaceFilter           | namespace for all filter classes within a module            | 
+| namespaceValidator        | namespace for all validator classes within a module         | 
+| namespaceInputFilter      | namespace for all input filter classes within a module      | 
+| namespaceForm             | namespace for all form classes within a module              | 
+| namespaceHydrator         | namespace for all hydrator classes within a module          |
 
 ### Modules
 
