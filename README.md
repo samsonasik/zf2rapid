@@ -2,9 +2,9 @@
 
 Console application to create ZF2 application prototypes rapidly.
 
- * [Features][]
- * [Requirements][]
- * [Warning][]
+ * [Features](#Features)
+ * [Requirements](#Requirements)
+ * [Warning](#Warning)
 
 ## Features
 
