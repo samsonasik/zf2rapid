@@ -1,6 +1,10 @@
 # ZF2rapid
 
-Console application to create ZF2 application rapidly.
+Console application to create ZF2 application prototypes rapidly.
+
+ * [Features][]
+ * [Requirements][]
+ * [Warning][]
 
 ## Features
 
