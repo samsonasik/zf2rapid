@@ -5,6 +5,25 @@ Console application to create ZF2 application prototypes rapidly.
  * [Features](#features)
  * [Requirements](#requirements)
  * [Warning](#warning)
+ * [Installation](#installation)
+ * [Quick-Guide](#quick-guide)
+ * [Command-Guide](#command-guide)
+   * [Help](#help)
+   * [Projects](#projects)
+   * [Project configuration](#project-configuration)
+   * [Modules](#modules)
+   * [Controllers](#controllers)
+   * [Actions](#actions)
+   * [Routing](#routing)
+   * [Maps](#maps)
+   * [Controller plugins](#controller-plugins)
+   * [View helpers](#view-helpers)
+   * [Filters](#filters)
+   * [Validators](#validators)
+   * [Input filters](#input-filters)
+   * [Forms](#forms)
+   * [Hydrators](#hydrators)
+ * [Roadmap](#roadmap)
 
 ## Features
 
@@ -549,8 +568,8 @@ modules to show the hydrators for.
 
 ### Version 0.5.0
 
-* Write documentation                           (in progress)
-* Write tutorial                                (todo)
+* Write documentation                           (done)
+* Write tutorial                                (in progress)
 
 ### Version 0.6.0
 
