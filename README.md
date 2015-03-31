@@ -9,6 +9,7 @@ Console application to create ZF2 application prototypes rapidly.
  * [Warning](#warning)
  * [Installation](#installation)
  * [Quick-Guide](#quick-guide)
+ * [Tutorial](#tutorial)
  * [Command-Guide](#command-guide)
    * [Help](#help)
    * [Projects](#projects)
@@ -146,6 +147,10 @@ Run project in your browser:
 The screen should look like this:
 
 ![Screen shot new project](screen_new_project.jpg)
+
+## Tutorial
+
+For a more detailed step-by-step guide please see the [ZF2rapid tuturial](docs/).
 
 ## Command-Guide
 
