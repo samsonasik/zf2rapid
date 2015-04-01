@@ -75,11 +75,11 @@ Add the new virtual host to your `/etc/hosts` file:
 
 Enable new virtual host:
 
-    sudo a2ensite zf2rapid.tutorial.conf 
+    $ sudo a2ensite zf2rapid.tutorial.conf 
 
 Restart Apache 2:
 
-    sudo service apache2 restart
+    $ sudo service apache2 restart
 
 Now you can open your new project in your prefered browser by calling the URL 
 [http://zf2rapid.tutorial](http://zf2rapid.tutorial). Your screen should look 
@@ -89,6 +89,43 @@ like this:
 
 ## Configure your project
 
-Before you start to create modules, controllers and other stuff you should take 
-some time and configure your new project.
+Before you continue to create modules, controllers and other stuff you should 
+take some time and configure your new project. To start with the configuration 
+you can list all options:
 
+    $ zf2rapid tool-config
+
+The following configuration keys can be changed for your current project:
+
+| Option                    | Description                                                 | 
+| ------------------------- | ----------------------------------------------------------- | 
+| configFileFormat          | format of the configuration files (not supported yet)       | 
+| flagAddDocBlocks          | whether to automatically create doc blocks or not           | 
+| fileDocBlockText          | text to be used in a file doc block                         | 
+| fileDocBlockCopyright     | copyright to be used in a file doc block                    | 
+| fileDocBlockLicense       | license to be used in a file doc block                      | 
+| namespaceController       | namespace for all controller classes within a module        | 
+| namespaceControllerPlugin | namespace for all controller plugin classes within a module | 
+| namespaceViewHelper       | namespace for all view helper classes within a module       | 
+| namespaceFilter           | namespace for all filter classes within a module            | 
+| namespaceValidator        | namespace for all validator classes within a module         | 
+| namespaceInputFilter      | namespace for all input filter classes within a module      | 
+| namespaceForm             | namespace for all form classes within a module              | 
+| namespaceHydrator         | namespace for all hydrator classes within a module          |
+
+First, we want to change the data for the file doc blocks.
+
+    $ zf2rapid tool-config --configKey=fileDocBlockText --configValue="ZF2rapid Tutorial"
+    $ zf2rapid tool-config --configKey=fileDocBlockCopyright --configValue="(c) 2015 YOUR NAME"
+    $ zf2rapid tool-config --configKey=fileDocBlockLicense --configValue="All rights reserved"
+
+Second, we want to change the default structure of the namespaces for the 
+classes that we will create later on.
+
+    $ zf2rapid tool-config --configKey=namespaceController --configValue="Application\\Controller"
+    $ zf2rapid tool-config --configKey=namespaceControllerPlugin --configValue="Application\\Controller\\Plugin"
+    $ zf2rapid tool-config --configKey=namespaceFilter --configValue="Model\\Filter"
+    $ zf2rapid tool-config --configKey=namespaceValidator --configValue="Model\\Validator"
+    $ zf2rapid tool-config --configKey=namespaceInputFilter --configValue="Model\\InputFilter"
+    $ zf2rapid tool-config --configKey=namespaceForm --configValue="Application\\Form"
+    $ zf2rapid tool-config --configKey=namespaceHydrator --configValue="Model\\Hydrator"
