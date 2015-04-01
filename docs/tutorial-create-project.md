@@ -4,8 +4,8 @@ In this tutorial you will learn how to create an application step by step with
 ZF2rapid.
 
  * [Create new project](tutorial-create-project.md)
- * Create new module
- * Create controllers and some views
+ * [Create new module](tutorial-create-module.md)
+ * [Create controllers and actions](tutorial-create-controllers-actions.md)
  * Create routing and generate maps
  * Create view helper and controller plugin
 
@@ -116,7 +116,7 @@ The following configuration keys can be changed for your current project:
 First, we want to change the data for the file doc blocks.
 
     $ zf2rapid tool-config --configKey=fileDocBlockText --configValue="ZF2rapid Tutorial"
-    $ zf2rapid tool-config --configKey=fileDocBlockCopyright --configValue="(c) 2015 YOUR NAME"
+    $ zf2rapid tool-config --configKey=fileDocBlockCopyright --configValue="(c) 2015 Your Name"
     $ zf2rapid tool-config --configKey=fileDocBlockLicense --configValue="All rights reserved"
 
 Second, we want to change the default structure of the namespaces for the 
@@ -129,3 +129,10 @@ classes that we will create later on.
     $ zf2rapid tool-config --configKey=namespaceInputFilter --configValue="Model\\InputFilter"
     $ zf2rapid tool-config --configKey=namespaceForm --configValue="Application\\Form"
     $ zf2rapid tool-config --configKey=namespaceHydrator --configValue="Model\\Hydrator"
+
+Your console screen should look like this, after changing the project 
+configuration:
+
+![Console shot project configuration](console_project_configuration.jpg)
+
+[Continue to create a new module](tutorial-create-module.md)
