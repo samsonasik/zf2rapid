@@ -2,6 +2,22 @@
 
 In this Command-Guide all ZF2rapid commands and their arguments ar explained.
 
+ * [Help](#help)
+ * [Projects](#projects)
+ * [Project configuration](#project-configuration)
+ * [Modules](#modules)
+ * [Controllers](#controllers)
+ * [Actions](#actions)
+ * [Routing](#routing)
+ * [Maps](#maps)
+ * [Controller plugins](#controller-plugins)
+ * [View helpers](#view-helpers)
+ * [Filters](#filters)
+ * [Validators](#validators)
+ * [Input filters](#input-filters)
+ * [Forms](#forms)
+ * [Hydrators](#hydrators)
+
 ## Help
 
 For each command you can display the command help with all supported arguments.
