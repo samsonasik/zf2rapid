@@ -1,9 +1,9 @@
-# ZF2rapid tutorial
+# ZF2rapid documentation
 
-In this tutorial you will learn how to create an application step by step with
-ZF2rapid.
+## Tutorial
 
-## Table of contents
+ * [Create a new project](tutorial-create-project.md)
 
- * [Create a new project](create-project.md)
+## Command-Guide
 
+ * [Command-Guide](command-guide.md)
