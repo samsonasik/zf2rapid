@@ -36,9 +36,10 @@ Create routing for new module
 
     $ zf2rapid create-routing Shop -s
 
-Generate the class map for the new module:
+Generate the class map and the template map for the new module:
 
     $ zf2rapid generate-classmap Shop
+    $ zf2rapid generate-templatemap Shop
 
 Create an Apache 2 virtual host `mynewproject` with the document root 
 `mynewproject/public/`, enable it, add it to your `/etc/hosts` file and restart 

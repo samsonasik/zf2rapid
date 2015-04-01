@@ -47,7 +47,8 @@ Please see the [composer.json](composer.json) file for all requirements.
 
 ## Warning
 
-An important note for all Windows users. ZF2rapid is not tested on Windows yet!
+An important note for all Windows users. ZF2rapid is not fully supported on 
+Windows yet! 
 
 ## Documentation
 
