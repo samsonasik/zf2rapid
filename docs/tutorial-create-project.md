@@ -135,4 +135,27 @@ configuration:
 
 ![Console shot project configuration](console_project_configuration.jpg)
 
+If you want to create the project configuration file by hand, please open the 
+`zfrapid2.json` file and change the configuration values manually. Make sure 
+not to overwrite or change any of the configuration keys. After our changes, 
+the file should look like this:
+ 
+    {
+      "configFileFormat": "php",
+      "flagAddDocBlocks": "true",
+      "fileDocBlockText": "ZF2rapid Tutorial",
+      "fileDocBlockCopyright": "(c) 2015 Ralf Eggert",
+      "fileDocBlockLicense": "All rights reserved",
+      "namespaceController": "Application\\Controller",
+      "namespaceControllerPlugin": "Application\\Controller\\Plugin",
+      "namespaceViewHelper": "View\\Helper",
+      "namespaceFilter": "Model\\Filter",
+      "namespaceValidator": "Model\\Validator",
+      "namespaceInputFilter": "Model\\InputFilter",
+      "namespaceForm": "Application\\Form",
+      "namespaceHydrator": "Model\\Hydrator"
+    }
+
+Now you are ready to create a new module for your Zend Framework 2 project.
+
 [Continue to create a new module](tutorial-create-module.md)
