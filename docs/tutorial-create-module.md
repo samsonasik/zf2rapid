@@ -22,7 +22,7 @@ We want to create a new module with the name `Shop`. Please choose the
 
     $ zf2rapid create-module Shop
 
-The following tasks are executed when creating a new project:
+The following tasks are executed when creating a new module:
 
  * Create module path
  * Create module class
@@ -36,17 +36,17 @@ The following tasks are executed when creating a new project:
 The generated structure of your new module should look like this:
 
     --- module
-      |--- Application
-      |--- Shop
-         |--- config
-         |  |--- module.config.php
-         |--- src
-         |  |--- Shop
+      +--- Application
+      +--- Shop
+         +--- config
+         |  +--- module.config.php
+         +--- src
+         |  +--- Shop
          |--- view
-         |  |--- shop
-         |--- autoload_classmap.php
-         |--- Module.php
-         |--- template_map.php
+         |  +--- shop
+         +--- autoload_classmap.php
+         +--- Module.php
+         +--- template_map.php
          
 The `/module/Shop/config/module.config.php` file should contain the 
 configuration for the ViewManager. The `/module/Shop/Module.php` file should 
