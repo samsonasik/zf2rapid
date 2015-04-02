@@ -35,6 +35,8 @@ class LoadedModules extends AbstractTask
             )
         );
 
+        $this->console->writeLine();
+
         // loop through modules
         foreach ($this->params->loadedModules as $moduleName => $moduleObject) {
             $this->console->writeListItemLine(

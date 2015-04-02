@@ -410,6 +410,8 @@ class Console implements AdapterInterface, ConsoleInterface
      */
     public function writeSelectPrompt($message, &$options)
     {
+        $this->writeLine();
+
         // translate options
         foreach ($options as $optionKey => $optionValue) {
             $options[$optionKey] = $this->translator->translate($optionValue);
@@ -442,6 +444,8 @@ class Console implements AdapterInterface, ConsoleInterface
      */
     public function writeLinePrompt($message)
     {
+        $this->writeLine();
+
         // write prompt badge
         $this->writeBadge('badge_pick', Color::RED);
 
@@ -469,6 +473,8 @@ class Console implements AdapterInterface, ConsoleInterface
      */
     public function writeConfirmPrompt($message, $yes, $no)
     {
+        $this->writeLine();
+
         // write prompt badge
         $this->writeBadge('badge_pick', Color::RED);
 
@@ -480,8 +486,6 @@ class Console implements AdapterInterface, ConsoleInterface
         );
 
         $answer = $prompt->show();
-
-        $this->writeLine();
 
         return $answer;
     }

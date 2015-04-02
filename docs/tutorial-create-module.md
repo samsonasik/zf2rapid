@@ -6,8 +6,8 @@ ZF2rapid.
  * [Create new project](tutorial-create-project.md)
  * [Create new module](tutorial-create-module.md)
  * [Create controllers and actions](tutorial-create-controllers-actions.md)
- * Create routing and generate maps
- * Create view helper and controller plugin
+ * [Create routing and generate maps](tutorial-create-routing-maps.md)
+ * [Create view helper and controller plugin](tutorial-create-view-helper-controller-plugin.md)
 
 ## Create new module
 
@@ -30,6 +30,8 @@ The following tasks are executed when creating a new project:
  * Generating template map for module
  * Writing module configuration file
  * Activating the module in the chosen application configuration file
+
+## Structure of new module
 
 The generated structure of your new module should look like this:
 
@@ -60,11 +62,36 @@ should also be shown in the ZendDeveloperToolbar at the bottom left:
   
 ![Screen shot activated module](screen_activated_module.jpg)
   
-## Activating and deactivating modules
+## Activating, deactivating and deleting modules
 
 When creating a new module you are asked to choose one of application 
-configuration files to activate the new module in.
- 
-...
+configuration files to activate the new module in. If you want to activate a 
+module in another application configuration file you can simply do it:
 
+    $ zf2rapid activate-module Shop
+
+To deactivate a module in any another application configuration file just run 
+this command:
+
+    $ zf2rapid deactivate-module Shop
+
+Both commands try to identify any application configuration file in the 
+`/config` path of your project. 
+
+If you want to delete a module you need to specify the name of the module and 
+optionally you can specify the project path. You will be asked twice if you 
+want to delete the module. Be aware that all files of this module will be 
+deleted and the module will be deactivated in any application configuration 
+file.
+
+    $ zf2rapid delete-module Shop
+
+## List modules
+
+If you want to get an overview about all the modules in your current project 
+you list them with a simple command. Naturally, you can optionally specify the 
+project path like in almost any other command.
+ 
+    $ zf2rapid show-modules
+ 
 [Continue to create controller and actions](tutorial-create-controllers-actions.md)

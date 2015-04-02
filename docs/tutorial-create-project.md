@@ -6,8 +6,8 @@ ZF2rapid.
  * [Create new project](tutorial-create-project.md)
  * [Create new module](tutorial-create-module.md)
  * [Create controllers and actions](tutorial-create-controllers-actions.md)
- * Create routing and generate maps
- * Create view helper and controller plugin
+ * [Create routing and generate maps](tutorial-create-routing-maps.md)
+ * [Create view helper and controller plugin](tutorial-create-view-helper-controller-plugin.md)
 
 ## Create new project
 
@@ -40,7 +40,7 @@ your new project path:
 
     $ cd /home/devhost/zf2rapid-tutorial
 
-The installation is finished now
+The installation of the new project is finished now.
 
 ## View new project in browser
 

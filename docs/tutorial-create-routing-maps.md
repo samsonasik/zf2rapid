@@ -1,14 +1,7 @@
-# ZF2rapid documentation
+# ZF2rapid tutorial
 
-## Installation
-
- * [Install ZF2rapid](installation.md)
-
-## Quick-Guide
-
- * [Quick-Guide](quick-guide.md)
-
-## Tutorial
+In this tutorial you will learn how to create an application step by step with
+ZF2rapid.
 
  * [Create new project](tutorial-create-project.md)
  * [Create new module](tutorial-create-module.md)
@@ -16,6 +9,10 @@
  * [Create routing and generate maps](tutorial-create-routing-maps.md)
  * [Create view helper and controller plugin](tutorial-create-view-helper-controller-plugin.md)
 
-## Command-Guide
+## Create routing
 
- * [Command-Guide](command-guide.md)
+## Create class map
+
+## Create template map
+ 
+[Create view helper and controller plugin](tutorial-create-view-helper-controller-plugin.md)
