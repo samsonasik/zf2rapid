@@ -119,7 +119,7 @@ When using the strict mode the routing configuration should look like this.
 ## View routing in browser
 
 Now you can open your project in your prefered browser and check the routing by 
-calling the URL [http://zf2rapid.tutorial/shop/basket/show](http://zf2rapid.tutorial/shop/basket/show. 
+calling the URL [http://zf2rapid.tutorial/shop/basket/show](http://zf2rapid.tutorial/shop/basket/show). 
 Your screen should look like this:
 
 ![Screen shot new routing](screen_new_routing.jpg)
