@@ -25,7 +25,7 @@ The following tasks are executed when creating a new controller:
  * Create view directory for controller
  * Creating controller class
  * Creating controller configuration
- * Adding index action method for controller
+ * Adding `index` action method for controller
  * Creating action view script
  
 ## Structure of new controller
@@ -208,8 +208,71 @@ project path like in almost any other command.
     $ zf2rapid show-controllers
     
 If you want to display the controllers of some specific module(s) you can add the
-names of these modules to the option `--modules=` and seperate them with commas.
+names of these modules to the option `--modules=` and separate them with commas.
 
     $ zf2rapid show-controllers --modules=Shop,Application
+
+## Create new action
+
+When you want to create a new controller action in a module you need to specify 
+the names of the module, the controller and the new action. Optionally, you can 
+specify the project path. 
  
+    $ zf2rapid create-action Shop Basket show
+
+The following tasks are executed when creating a new action:
+
+ * Check if module exists
+ * Check if controller exists
+ * Adding new action method for controller
+ * Creating action view script
+
+ The view script `/module/Shop/view/shop/basket/show.phtml` outputs the names 
+ of current module, controller and action and can also be simply overwritten.
+ 
+     <?php
+     /**
+      * ZF2rapid Tutorial
+      *
+      * @copyright (c) 2015 Ralf Eggert
+      * @license All rights reserved
+      */
+     ?>
+     <h2>Shop Module</h2>
+     <h3>Basket Controller</h3>
+     <h4>Show Action</h4>
+
+## Deleting action
+
+If you want to delete a controller action you need to specify the name of 
+the module, the name of the controller, the name of the action and optionally 
+you can specify the project path.  
+
+    $ zf2rapid delete-action Shop Basket show
+
+The following tasks are executed when deleting an existing controller:
+
+ * Check if module exists
+ * Check if controller exists
+ * Delete action method form controller class
+ * Delete action view script
+ 
+## List actions
+
+If you want to get an overview about all the actions in your current project 
+you list them with a simple command. Naturally, you can optionally specify the 
+project path like in almost any other command.
+
+    $ zf2rapid show-actions
+ 
+If you want to display the actions of some specific module(s) you can add the
+names of these modules to the option `--modules=` and separate them with commas.
+
+    $ zf2rapid show-actions --modules=Shop,Application
+
+If you want to display the actions of some specific controllers(s) you can add the
+names of these controllers to the option `--controllers=` and separate them with commas.
+
+    $ zf2rapid show-actions --controllers=Index,Basket
+
 [Create routing and generate maps](tutorial-create-routing-maps.md)
