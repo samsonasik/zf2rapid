@@ -28,6 +28,8 @@ class ZFVersion extends AbstractTask
     {
         $projectPath = $this->params->projectPath;
 
+        // @todo define versionFile depending on ZF version >= 2.5
+
         if (is_dir(
             $projectPath . '/vendor/zendframework/zendframework/library'
         )) {
@@ -42,9 +44,13 @@ class ZFVersion extends AbstractTask
             $library = false;
         }
 
-        // check version file available
-        $versionFile = $projectPath . $library
-            . '/Zend/Version/Version.php';
+        // set version file name
+        $versionFile = $projectPath . $library . '/Zend/Version/Version.php';
+
+        // check for individual Zend\Version repository
+        if (!file_exists($versionFile)) {
+            $versionFile = $projectPath . $library . '/src/Version.php';
+        }
 
         // load version file
         require_once $versionFile;

@@ -49,10 +49,101 @@ The generated structure of your new module should look like this:
          +--- template_map.php
          
 The `/module/Shop/config/module.config.php` file should contain the 
-configuration for the ViewManager. The `/module/Shop/Module.php` file should 
-contain the `Module` class, which provides the methods `init()`, `getConfig()` 
-and `getAutoloaderConfig()`. The module also defines a constant 
+configuration for the ViewManager. 
+
+    <?php
+    /**
+     * ZF2rapid Tutorial
+     *
+     * @copyright (c) 2015 Ralf Eggert
+     * @license All rights reserved
+     */
+    
+    return array(
+        'view_manager' => array(
+            'template_map' => include SHOP_MODULE_ROOT . '/template_map.php',
+            'template_path_stack' => array(
+                SHOP_MODULE_ROOT . '/view'
+            )
+        )
+    );
+
+The `/module/Shop/Module.php` file should contain the `Module` class, 
+which provides the methods `init()`, `getConfig()` and 
+`getAutoloaderConfig()`. The module also defines a constant 
 `SHOP_MODULE_ROOT` which contains the root path of the `Shop` module.
+
+    <?php
+    /**
+     * ZF2rapid Tutorial
+     *
+     * @copyright (c) 2015 Ralf Eggert
+     * @license All rights reserved
+     */
+    
+    namespace Shop;
+    
+    use Zend\ModuleManager\Feature\InitProviderInterface;
+    use Zend\ModuleManager\ModuleManagerInterface;
+    use Zend\ModuleManager\Feature\ConfigProviderInterface;
+    use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+    
+    /**
+     * Module Shop
+     *
+     * Sets up and configures the Shop module
+     *
+     * @package Shop
+     */
+    class Module implements InitProviderInterface, ConfigProviderInterface, AutoloaderProviderInterface
+    {
+        /**
+         * Init module
+         *
+         * Initialize module on loading
+         *
+         * @param ModuleManagerInterface $manager
+         */
+        public function init(ModuleManagerInterface $manager)
+        {
+            if (!defined('SHOP_MODULE_ROOT')) {
+                define('SHOP_MODULE_ROOT', realpath(__DIR__));
+            }
+        }
+    
+        /**
+         * Get module configuration
+         *
+         * Reads the module configuration from the config/ directory
+         *
+         * @return array module configuration data
+         */
+        public function getConfig()
+        {
+            return include __DIR__ . '/config/module.config.php';
+        }
+    
+        /**
+         * Get module autoloader configuration
+         *
+         * Sets up the module autoloader configuration
+         *
+         * @return array module autoloader configuration
+         */
+        public function getAutoloaderConfig()
+        {
+            return array(
+                'Zend\\Loader\\ClassMapAutoloader' => array(
+                    __NAMESPACE__ => __DIR__ . '/autoload_classmap.php'
+                ),
+                'Zend\\Loader\\StandardAutoloader' => array(
+                    'namespaces' => array(
+                        __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__
+                    )
+                )
+            );
+        }
+    }
 
 If you look at the chosen application configuration file 
 `/config/development.config.php` the new `Shop` module should be listed with all 
