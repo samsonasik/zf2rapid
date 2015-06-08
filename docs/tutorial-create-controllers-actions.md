@@ -94,17 +94,17 @@ The view script `/module/Shop/view/shop/basket/index.phtml` outputs the names
 of current module, controller and action and can also be simply overwritten.
 
 ```
-    <?php
-    /**
-     * ZF2rapid Tutorial
-     *
-     * @copyright (c) 2015 Ralf Eggert
-     * @license All rights reserved
-     */
-    ?>
-    <h2>Shop Module</h2>
-    <h3>Basket Controller</h3>
-    <h4>Index Action</h4>
+<?php
+/**
+ * ZF2rapid Tutorial
+ *
+ * @copyright (c) 2015 Ralf Eggert
+ * @license All rights reserved
+ */
+?>
+<h2>Shop Module</h2>
+<h3>Basket Controller</h3>
+<h4>Index Action</h4>
 ```
 
 ## Create a factory for a controller
@@ -233,17 +233,17 @@ The view script `/module/Shop/view/shop/basket/show.phtml` outputs the names
 of current module, controller and action and can also be simply overwritten.
  
 ```
-     <?php
-     /**
-      * ZF2rapid Tutorial
-      *
-      * @copyright (c) 2015 Ralf Eggert
-      * @license All rights reserved
-      */
-     ?>
-     <h2>Shop Module</h2>
-     <h3>Basket Controller</h3>
-     <h4>Show Action</h4>
+<?php
+/**
+ * ZF2rapid Tutorial
+ *
+ * @copyright (c) 2015 Ralf Eggert
+ * @license All rights reserved
+ */
+?>
+<h2>Shop Module</h2>
+<h3>Basket Controller</h3>
+<h4>Show Action</h4>
 ```
 
 ## Deleting action

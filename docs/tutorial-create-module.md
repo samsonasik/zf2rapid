@@ -177,8 +177,6 @@ file.
 
     $ zf2rapid delete-module Shop
 
-
-
 ## List modules
 
 If you want to get an overview about all the modules in your current project 
