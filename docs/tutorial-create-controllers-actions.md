@@ -93,6 +93,18 @@ with your application controller logic.
 The view script `/module/Shop/view/shop/basket/index.phtml` outputs the names 
 of current module, controller and action and can also be simply overwritten.
 
+    <?php
+    /**
+     * ZF2rapid Tutorial
+     *
+     * @copyright (c) 2015 Ralf Eggert
+     * @license All rights reserved
+     */
+    ?>
+    <h2>Shop Module</h2>
+    <h3>Basket Controller</h3>
+    <h4>Index Action</h4>
+
 ## Create a factory for a controller
 
 If you want to create a factory for an existing controller you just need to 
@@ -155,10 +167,49 @@ this command:
 
     $ zf2rapid create-controller Shop Basket -f
 
+## Deleting controllers and controller factories
+
+If you want to delete a controller you need to specify the name of the module, 
+the name of the controller and optionally you can specify the project path. If 
+a factory exists for this controller, this factory will also be deleted. 
+Additionally, the configuration for this controller will also be deleted. 
+
+    $ zf2rapid delete-controller Shop Basket
+
+The following tasks are executed when deleting an existing controller:
+
+ * Check if module exists
+ * Check if controller exists
+ * Delete controller class
+ * Delete controller factory class (if any exists)
+ * Remove controller configuration
+ * Remove any views for this controller
+
+If you only want to delete the factory of a controller you need to specify the 
+name of the module, the name of the controller and optionally you can specify 
+the project path. The controller factory will be deleted and the controller 
+configuration will be updated.
+
+    $ zf2rapid delete-controller-factory Shop Basket
+
+The following tasks are executed when deleting an existing controller factory:
+
+ * Check if module exists
+ * Check if controller exists
+ * Delete controller factory class (if any exists)
+ * Update controller configuration (from `factories` to `invokables`)
+
 ## List controllers
 
-xxx
+If you want to get an overview about all the controllers in your current project 
+you list them with a simple command. Naturally, you can optionally specify the 
+project path like in almost any other command.
  
     $ zf2rapid show-controllers
+    
+If you want to display the controllers of some specific module(s) you can add the
+names of these modules to the option `--modules=` and seperate them with commas.
+
+    $ zf2rapid show-controllers --modules=Shop,Application
  
 [Create routing and generate maps](tutorial-create-routing-maps.md)
