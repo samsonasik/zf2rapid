@@ -93,6 +93,7 @@ with your application controller logic.
 The view script `/module/Shop/view/shop/basket/index.phtml` outputs the names 
 of current module, controller and action and can also be simply overwritten.
 
+```
     <?php
     /**
      * ZF2rapid Tutorial
@@ -104,6 +105,7 @@ of current module, controller and action and can also be simply overwritten.
     <h2>Shop Module</h2>
     <h3>Basket Controller</h3>
     <h4>Index Action</h4>
+```
 
 ## Create a factory for a controller
 
@@ -227,9 +229,10 @@ The following tasks are executed when creating a new action:
  * Adding new action method for controller
  * Creating action view script
 
- The view script `/module/Shop/view/shop/basket/show.phtml` outputs the names 
- of current module, controller and action and can also be simply overwritten.
+The view script `/module/Shop/view/shop/basket/show.phtml` outputs the names 
+of current module, controller and action and can also be simply overwritten.
  
+```
      <?php
      /**
       * ZF2rapid Tutorial
@@ -241,6 +244,7 @@ The following tasks are executed when creating a new action:
      <h2>Shop Module</h2>
      <h3>Basket Controller</h3>
      <h4>Show Action</h4>
+```
 
 ## Deleting action
 
