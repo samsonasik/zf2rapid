@@ -144,7 +144,7 @@ the file should look like this:
       "configFileFormat": "php",
       "flagAddDocBlocks": "true",
       "fileDocBlockText": "ZF2rapid Tutorial",
-      "fileDocBlockCopyright": "(c) 2015 Ralf Eggert",
+      "fileDocBlockCopyright": "(c) 2015 John Doe",
       "fileDocBlockLicense": "All rights reserved",
       "namespaceController": "Application\\Controller",
       "namespaceControllerPlugin": "Application\\Controller\\Plugin",

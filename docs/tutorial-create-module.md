@@ -55,7 +55,7 @@ configuration for the ViewManager.
     /**
      * ZF2rapid Tutorial
      *
-     * @copyright (c) 2015 Ralf Eggert
+     * @copyright (c) 2015 John Doe
      * @license All rights reserved
      */
     
@@ -77,7 +77,7 @@ which provides the methods `init()`, `getConfig()` and
     /**
      * ZF2rapid Tutorial
      *
-     * @copyright (c) 2015 Ralf Eggert
+     * @copyright (c) 2015 John Doe
      * @license All rights reserved
      */
     

@@ -60,7 +60,7 @@ with your application controller logic.
     /**
      * ZF2rapid Tutorial
      *
-     * @copyright (c) 2015 Ralf Eggert
+     * @copyright (c) 2015 John Doe
      * @license All rights reserved
      */
     namespace Shop\Application\Controller;
@@ -98,7 +98,7 @@ of current module, controller and action and can also be simply overwritten.
 /**
  * ZF2rapid Tutorial
  *
- * @copyright (c) 2015 Ralf Eggert
+ * @copyright (c) 2015 John Doe
  * @license All rights reserved
  */
 ?>
@@ -129,7 +129,7 @@ dependencies you want and pass them to your controller.
     /**
      * ZF2rapid Tutorial
      *
-     * @copyright (c) 2015 Ralf Eggert
+     * @copyright (c) 2015 John Doe
      * @license All rights reserved
      */
     namespace Shop\Application\Controller;
@@ -237,7 +237,7 @@ of current module, controller and action and can also be simply overwritten.
 /**
  * ZF2rapid Tutorial
  *
- * @copyright (c) 2015 Ralf Eggert
+ * @copyright (c) 2015 John Doe
  * @license All rights reserved
  */
 ?>

@@ -4,7 +4,7 @@
   "license": "The MIT License (MIT)",
   "homepage": "http://to.be.named",
   "require": {
-    "php": ">=5.3.23",
+    "php": ">=5.5",
     "zfcampus/zf-console": "dev-master",
     "zendframework/zend-code": "2.*",
     "zendframework/zend-filter": "2.*",

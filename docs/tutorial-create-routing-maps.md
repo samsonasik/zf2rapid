@@ -28,7 +28,7 @@ The routing configuration should look like this.
     /**
      * ZF2rapid Tutorial
      *
-     * @copyright (c) 2015 Ralf Eggert
+     * @copyright (c) 2015 John Doe
      * @license All rights reserved
      */
     return array(
@@ -77,7 +77,7 @@ When using the strict mode the routing configuration should look like this.
     /**
      * ZF2rapid Tutorial
      *
-     * @copyright (c) 2015 Ralf Eggert
+     * @copyright (c) 2015 John Doe
      * @license All rights reserved
      */
     return array(
