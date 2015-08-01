@@ -62,7 +62,7 @@ Windows yet!
 ### Version 0.5.0
 
 * Write documentation                           (done)
-* Write tutorial                                (in progress)
+* Write tutorial                                (done)
 
 ### Version 0.6.0
 

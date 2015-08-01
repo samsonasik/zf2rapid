@@ -7,7 +7,7 @@ ZF2rapid.
  * [Create new module](tutorial-create-module.md)
  * [Create controllers and actions](tutorial-create-controllers-actions.md)
  * [Create routing and generate maps](tutorial-create-routing-maps.md)
- * [Create view helper and controller plugin](tutorial-create-view-helper-controller-plugin.md)
+ * [Create controller plugin and view helper](tutorial-create-controller-plugin-view-helper.md)
 
 ## Create new module
 
@@ -42,7 +42,7 @@ The generated structure of your new module should look like this:
          |  +--- module.config.php
          +--- src
          |  +--- Shop
-         |--- view
+         +--- view
          |  +--- shop
          +--- autoload_classmap.php
          +--- Module.php

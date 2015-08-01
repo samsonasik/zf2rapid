@@ -14,7 +14,7 @@
  * [Create new module](tutorial-create-module.md)
  * [Create controllers and actions](tutorial-create-controllers-actions.md)
  * [Create routing and generate maps](tutorial-create-routing-maps.md)
- * [Create view helper and controller plugin](tutorial-create-view-helper-controller-plugin.md)
+ * [Create controller plugin and view helper](tutorial-create-controller-plugin-view-helper.md)
 
 ## Command-Guide
 
