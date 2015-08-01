@@ -65,7 +65,7 @@ class LoadActions extends AbstractTask
                     foreach ($methods as $method) {
                         // get class and method name
                         $methodClass = $method->getDeclaringClass()->getName();
-                        $methodName  = $method->getName();
+                        $methodName  = $method->name;
 
                         // continue for methods from extended class
                         if ($methodClass != $controllerClass) {
